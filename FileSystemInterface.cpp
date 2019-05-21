@@ -9,7 +9,7 @@ vector<string> FileSystemInterface::text_to_vec(string commands)
     vector<string> input_commands;
     string line, item;
     ifstream file(file_name);
-    while ( getline( file, line ) )
+    while (getline(file,line))
         input_commands.push_back(line);
    file.close();
    return input_commands;
@@ -43,7 +43,7 @@ vector<string> FileSystemInterface::split(const string& input_command)
 
 void FileSystemInterface::check_commence(vector<vector<string>> input_commands)
 {
-  
+
 }
 
 void FileSystemInterface::check_commands(vector<vector<string>> input_commands)

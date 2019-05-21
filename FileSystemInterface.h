@@ -32,6 +32,9 @@ constexpr char GET_PURCHACED[] = "GET purchased";
 constexpr char GET_NOTIFICATION[] = "GET notification";
 constexpr char GET_NOTIFICATION_READ[] = "GET notification read";*/
 
+class Notfound();
+class 
+
 class FileSystemInterface
 {
 public:
