@@ -3,19 +3,25 @@
 
 #include <exception>
 
+
 class NotFound : public std::exception
 {
-    const char* what() const noexcept;
+public:
+    inline const char* what() const throw();
 };
 
 class BadRequest : public std::exception
 {
-    const char* what() const noexcept;
+public:
+    inline const char* what() const throw();
 };
 
 class PremissionDenied : public std::exception
 {
-    const char* what() const noexcept;
+public:
+    inline const char* what() const throw();
 };
+
+#include "Exception-inl.h"
 
 #endif

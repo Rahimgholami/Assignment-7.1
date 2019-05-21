@@ -10,6 +10,13 @@
 #include <cctype>
 #include <fstream>
 #include <sstream>
+#include "Exception.h"
+
+
+#define PUT "PUT"
+#define POST "POST"
+#define GET "GET"
+#define DELETE "DELETE"
 /*
 constexpr char POST_SIGNUP[] = "POST signup";
 constexpr char POST_LOGIN[] = "POST login";
@@ -32,8 +39,6 @@ constexpr char GET_PURCHACED[] = "GET purchased";
 constexpr char GET_NOTIFICATION[] = "GET notification";
 constexpr char GET_NOTIFICATION_READ[] = "GET notification read";*/
 
-class Notfound();
-class 
 
 class FileSystemInterface
 {
@@ -44,6 +49,9 @@ public:
     static bool not_space(char c);
     std::vector<std::string> split(const std::string& input_command);
     void run_commands(std::vector<std::string> _input_commands);
+    void check_commence(std::vector<std::vector<std::string>> input_commands);
+    void check_commands(std::vector<std::vector<std::string>> input_commands);
+
 private:
     std::vector<std::string> commands;
     std::vector<std::vector<std::string>> splitted_commands;
