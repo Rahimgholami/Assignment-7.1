@@ -42,36 +42,44 @@ vector<string> FileSystemInterface::split(const string& input_command)
   return splitted_command;
 }
 
-void FileSystemInterface::check_commence(vector<vector<string>> input_commands)
+void FileSystemInterface::check_commence(string command_commerce)
 {
   vector<string> commerce_commands {PUT, POST, GET, DELETE};
-  int check_validity = 0;
-
-  for(int i=0; i<input_commands.size(); i++)
-  {
-      if ((std::find(commerce_commands.begin(), commerce_commands.end(), input_commands[i][0]) != commerce_commands.end()) != 1)
-      {
-        throw BadRequest();
-
-      }
-  }
+if ((std::find(commerce_commands.begin(), commerce_commands.end(), command_commerce) != commerce_commands.end()) != 1)
+  throw BadRequest();
 }
 
 void FileSystemInterface::check_commands(vector<vector<string>> input_commands)
-{
+{/*
   try
   {
     check_commence(input_commands);
   }catch(BadRequest bad_req)
   {
     std::cerr << bad_req.what() << endl;
-  }
+  }*/
+  cerr << "Will be deleted!!" << endl;
+}
+
+void FileSystemInterface::assign_command(vector<string> input_command)
+{
+  //if(input_command[1] == )
+  cerr << "Will be completed!!" << endl;
 }
 
 void FileSystemInterface::run_commands()
 {
-  check_commands(splitted_commands);
-
+  for(int i=0; i<splitted_commands.size(); i++)
+  {
+    try
+    {
+      check_commence(splitted_commands[i][0]);
+      assign_command(splitted_commands[i]);
+    }catch(BadRequest bad_req)
+    {
+      std::cout << bad_req.what() << endl;
+    }    
+  }
 }
 
 
@@ -81,6 +89,12 @@ FileSystemInterface::FileSystemInterface(string _commands)
   for(int i=0; i<commands.size(); i++)
   {
     splitted_commands.push_back(split(commands[i]));
+    if(splitted_commands[splitted_commands.size()-1].size() == 0)
+    {
+      splitted_commands.pop_back();
+      cerr << "here" << endl;
+    }
   }
-  run_commands(splitted_commands);
+  cerr << splitted_commands.size() << endl;
+  run_commands();
 }

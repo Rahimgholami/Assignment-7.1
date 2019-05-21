@@ -48,8 +48,9 @@ public:
     static bool space(char c);
     static bool not_space(char c);
     std::vector<std::string> split(const std::string& input_command);
+    void assign_command(std::vector<std::string> input_command);
     void run_commands();
-    void check_commence(std::vector<std::vector<std::string>> input_commands);
+    void check_commence(std::string command_commerce);
     void check_commands(std::vector<std::vector<std::string>> input_commands);
 
 private:
