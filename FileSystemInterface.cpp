@@ -67,20 +67,20 @@ void FileSystemInterface::check_commands(vector<vector<string>> input_commands)
     std::cerr << bad_req.what() << endl;
   }
 }
-/*
-void FileSystemInterface::run_commands(vector<string> _input_commands)
+
+void FileSystemInterface::run_commands()
 {
-  
+  check_commands(splitted_commands);
+
 }
-*/
+
 
 FileSystemInterface::FileSystemInterface(string _commands)
 {
-  vector<vector<string>> inn;
-   commands = text_to_vec(_commands);
+  commands = text_to_vec(_commands);
   for(int i=0; i<commands.size(); i++)
-    {
-      splitted_commands.push_back(split(commands[i]));
-    }
-    check_commands(splitted_commands);
+  {
+    splitted_commands.push_back(split(commands[i]));
+  }
+  run_commands(splitted_commands);
 }
