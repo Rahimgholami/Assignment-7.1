@@ -11,6 +11,7 @@
 #include <fstream>
 #include <sstream>
 #include "Exception.h"
+#include "CommandHandler.h"
 
 
 #define PUT "PUT"
