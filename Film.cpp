@@ -11,7 +11,7 @@ Film(std::string _name, int _year, int _length, int _price, std::string _summary
     director = _director;
 }
 
-Film::set_film_id(int _film_id)
+void Film::set_film_id(int _film_id)
 {
     film_id = _film_id;
 }

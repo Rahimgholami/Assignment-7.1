@@ -12,19 +12,24 @@
 #include "Define.h"
 #include "Publisher.h"
 
-class FileSystemInterface
+class CommandHandler
 {
 public:
+    void signup(std::string _email, std::string _username, int _age, std::string _password, std::string _status);
+    void check_signup_command_size(std::vector<std::string> current_command);
+    int find_element_in_vec(std::string search_element, int priority);
+    void check_signup_command(std::vector<std::string> current_command);
     void add_command(std::vector<std::string> input_command);
     void process_command();
-    void signup(std::string _email, std::string _username, int _age, std::string _password);
     void login(std::string _username, std::string _password);
-    //void get_command(std::string input_command);
+    User get_user(int _user_id);
+    Publisher get_publisher(int _publisher_id);
 private:
-    vector<string> current_command;
-    vector<User*> users;
-    vector<Publisher*> publishers;
-    string user_role;
+    std::vector<std::string> current_command;
+    std::vector<User> users;
+    std::vector<Publisher*> publishers;
+    std::string user_role;
+    int current_user_id;
 };
 
 

@@ -8,7 +8,7 @@ class Film
 {
 public:
     Film(std::string _name, int _year, int _length, int _price, std::string _summary, std::string _director);
-    set_film_id(int film_id);
+    void set_film_id(int film_id);
 private:
     int film_id;
     std::string name;

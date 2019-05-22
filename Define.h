@@ -4,7 +4,7 @@
 #define DELETE "DELETE"
 #define SignUp "signup"
 #define Login "login"
-#define Film "film"
+#define FilmWord "film"
 #define Films "films"
 #define Followers "followers"
 #define Money "money"
@@ -19,6 +19,7 @@
 #define Notification "notification"
 #define Read "read"
 
+#define Age "age"
 #define Email "email"
 #define UserName "username"
 #define PassWord "password"

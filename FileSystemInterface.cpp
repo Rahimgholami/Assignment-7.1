@@ -45,8 +45,8 @@ vector<string> FileSystemInterface::split(const string& input_command)
 void FileSystemInterface::check_commence(string command_commerce)
 {
   vector<string> commerce_commands {PUT, POST, GET, DELETE};
-if ((std::find(commerce_commands.begin(), commerce_commands.end(), command_commerce) != commerce_commands.end()) != 1)
-  throw BadRequest();
+  if ((std::find(commerce_commands.begin(), commerce_commands.end(), command_commerce) != commerce_commands.end()) != 1)
+    throw BadRequest();
 }
 
 void FileSystemInterface::check_commands(vector<vector<string>> input_commands)
@@ -64,7 +64,7 @@ void FileSystemInterface::check_commands(vector<vector<string>> input_commands)
 void FileSystemInterface::assign_command(vector<string> input_command)
 {
   //if(input_command[1] == )
-  add_command(input_command);
+  command_handler.add_command(input_command);
 }
 
 void FileSystemInterface::run_commands()
