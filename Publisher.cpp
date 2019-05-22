@@ -3,8 +3,8 @@
 
 using namespace std;
 
-Publisher(std::string _email, std::string _username, std::string _password, int _age)
-:User(_email, _username, _password, _age)
+Publisher(std::string _email, std::string _username, std::string _password, int _age, int _publisher_id)
+:User(_email, _username, _password, _age, _publisher_id)
 {
     set_publisher_id();
 }

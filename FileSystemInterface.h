@@ -12,12 +12,9 @@
 #include <sstream>
 #include "Exception.h"
 #include "CommandHandler.h"
+#include "Define.h"
 
 
-#define PUT "PUT"
-#define POST "POST"
-#define GET "GET"
-#define DELETE "DELETE"
 /*
 constexpr char POST_SIGNUP[] = "POST signup";
 constexpr char POST_LOGIN[] = "POST login";

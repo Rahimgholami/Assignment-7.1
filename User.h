@@ -7,7 +7,9 @@
 class User
 {
 public:
-    User(std::string _email, std::string _username, std::string _password, int _age);
+    User(std::string _email, std::string _username, std::string _password, int _age, int _user_id);
+    std::string get_username();
+    std::string get_passwoerd(); 
     void add_following(int following_id);
     void increase_money(int money_amount);
     void buy_film(int film_id);
