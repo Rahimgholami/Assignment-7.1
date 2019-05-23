@@ -32,19 +32,23 @@ void User::increase_money(int money_amount)
 void User::buy_film(int film_id)
 {
     buyed_films_id.push_back(film_id);
-}/*
-    void User::rate_films(int film_id, std::string comment)
-    {
-        for(int i=0; i<buyed_films_id.size(); i++)
-            vector<int>::iterator itr = find(buyed_films_id.begin(), buyed_films_id.end(), film_id);
-        if (itr != buyed_films_id.cend())
- 
-    };*/
+}
+
 void User::show_purchased_films(std::string name,int price,int min_year, int max_year, std::string director)
 {
     for(int i=0; i<buyed_films_id.size(); i++)
         cerr << "It will completed till vector<film> completed" << endl;
 }
-    void User::show_notification(){};
-    void User::show_readed_notification(){};
-    void User::add_following(int _following_id){};
+void User::show_notification()
+{
+    for(int i=0; i<notification.size(); i++)
+        cout << notification[i] << endl;
+}
+
+void User::show_readed_notification()
+{
+      for(int i=0; i<readed_notification.size(); i++)
+        cout << readed_notification[i] << endl;
+}
+
+void User::add_following(int _following_id){};

@@ -33,7 +33,7 @@ private:
   std::vector<std::string> readed_notification;
   std::vector<int> followings_id;
   std::vector<int> buyed_films_id;
-  //  std::vector<Film> buyed_films;
+
 };
 
 #endif
