@@ -10,22 +10,23 @@ Publisher::Publisher(string _email, string _username, string _password, int _age
 }
 void Publisher::add_film(string _film_name, int _film_year, int _film_length, int _film_price, string _film_summary, string _film_director)
 {
-
+    cerr << "It will be completed!" << endl;
 }
 
 void Publisher::delete_film(int _film_id)
 {
-
+    cerr << "It will be completed!" << endl;
 }
 
 void Publisher::edit_film(int _film_id, string _film_name, int _film_year, int _film_length, string _film_summary, string _film_director)
 {
-    
+    cerr << "It will be completed!" << endl;
 }
 
 void Publisher::list_followers()
 {
-
+    for(int i=0; i<followers_id.size(); i++)
+        cout << followers_id[i] << endl;
 }
 
 void Publisher::get_money()
