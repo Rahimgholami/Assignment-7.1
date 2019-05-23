@@ -32,3 +32,16 @@ Film Film::get_film()
 {
     return Film(name, year, length, price, summary, director);
 }
+
+void Film::comment_film(string content)
+{
+    comments.push_back(content);
+}
+
+void Film::comment_reply(int comment_id, string content, string status)
+{
+    if(status == "publisher")
+        comments_replies[comment_id] = content;
+    else
+        throw BadRequest();
+}
