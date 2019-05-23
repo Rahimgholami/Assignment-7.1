@@ -4,29 +4,35 @@
 
 using namespace std;
 
-    User::User(string _username, string _password)
-    {
-        username = _username;
-        password = _password;
-    }
-    string User::get_username()
-    {
-        return username;
-    }
+User::User(string _email, string _username, string _password, int _age, int _user_id)
+{
+    email = _email;
+    username = _username;
+    password = _password;
+    age = _age;
+    user_id = _user_id;
+}
+
+string User::get_username()
+{
+    return username;
+}
 
 
- string User::get_password()
- {
-     return password;
- };
-    void User::increase_money(int money_amount)
-    {
-        money += money_amount;
-    };
-    void User::buy_film(int film_id)
-    {
-        buyed_films_id.push_back(film_id);
-    };/*
+string User::get_password()
+{
+    return password;
+};
+    
+void User::increase_money(int money_amount)
+{
+    money += money_amount;
+};
+    
+void User::buy_film(int film_id)
+{
+    buyed_films_id.push_back(film_id);
+}/*
     void User::rate_films(int film_id, std::string comment)
     {
         for(int i=0; i<buyed_films_id.size(); i++)

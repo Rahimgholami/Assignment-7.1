@@ -11,12 +11,8 @@
 class User {
 
 public:
-    User(std::string _username, std::string _password);
+    User(std::string _email, std::string _username, std::string _password, int _age, int _user_id); 
     std::string get_username();
-
-
-//User(std::string _email, std::string _username, std::string _password, int _age, int _user_id);
-
     std::string get_password();
     void increase_money(int money_amount);
     void buy_film(int film_id);
@@ -34,6 +30,7 @@ private:
     std::string email;
     int age;
     int money;
+    int user_id;
     std::vector<std::string> notification;
     std::vector<std::string> readed_notification;
     std::vector<int> followings_id;
