@@ -1,16 +1,23 @@
 #include "CommandHandler.h"
 
 using namespace std;
-
+/*
 
 void CommandHandler::signup(string _email, string _username, int _age, string _password, string _status)
 {
     int _user_id = users.size()+publishers.size()+1;
     if(_status == "user")
-        users.push_back(new User(_email, _username, _password, _age, _user_id));
+        users.push_back(User(_email, _username, _password, _age, _user_id));
     else
-        publishers.push_back(new Publisher(_email, _username, _password, _age, _user_id));   
+        publishers.push_back(Publisher(_email, _username, _password, _age, _user_id));   
 }
+*/
+
+/*
+void CommandHandler::signup(int _current)
+{  
+    current_user_id = _current;
+}*/
 
 void CommandHandler::check_signup_command_size(vector<string> current_command)
 {
@@ -54,9 +61,11 @@ void CommandHandler::check_signup_command(vector<string> current_command)
     check_signup_command_size(current_command);
     if(current_command[3] == "?")
     {
-        signup(current_command[find_element_in_vec(Email, 1)+1], current_command[find_element_in_vec(UserName, 1)+1],
+      /*  signup(current_command[find_element_in_vec(Email, 1)+1], current_command[find_element_in_vec(UserName, 1)+1],
               current_command[find_element_in_vec(PassWord, 1)+1], current_command[find_element_in_vec(Age, 1)+1],
-               current_command[find_element_in_vec(Publisher_word, 0)+1]);
+               current_command[find_element_in_vec(Publisher_word, 0)+1]);*/
+           // signup("rahimgholami1998@gmail.com", "Rahim", 21, "Tehran", "user");
+           cerr << "Not OK!" << endl;
     }
     else
         throw BadRequest();
@@ -80,23 +89,6 @@ void CommandHandler::process_command()
     }
 }
 
-void CommandHandler::login(string _username, string _password)
-{
-    for(int i=0; i<users.size(); i++)
-    {
-        vector<User*>::iterator it = find(((users.get_user[i])->get_username).begin(), ((users.get_user[i])->get_username).end(), _username);
-        if (it != ((users.get_user[i])->get_username).cend())
-        {
-            if((users.get_user[it])->get_password == _password)
-                current_user_id = it;
-            else
-                throw BadRequest();
-        }
-        else
-            throw BadRequest();
-    }
-}
-
 
 User CommandHandler::get_user(int _user_id)
 {
@@ -105,5 +97,23 @@ User CommandHandler::get_user(int _user_id)
 
 Publisher CommandHandler::get_publisher(int _publisher_id)
 {
-    return publishers[_publisher_id-1] //some errors
+    return publishers[_publisher_id-1]; //some errors
 }
+/*
+void CommandHandler::login(string _username, string _password)
+{
+    for(int i=0; i<users.size(); i++)
+    {
+        vector<User>::iterator it = find((get_user(i).get_username()).begin(), (get_user(i).get_username()).end(), _username);
+        if (it != ((users.get_user[i])->get_username).cend())
+        {
+            if((users.get_user[distance(current_command.begin(), it)])->get_password == _password)
+                current_user_id = distance(current_command.begin(), it);
+            else
+                throw BadRequest();
+        }
+        else
+            throw BadRequest();
+    }
+}
+*/

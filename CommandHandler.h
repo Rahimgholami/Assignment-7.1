@@ -15,19 +15,20 @@
 class CommandHandler
 {
 public:
-    void signup(std::string _email, std::string _username, int _age, std::string _password, std::string _status);
+   // void signup(std::string _email, std::string _username, int _age, std::string _password, std::string _status);
+       //void signup(int);
     void check_signup_command_size(std::vector<std::string> current_command);
     int find_element_in_vec(std::string search_element, int priority);
     void check_signup_command(std::vector<std::string> current_command);
     void add_command(std::vector<std::string> input_command);
     void process_command();
-    void login(std::string _username, std::string _password);
+    //void login(std::string _username, std::string _password);
     User get_user(int _user_id);
     Publisher get_publisher(int _publisher_id);
 private:
     std::vector<std::string> current_command;
     std::vector<User> users;
-    std::vector<Publisher*> publishers;
+    std::vector<Publisher> publishers;
     std::string user_role;
     int current_user_id;
 };

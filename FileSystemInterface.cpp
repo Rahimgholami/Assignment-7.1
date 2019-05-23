@@ -92,9 +92,8 @@ FileSystemInterface::FileSystemInterface(string _commands)
     if(splitted_commands[splitted_commands.size()-1].size() == 0)
     {
       splitted_commands.pop_back();
-      cerr << "here" << endl;
     }
   }
-  cerr << splitted_commands.size() << endl;
+
   run_commands();
 }
