@@ -42,3 +42,17 @@
 
 #define Deleted "deleted"
 #define Available "available"
+#define EmptyString "empty"
+#define EmptyInt -1
+
+#define DetailsOfFilm "Details of Film"
+#define YearShow "Year"
+#define IdShow "Id"
+#define DirectorShow "Director"
+#define LengthShow "Length"
+#define SummaryShow "Summary"
+#define RateShow "Rate"
+#define PriceShow "Price"
+#define CommentsShow "Commnets"
+#define RecommendationFilm "Recommendation Film"
+#define EqualSpace " = "

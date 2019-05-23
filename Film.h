@@ -17,9 +17,12 @@ public:
     void rate_film(int _rate_in);
     Film get_film();
     void comment_film(std::string content);
-    void comment_reply(int comment_id, std::string content, std::string status);
+    void reply_comment(int comment_id, std::string content, std::string _status);
+    void delete_comment(int _comment_id);
     void delete_film();
     std::string film_status();
+    void edit_film(std::string _name, int _year, int _length, std::string _summary, std::string _director);
+    void show_film_details();
 private:
     int rated_num;
     int rate;

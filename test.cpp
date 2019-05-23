@@ -315,7 +315,7 @@ int main()
 }*/
 
 
-
+/*
 #include <iostream>
 #include <fstream>
 //#include <conio.h>
@@ -350,4 +350,22 @@ int main() {
 
 
 	//getch();
+}
+*/
+
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    int a,b;
+    a = 1;
+    b = 10;
+    a = (b==0) ? (b-1):a;
+    cout << a << endl;
+    return 0;
 }
