@@ -39,3 +39,6 @@
 #define Amount "amount"
 #define MinYear "min_year"
 #define Limit "limit"
+
+#define Deleted "deleted"
+#define Available "available"

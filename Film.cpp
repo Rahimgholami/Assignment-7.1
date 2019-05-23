@@ -10,6 +10,7 @@ Film::Film(std::string _name, int _year, int _length, int _price, std::string _s
     price = _price;
     summary = _summary;
     director = _director;
+    status = Available;
 }
 
 void Film::set_film_id(int _film_id)
@@ -44,4 +45,14 @@ void Film::comment_reply(int comment_id, string content, string status)
         comments_replies[comment_id] = content;
     else
         throw BadRequest();
+}
+
+void Film::delete_film()
+{
+    status = Deleted; 
+}
+
+string Film::film_status()
+{
+    return status;
 }

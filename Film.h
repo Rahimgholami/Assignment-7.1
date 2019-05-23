@@ -6,6 +6,7 @@
 #include <string>
 #include <map>
 #include "Exception.h"
+#include "Define.h"
 
 class Film
 {
@@ -17,6 +18,8 @@ public:
     Film get_film();
     void comment_film(std::string content);
     void comment_reply(int comment_id, std::string content, std::string status);
+    void delete_film();
+    std::string film_status();
 private:
     int rated_num;
     int rate;
@@ -25,6 +28,7 @@ private:
     int year;
     int length;
     int price;
+    std::string status;
     std::string summary;
     std::string director;
     std::vector<std::string> comments;
