@@ -63,7 +63,6 @@ void FileSystemInterface::check_commands(vector<vector<string>> input_commands)
 
 void FileSystemInterface::assign_command(vector<string> input_command)
 {
-  //if(input_command[1] == )
   command_handler.add_command(input_command);
 }
 
@@ -81,7 +80,6 @@ void FileSystemInterface::run_commands()
     }    
   }
 }
-
 
 FileSystemInterface::FileSystemInterface(string _commands)
 {
