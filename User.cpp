@@ -40,7 +40,11 @@ void User::buy_film(int film_id)
         if (itr != buyed_films_id.cend())
  
     };*/
-    void User::show_purchased_films(std::string name,int price,int min_year, int max_year, std::string director){};
+void User::show_purchased_films(std::string name,int price,int min_year, int max_year, std::string director)
+{
+    for(int i=0; i<buyed_films_id.size(); i++)
+        cerr << "It will completed till vector<film> completed" << endl;
+}
     void User::show_notification(){};
     void User::show_readed_notification(){};
     void User::add_following(int _following_id){};

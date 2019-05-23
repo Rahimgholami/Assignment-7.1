@@ -18,6 +18,7 @@ public:
     CommandHandler();
    // void signup(std::string _email, std::string _username, int _age, std::string _password, std::string _status);
        //void signup(int);
+    static bool is_email_valid(const std::string& email);
     void check_signup_command_size();
     int find_element_in_vec(std::string search_element, int priority);
     void check_signup_command();

@@ -25,16 +25,16 @@ public:
 
 
 private:
-	std::string username;
+  std::string username;
 	std::string password;
-    std::string email;
-    int age;
-    int money;
-    int user_id;
-    std::vector<std::string> notification;
-    std::vector<std::string> readed_notification;
-    std::vector<int> followings_id;
-    std::vector<int> buyed_films_id;
+  std::string email;
+  int age;
+  int money;
+  int user_id;
+  std::vector<std::string> notification;
+  std::vector<std::string> readed_notification;
+  std::vector<int> followings_id;
+  std::vector<int> buyed_films_id;
   //  std::vector<Film> buyed_films;
 
 };

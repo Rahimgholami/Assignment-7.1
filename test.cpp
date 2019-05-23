@@ -353,7 +353,7 @@ int main() {
 }
 */
 
-
+/*
 #include <iostream>
 #include <string>
 #include <vector>
@@ -368,4 +368,26 @@ int main()
     a = (b==0) ? (b-1):a;
     cout << a << endl;
     return 0;
+}*/
+
+
+#include <iostream>
+#include <string>
+#include <regex>
+
+using namespace std;
+
+bool is_email_valid(const std::string& email)
+{
+   const std::regex pattern
+      ("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+   return std::regex_match(email, pattern);
+}
+
+int main()
+{
+    std::string email1;// = "text.example@randomcom";
+    cin >> email1;
+    std::cout << email1 << " : " << (is_email_valid(email1) ?
+      "valid" : "invalid") << std::endl;
 }

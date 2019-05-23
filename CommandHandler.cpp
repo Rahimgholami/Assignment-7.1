@@ -1,4 +1,5 @@
 #include "CommandHandler.h"
+#include <regex>
 
 using namespace std;
 CommandHandler::CommandHandler()
@@ -21,6 +22,13 @@ void CommandHandler::signup(int _current)
 {  
     current_user_id = _current;
 }*/
+
+bool CommandHandler::is_email_valid(const std::string& email)
+{
+   const std::regex pattern
+      ("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+   return std::regex_match(email, pattern);
+}
 
 void CommandHandler::check_signup_command_size()
 {
