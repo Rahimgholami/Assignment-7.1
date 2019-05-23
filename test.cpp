@@ -259,7 +259,7 @@ int main()
 }*/
 
 
-
+/*
 
 #include <iostream>
 #include <string>
@@ -312,4 +312,42 @@ int main()
 
   r.get_sec(1).print();
   return 0;
+}*/
+
+
+
+#include <iostream>
+#include <fstream>
+//#include <conio.h>
+#include <string>
+using namespace std;
+
+class User {
+
+public:
+    User(string _username, string _password)
+    {
+        username = _username;
+        password = _password;
+    }
+    string get_name(){return username;};
+    void change_name()
+    {
+        username = get_name() + "ed";
+    }
+private:
+	string username;
+	string password;
+};
+
+int main() {
+	
+	User u("Rahim","Tehran");
+
+    cout << u.get_name() << endl;
+    u.change_name();
+    cout << u.get_name() << endl;
+
+
+	//getch();
 }

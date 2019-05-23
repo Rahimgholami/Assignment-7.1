@@ -1,6 +1,9 @@
 #include "CommandHandler.h"
 
 using namespace std;
+CommandHandler::CommandHandler()
+{
+}
 /*
 
 void CommandHandler::signup(string _email, string _username, int _age, string _password, string _status)
@@ -19,7 +22,7 @@ void CommandHandler::signup(int _current)
     current_user_id = _current;
 }*/
 
-void CommandHandler::check_signup_command_size(vector<string> current_command)
+void CommandHandler::check_signup_command_size()
 {
     int command_size = current_command.size();
     if((command_size > 13) || (command_size < 11))
@@ -56,10 +59,10 @@ int CommandHandler::find_element_in_vec(string search_element, int priority)
 }
 
 
-void CommandHandler::check_signup_command(vector<string> current_command)
+void CommandHandler::check_signup_command()
 {
-    check_signup_command_size(current_command);
-    if(current_command[3] == "?")
+    check_signup_command_size();
+    if(current_command[2] == "?")
     {
       /*  signup(current_command[find_element_in_vec(Email, 1)+1], current_command[find_element_in_vec(UserName, 1)+1],
               current_command[find_element_in_vec(PassWord, 1)+1], current_command[find_element_in_vec(Age, 1)+1],
@@ -71,12 +74,6 @@ void CommandHandler::check_signup_command(vector<string> current_command)
         throw BadRequest();
 }
 
-
-void CommandHandler::add_command(vector<string> input_command)
-{
-    current_command = input_command;
-}
-    
 void CommandHandler::process_command()
 {
     string commence = current_command[0];
@@ -84,9 +81,16 @@ void CommandHandler::process_command()
     if(commence == POST)
     {
         if(main_command == SignUp)
-            cerr << "will be completed!" << endl;
+            check_signup_command();
             //signup();
     }
+}
+
+
+void CommandHandler::add_command(vector<string> input_command)
+{
+    current_command = input_command;
+    process_command();
 }
 
 

@@ -6,7 +6,7 @@ using namespace std;
 Publisher::Publisher(string _email, string _username, string _password, int _age, int _publisher_id)
 :User(_email, _username, _password, _age, _publisher_id)
 {
-    set_publisher_id();
+    publisher_id = _publisher_id;
 }
 void Publisher::add_film(string _film_name, int _film_year, int _film_length, int _film_price, string _film_summary, string _film_director)
 {
