@@ -31,22 +31,22 @@ void Publisher::list_followers()
 
 void Publisher::get_money()
 {
-
+    cerr << "It will be completed!" << endl;
 }
 
 void Publisher::show_published_films(string _name, int _min_rate, int _price, int _max_year, string _director)
 {
-
+    cerr << "It will be completed!" << endl;
 }
 
 void Publisher::reply_comments(int _film_id, string _comment_id, string _content)
 {
-
+    cerr << "It will be completed!" << endl;
 }
 
 void Publisher::delete_comments(int _film_id, int _comment_id)
 {
-    
+    cerr << "It will be completed!" << endl;
 }
 
 

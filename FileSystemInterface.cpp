@@ -49,18 +49,6 @@ void FileSystemInterface::check_commence(string command_commerce)
     throw BadRequest();
 }
 
-void FileSystemInterface::check_commands(vector<vector<string>> input_commands)
-{/*
-  try
-  {
-    check_commence(input_commands);
-  }catch(BadRequest bad_req)
-  {
-    std::cerr << bad_req.what() << endl;
-  }*/
-  cerr << "Will be deleted!!" << endl;
-}
-
 void FileSystemInterface::assign_command(vector<string> input_command)
 {
   command_handler.add_command(input_command);
