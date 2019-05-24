@@ -19,11 +19,6 @@ void CommandHandler::increase_money_publisher()
 cerr << "I";
 }
 
-void CommandHandler::login()
-{
-cerr << "I";
-}
-
 void CommandHandler::add_film_publisher()
 {
     cerr << "I";
@@ -227,4 +222,62 @@ Publisher CommandHandler::get_publisher(int _publisher_id)
             return publishers[_publisher_id];
     }
     throw BadRequest();
+}
+
+void CommandHandler::check_login_command()
+{
+    check_command_size(7,7);
+    if(current_command[2] == "?")
+    {
+        cerr << "OK" << endl;
+    }
+    else
+        throw BadRequest();
+}
+
+bool CommandHandler::user_search()
+{
+    int check = 0;
+    for(int i=0; i<users.size(); i++)
+    {
+        if(current_command[find_element_in_vec(UserName,1)+1] == users[i].get_username())
+        {
+            if(current_command[find_element_in_vec(PassWord,1)+1] == users[i].get_password())
+            {
+                cout << OK << endl;
+                role = User_word;
+                current_user_id = find_element_in_vec(UserName,1)+1;
+                check = 1;
+            }
+        }
+    }
+    return check;
+}
+
+bool CommandHandler::publisher_search()
+{
+    int check = 0;
+    for(int i=0; i<users.size(); i++)
+    {
+        if(current_command[find_element_in_vec(UserName,1)+1] == publishers[i].get_username())
+        {
+            if(current_command[find_element_in_vec(PassWord,1)+1] == publishers[i].get_password())
+            {
+                cout << OK << endl;
+                role = Publisher_word;
+                current_publisher_id = find_element_in_vec(UserName,1)+1;
+                check = 1;
+            }
+        }
+    }
+    return check;
+}
+
+void CommandHandler::login()
+{
+    check_login_command();
+    int check_user_search = user_search();
+    int check_publisher_search = publisher_search();
+    if((check_user_search == 0) && (check_publisher_search))
+        throw BadRequest();
 }

@@ -16,25 +16,35 @@
 class CommandHandler
 {
 public:
-    CommandHandler();
-    void check_command_size(int min_size, int max_size);
+  CommandHandler();
+  void add_command(std::vector<std::string> input_command);
 
+  void check_command_size(int min_size, int max_size);
+  int find_element_in_vec(std::string search_element, int priority);
 
-    std::vector<int> find_signup_key_indexes();
-    static void is_email_valid(const std::string& email);
+  std::vector<int> find_signup_key_indexes();
+  static void is_email_valid(const std::string& email);
+  void check_signup_command();
+  void signup();
+  
+  void login();
+  void check_login_command();
+  bool user_search();
+  bool publisher_search();  
     
-    int find_element_in_vec(std::string search_element, int priority);
-    void check_signup_command();
-    void add_command(std::vector<std::string> input_command);
+
+
+
     //void process_command();
     User get_user(int _user_id);
     Publisher get_publisher(int _publisher_id);
-    void signup();
+    
+
+  
+
 
   void increase_money_user();
   void increase_money_publisher();
-  
-  void login();
   void add_film_publisher();
   void reply_comment_publisher();
   void add_follower_user();
@@ -59,6 +69,7 @@ private:
     std::vector<Film> films;
     std::string role;
     int current_user_id;
+    int current_publisher_id;
 };
 
 
