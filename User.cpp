@@ -56,3 +56,9 @@ void User::add_following(int _following_id)
 {
     followings_id.push_back(_following_id);
 }
+
+
+int User::get_user_id()
+{
+    return user_id;
+}

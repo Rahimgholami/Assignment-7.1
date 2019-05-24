@@ -208,12 +208,23 @@ void CommandHandler::add_command(vector<string> input_command)
 }
 
 
+
 User CommandHandler::get_user(int _user_id)
 {
-    return users[_user_id-1];
+    for(int i=0; i<users.size(); i++)
+    {
+        if(users[i].get_user_id() == _user_id)
+            return users[_user_id];
+    }
+    throw BadRequest();
 }
 
 Publisher CommandHandler::get_publisher(int _publisher_id)
 {
-    return publishers[_publisher_id-1];
+    for(int i=0; i<publishers.size(); i++)
+    {
+        if(publishers[i].get_user_id() == _publisher_id)
+            return publishers[_publisher_id];
+    }
+    throw BadRequest();
 }
