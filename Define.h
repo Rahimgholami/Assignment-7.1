@@ -54,6 +54,8 @@
 #define SummaryShow "Summary"
 #define RateShow "Rate"
 #define PriceShow "Price"
+#define Name "name"
+
 #define CommentsShow "Commnets"
 #define RecommendationFilm "Recommendation Film"
 #define EqualSpace " = "

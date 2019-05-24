@@ -7,97 +7,6 @@ CommandHandler::CommandHandler()
     role = NotSets;
 }
 
-
-
-
-void CommandHandler::add_film_publisher()
-{
-    cerr << "I";
-}
-
-void CommandHandler::reply_comment_publisher()
-{
-cerr << "I";
-}
-
-void CommandHandler::add_follower_user()
-{
-cerr << "I";
-}
-
-void CommandHandler::buy_film_user()
-{
-cerr << "I";
-}
-
-void CommandHandler::rate_film_user()
-{
-cerr << "I";
-}
-
-void CommandHandler::comment_user()
-{
-cerr << "I";
-}
-
-void CommandHandler::edit_film_publisher()
-{
-cerr << "I";
-}
-
-void CommandHandler::show_film_details_user()
-{
-cerr << "I";
-}
-
-void CommandHandler::search_films_user()
-{
-cerr << "I";
-}
-
-void CommandHandler::show_readed_notifications_user()
-{
-cerr << "I";
-}
-
-void CommandHandler::show_notifications_user()
-{
-cerr << "I";
-}
-
-void CommandHandler::show_followers_list_publisher()
-{
-cerr << "I";
-}
-
-void CommandHandler::show_published_films_publisher()
-{
-cerr << "I";
-}
-
-void CommandHandler::show_buyed_films_user()
-{
-cerr << "I";
-}
-
-void CommandHandler::delete_film_publisher()
-{
-cerr << "I";
-}
-
-void CommandHandler::delete_comment_publisher( )
-{
-cerr << "I";
-}
-
-
-
-
-
-
-
-
-
 int CommandHandler::find_element_in_vec(string search_element, int priority)
 {
     vector<string>::iterator itr = find(current_command.begin(), current_command.end(), search_element);
@@ -119,6 +28,7 @@ void CommandHandler::check_command_size(int min_size, int max_size)
         throw BadRequest();
 }
 
+
 void CommandHandler::is_email_valid(const std::string& email)
 {
    const std::regex pattern
@@ -127,9 +37,8 @@ void CommandHandler::is_email_valid(const std::string& email)
         throw BadRequest();
 }
 
-void CommandHandler::check_signup_command()
+void CommandHandler::check_QuestionMark_command()
 {
-    check_command_size(11,13);
     if(current_command[2] == QuestionMark)
     {
         cerr << "OK" << endl;
@@ -140,7 +49,8 @@ void CommandHandler::check_signup_command()
 
 vector<int> CommandHandler::find_signup_key_indexes()
 {
-    check_signup_command();
+    check_command_size(11,13);
+    check_QuestionMark_command();
     vector<int> indexes{find_element_in_vec(Email,1), find_element_in_vec(UserName,1), find_element_in_vec(PassWord,1), find_element_in_vec(Age,1)};
     is_email_valid(current_command[find_element_in_vec(Email,1)+1]);
     if(find_element_in_vec(Publisher_word,0) != 0)
@@ -170,34 +80,28 @@ void CommandHandler::add_user_publisher_to_vector(vector<int> key_indexes, int a
     else
         throw PremissionDenied();
 }
-void CommandHandler::signup()
+
+int CommandHandler::convert_string_to_int(string input_string)
 {
-    vector<int> key_indexes = find_signup_key_indexes();
-    int age;
+    int output_int;
     try
     {
-        age = stoi(current_command[key_indexes[3]+1]);
+        output_int = stoi(input_string);
+        return output_int;
     }
     catch(invalid_argument er)
     {
         cerr << "Bad Request" << endl;
+        throw BadRequest();
     }
-    add_user_publisher_to_vector(key_indexes,age);
 }
 
-
-/*
-void CommandHandler::process_command()
+void CommandHandler::signup()
 {
-    string commence = current_command[0];
-    string main_command = current_command[1];
-    if(commence == POST)
-    {
-        if(main_command == SignUp)
-            check_signup_command();
-    }
-}*/
-
+    vector<int> key_indexes = find_signup_key_indexes();
+    int age = convert_string_to_int(current_command[key_indexes[3]+1]);
+    add_user_publisher_to_vector(key_indexes,age);
+}
 
 void CommandHandler::add_command(vector<string> input_command)
 {
@@ -284,7 +188,6 @@ void CommandHandler::login()
         throw BadRequest();
 }
 
-
 void CommandHandler::check_increase_money()
 {
     if((current_command[2] != QuestionMark) || (current_command[3] != Amount))
@@ -304,6 +207,7 @@ int CommandHandler::convert_money_to_int()
     }
     return money;
 }
+
 void CommandHandler::increase_money_user()
 {
     check_increase_money();
@@ -316,11 +220,130 @@ void CommandHandler::increase_money_user()
         throw PremissionDenied();
 }
 
-
-
 void CommandHandler::increase_money_publisher()
 {
     check_command_size(2,2);
     publishers[current_publisher_index].get_money();
 }
 
+
+
+
+
+vector<int> CommandHandler::find_add_film_publisher_key_indexes()
+{
+    check_QuestionMark_command();
+    vector<int> indexes{find_element_in_vec(Name,1), find_element_in_vec(Year,1), find_element_in_vec(Length,1),
+                         find_element_in_vec(Price,1), find_element_in_vec(Summary,1), find_element_in_vec(Director,1)};
+    return indexes;
+}
+
+void CommandHandler::add_film_to_vector(vector<int> key_indexes)
+{
+    films.push_back(Film(current_command[key_indexes[0]+1],convert_string_to_int(current_command[key_indexes[1]+1]),
+                        convert_string_to_int(current_command[key_indexes[2]+1]),convert_string_to_int(current_command[key_indexes[3]+1]),
+                        current_command[key_indexes[4]+1],current_command[key_indexes[5]+1]));
+    //int id= (films.size() !=0)? films.size()-1 : 0;
+    publishers[current_publisher_index].add_film(films.size());            
+}
+
+void CommandHandler::add_film_publisher()
+{
+    check_command_size(15,15);
+    vector<int> indexes = find_add_film_publisher_key_indexes();
+    add_film_to_vector(indexes);
+}   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void CommandHandler::reply_comment_publisher()
+{
+cerr << "I";
+}
+
+void CommandHandler::add_follower_user()
+{
+cerr << "I";
+}
+
+void CommandHandler::buy_film_user()
+{
+cerr << "I";
+}
+
+void CommandHandler::rate_film_user()
+{
+cerr << "I";
+}
+
+void CommandHandler::comment_user()
+{
+cerr << "I";
+}
+
+void CommandHandler::edit_film_publisher()
+{
+cerr << "I";
+}
+
+void CommandHandler::show_film_details_user()
+{
+cerr << "I";
+}
+
+void CommandHandler::search_films_user()
+{
+cerr << "I";
+}
+
+void CommandHandler::show_readed_notifications_user()
+{
+cerr << "I";
+}
+
+void CommandHandler::show_notifications_user()
+{
+cerr << "I";
+}
+
+void CommandHandler::show_followers_list_publisher()
+{
+cerr << "I";
+}
+
+void CommandHandler::show_published_films_publisher()
+{
+cerr << "I";
+}
+
+void CommandHandler::show_buyed_films_user()
+{
+cerr << "I";
+}
+
+void CommandHandler::delete_film_publisher()
+{
+cerr << "I";
+}
+
+void CommandHandler::delete_comment_publisher( )
+{
+cerr << "I";
+}

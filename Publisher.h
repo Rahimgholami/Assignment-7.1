@@ -7,7 +7,7 @@ class Publisher : public User
 {
 public:
     Publisher(std::string _email, std::string _username, std::string _password, int _age, int _publisher_id);
-    void add_film(std::string _film_name, int _film_year, int _film_length, int _film_price, std::string _film_summary, std::string _film_director);
+    void add_film(int _film_id);
     void delete_film(int _film_id);
     void edit_film(int _film_id, std::string _film_name, int _film_year, int _film_length, std::string _film_summary, std::string _film_director);
     void list_followers();
@@ -18,7 +18,8 @@ public:
 private:
     int publisher_id;
     std::vector<int> followers_id;
-    std::vector<Film*> published_films;
+    std::vector<int> published_films_id;
+    std::vector<std::string> published_films;
 };
 
 #endif

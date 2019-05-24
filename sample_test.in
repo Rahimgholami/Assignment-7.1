@@ -1,0 +1,2 @@
+
+POST films ? name film1 year 1999 length 120 price 10000 summary summary|of|film1 director director_of_film1

@@ -19,12 +19,14 @@ public:
   CommandHandler();
   void add_command(std::vector<std::string> input_command);
 
+  int convert_string_to_int(std::string input_string);
   void check_command_size(int min_size, int max_size);
   int find_element_in_vec(std::string search_element, int priority);
+  void check_QuestionMark_command();
 
   std::vector<int> find_signup_key_indexes();
   static void is_email_valid(const std::string& email);
-  void check_signup_command();
+  
   void add_user_publisher_to_vector(std::vector<int> key_indexes, int age);
   void signup();
   
@@ -38,17 +40,14 @@ public:
   int convert_money_to_int();
   void increase_money_user();
 
-    /*void process_command();
-    User get_user(int _user_id);
-    Publisher get_publisher(int _publisher_id);
-    */
 
-  
-
-
- 
   void increase_money_publisher();
+
+  void add_film_to_vector(std::vector<int> key_indexes);
+  std::vector<int> find_add_film_publisher_key_indexes();
   void add_film_publisher();
+
+
   void reply_comment_publisher();
   void add_follower_user();
   void buy_film_user();
