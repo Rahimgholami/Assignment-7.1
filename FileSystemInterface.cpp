@@ -54,19 +54,57 @@ void FileSystemInterface::assign_command(vector<string> input_command)
   command_handler.add_command(input_command);
 }
 
+void FileSystemInterface::find_post_funcitons(string main_command)
+{
+  if(main_command == SignUp)
+    commandhandler.signup(current_command);
+  else if(main_command == Login)
+    commandhandler.login(current_command);
+  else if(main_command == Films)
+    commandhandler.add_film_publisher(current_command);
+  else if(main_command == Follower)
+    commandhandler.add_follower_user(current_command);
+  else if(main_command == Money)
+    commandhandler.increase_money_user(current_command);
+  else if(main_command == Buy)
+    commandhandler.buy_film_user(current_command);
+  else if(main_command == Rate)
+    commandhandler.rate_film_user(current_command);
+  else if(main_command == Comment)
+    commandhandler.comment_user(current_command);
+}
+
+void FileSystemInterface::find_post_funcitons(string main_command)
+{
+  if(main_command == SignUp)
+    commandhandler.signup(current_command);
+  else if(main_command == Login)
+    commandhandler.login(current_command);
+  else if(main_command == Films)
+    commandhandler.add_film_publisher(current_command);
+  else if(main_command == Follower)
+    commandhandler.add_follower_user(current_command);
+  else if(main_command == Money)
+    commandhandler.increase_money_user(current_command);
+  else if(main_command == Buy)
+    commandhandler.buy_film_user(current_command);
+  else if(main_command == Rate)
+    commandhandler.rate_film_user(current_command);
+  else if(main_command == Comment)
+    commandhandler.comment_user(current_command);
+}
+
+
 void FileSystemInterface::process_command()
 {
   string commence = current_command[0];
   string main_command = current_command[1];
   if(commence == POST)
-  {
-    if(main_command == SignUp)
-      commandhandler.signup(current_command);
-    else if(main_command == Login)
-      commandhandler.login(current_command);
-    else if(main_command == Films)
-      commandhandler.
-  }
+    find_post_functions(main_command);
+  else if(commence == PUT)
+    find_put_functions(main_command);
+    
+
 }
 
 void FileSystemInterface::add_command(std::vector<std::string> input_command)
