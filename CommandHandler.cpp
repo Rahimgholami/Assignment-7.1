@@ -1,10 +1,10 @@
 #include "CommandHandler.h"
 #include <regex>
 
-
 using namespace std;
 CommandHandler::CommandHandler()
 {
+    role = NotSets;
 }
 
 
@@ -126,62 +126,24 @@ int CommandHandler::find_element_in_vec(string search_element, int priority)
 	}
 }
 
-
-
-vector<int> CommandHandler::find_signup_key_indexes()
-{
-    vector<int> indexes{find_element_in_vec(Email,1), find_element_in_vec(UserName,1), find_element_in_vec(PassWord,1), find_element_in_vec(Age,1)};
-    if(find_element_in_vec(Publisher_word,0) != 0)
-    {
-        if(current_command[find_element_in_vec(Publisher_word,0)+1] == "true")
-            role = Publisher_word;
-        else
-            role = User_word;
-    }
-}
-
-
-
-void CommandHandler::signup()
-{/*
-    vector<int> key_indexes = find_signup_key_indexes();
-    int id = users.size() + publishers.size() + 1;
-    if(role == Publisher_word)
-        publishers.push_back(Publisher("rahimgholami1998@gmail.com","Rahim","Rahim1998",21,5));*/
-    /*
-        publishers.push_back(Publisher(string(current_command[key_indexes[0]]),string(current_command[key_indexes[1]]),
-                                    string(current_command[key_indexes[2]]),stoi(current_command[key_indexes[3]]),id));*/
- /*   else
-        users.push_back(User(current_command[key_indexes[0]],current_command[key_indexes[1]],
-                            current_command[key_indexes[2]],stoi(current_command[key_indexes[3]]),id));*/
-}
-
-
-void CommandHandler::test()
-{
-    cerr << "OH" << endl;
-
-}
-
-
-bool CommandHandler::is_email_valid(const std::string& email)
-{
-   const std::regex pattern
-      ("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
-   return std::regex_match(email, pattern);
-}
-
-void CommandHandler::check_signup_command_size()
+void CommandHandler::check_command_size(int min_size, int max_size)
 {
     int command_size = current_command.size();
-    if((command_size > 13) || (command_size < 11))
+    if((command_size > max_size) || (command_size < min_size))
         throw BadRequest();
 }
 
+void CommandHandler::is_email_valid(const std::string& email)
+{
+   const std::regex pattern
+      ("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+    if(std::regex_match(email, pattern) == 0)
+        throw BadRequest();
+}
 
 void CommandHandler::check_signup_command()
 {
-    check_signup_command_size();
+    check_command_size(11,13);
     if(current_command[2] == "?")
     {
         cerr << "OK" << endl;
@@ -189,6 +151,44 @@ void CommandHandler::check_signup_command()
     else
         throw BadRequest();
 }
+
+vector<int> CommandHandler::find_signup_key_indexes()
+{
+    check_signup_command();
+    vector<int> indexes{find_element_in_vec(Email,1), find_element_in_vec(UserName,1), find_element_in_vec(PassWord,1), find_element_in_vec(Age,1)};
+    is_email_valid(current_command[find_element_in_vec(Email,1)+1]);
+    if(find_element_in_vec(Publisher_word,0) != 0)
+    {
+        if(current_command[find_element_in_vec(Publisher_word,0)+1] == "true")
+            role = Publisher_word;
+        else
+            role = User_word;
+    }
+    return indexes;
+}
+
+void CommandHandler::signup()
+{
+    vector<int> key_indexes = find_signup_key_indexes();
+    int id = users.size() + publishers.size() + 1;
+    int age;
+    try
+    {
+        age = stoi(current_command[key_indexes[3]+1]);
+    }
+    catch(invalid_argument er)
+    {
+        cerr << "Bad Request" << endl;
+    }
+    if(role == Publisher_word)
+        publishers.push_back(Publisher(current_command[key_indexes[0]+1],current_command[key_indexes[1]+1],current_command[key_indexes[2]+1],age,id));
+    else if(role == User_word)
+        users.push_back(User(current_command[key_indexes[0]+1],current_command[key_indexes[1]+1],current_command[key_indexes[2]+1],age,id));
+    else
+        throw PremissionDenied();
+}
+
+
 /*
 void CommandHandler::process_command()
 {

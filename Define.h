@@ -57,3 +57,5 @@
 #define CommentsShow "Commnets"
 #define RecommendationFilm "Recommendation Film"
 #define EqualSpace " = "
+#define NotSets "not_sets"
+#define OK "OK"

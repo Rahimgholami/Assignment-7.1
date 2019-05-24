@@ -6,10 +6,10 @@ OBJ = main.o FileSystemInterface.o CommandHandler.o User.o Film.o Publisher.o
 result.out: $(OBJ)
 	$(CPP11) $(OBJ)  -o result.out
 
-FileSystemInterface.o:	FileSystemInterface.cpp FileSystemInterface.h Define.h
+FileSystemInterface.o:	FileSystemInterface.cpp FileSystemInterface.h CommandHandler.cpp CommandHandler.h Define.h
 	$(CPP11) FileSystemInterface.cpp -c
 
-CommandHandler.o:	CommandHandler.cpp CommandHandler.h User.cpp User.h Publisher.cpp Publisher.h Film.cpp Film.h Exception.h  
+CommandHandler.o:	CommandHandler.cpp CommandHandler.h User.cpp User.h Publisher.cpp Publisher.h User.cpp User.h Film.cpp Film.h Exception.h  
 	$(CPP11) CommandHandler.cpp -c
 
 Publisher.o:	Publisher.cpp Publisher.h User.cpp User.h Define.h Exception.h

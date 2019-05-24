@@ -66,7 +66,7 @@ int main(int argc , char *argv[])
  //   in.push_back(k);
     return 0;
 }*/
-
+/*
 
 #include <iostream>
 #include <vector>
@@ -131,4 +131,35 @@ int main()
 {
   C c;
   return 0;
+}*/
+
+
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+  vector<string> input;
+
+  for(int i=0; i<3; i++)
+  {
+    string ss;
+    cin >> ss;
+    input.push_back(ss);
+  }
+  for(int i=0; i<input.size(); i++)
+    cout << typeid(input[i]).name() << input[i] << endl;
+    try
+    {
+      int ca = stoi(input[1]);
+      cout << ca;
+      //cout << typeid(ca).name() << endl;
+    }catch(invalid_argument er)
+    {
+      cout << "error!" << endl;
+    }
 }

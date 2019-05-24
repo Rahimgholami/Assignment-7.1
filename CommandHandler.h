@@ -11,16 +11,18 @@
 #include "Exception.h"
 #include "Define.h"
 #include "Publisher.h"
-#include "Ut.h"
+#include "User.h"
 
 class CommandHandler
 {
 public:
     CommandHandler();
+    void check_command_size(int min_size, int max_size);
+
 
     std::vector<int> find_signup_key_indexes();
-    static bool is_email_valid(const std::string& email);
-    void check_signup_command_size();
+    static void is_email_valid(const std::string& email);
+    
     int find_element_in_vec(std::string search_element, int priority);
     void check_signup_command();
     void add_command(std::vector<std::string> input_command);
@@ -29,7 +31,6 @@ public:
     Publisher get_publisher(int _publisher_id);
     void signup();
 
-    void test();
   void increase_money_user();
   void increase_money_publisher();
   
