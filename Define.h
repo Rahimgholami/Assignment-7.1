@@ -24,6 +24,7 @@
 #define UserName "username"
 #define PassWord "password"
 #define Publisher_word "publisher"
+#define User_word "user"
 #define Year "year"
 #define Length "length"
 #define Price "price"

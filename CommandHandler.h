@@ -11,11 +11,14 @@
 #include "Exception.h"
 #include "Define.h"
 #include "Publisher.h"
+#include "Ut.h"
 
 class CommandHandler
 {
 public:
     CommandHandler();
+
+    std::vector<int> find_signup_key_indexes();
     static bool is_email_valid(const std::string& email);
     void check_signup_command_size();
     int find_element_in_vec(std::string search_element, int priority);
@@ -24,10 +27,12 @@ public:
     //void process_command();
     User get_user(int _user_id);
     Publisher get_publisher(int _publisher_id);
+    void signup();
 
+    void test();
   void increase_money_user();
   void increase_money_publisher();
-  void signup();
+  
   void login();
   void add_film_publisher();
   void reply_comment_publisher();
@@ -51,7 +56,7 @@ private:
     std::vector<User> users;
     std::vector<Publisher> publishers;
     std::vector<Film> films;
-    std::string user_role;
+    std::string role;
     int current_user_id;
 };
 

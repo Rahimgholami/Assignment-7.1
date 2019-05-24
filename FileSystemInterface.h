@@ -13,6 +13,7 @@
 #include "Exception.h"
 #include "CommandHandler.h"
 #include "Define.h"
+#include "Exception.h"
 
 
 

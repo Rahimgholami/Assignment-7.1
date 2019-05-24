@@ -173,7 +173,13 @@ void FileSystemInterface::run_commands()
     }catch(BadRequest bad_req)
     {
       std::cout << bad_req.what() << endl;
-    }    
+    }catch(NotFound not_found)
+    {
+      cout << not_found.what() << endl;
+    }catch(PremissionDenied Pre_denied)
+    {
+      cout << Pre_denied.what() << endl;
+    }
   }
 }
 
