@@ -25,11 +25,16 @@ public:
     static bool not_space(char c);
     std::vector<std::string> split(const std::string& input_command);
     void check_commence(std::string command_commerce);
-    void assign_command(std::vector<std::string> input_command);
     void run_commands();
-    void add_command(std::vector<std::string> input_command);
-
-
+    void assign_command(std::vector<std::string> input_command);
+    void find_post_money_funtions();
+    void find_post_functions(std::string main_command);
+    void find_put_functions(std::string main_command);
+    void find_get_films_functions();
+    void find_get_notificaion_functions();
+    void find_get_functions(std::string main_command);
+    void find_delete_functions(std::string main_command);
+    void process_command();
 private:
     std::vector<std::string> current_command;
     std::vector<std::string> commands;

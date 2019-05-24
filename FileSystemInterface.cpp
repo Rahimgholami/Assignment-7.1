@@ -49,89 +49,94 @@ void FileSystemInterface::check_commence(string command_commerce)
     throw BadRequest();
 }
 
-void FileSystemInterface::assign_command(vector<string> input_command)
-{
-  command_handler.add_command(input_command);
-}
-
 void FileSystemInterface::find_post_money_funtions()
 {
-  third_command_member = current_command[3];
+  string third_command_member = current_command[3];
   if(third_command_member == "?")
-    commandhandler.increase_money_user(current_command);
+    command_handler.increase_money_user(current_command);
   else
-    commandhandler.increase_money_publisher(current_command);
+    command_handler.increase_money_publisher(current_command);
 }
 
-void FileSystemInterface::find_post_funcitons(string main_command)
+void FileSystemInterface::find_post_functions(string main_command)
 {
   if(main_command == SignUp)
-    commandhandler.signup(current_command);
+    command_handler.signup(current_command);
   else if(main_command == Login)
-    commandhandler.login(current_command);
+    command_handler.login(current_command);
   else if(main_command == Films)
-    commandhandler.add_film_publisher(current_command);
+    command_handler.add_film_publisher(current_command);
   else if(main_command == Money)
-    find_post_money_functions();
+    find_post_money_funtions();
   else if(main_command == Replies)
-    commandhandler.reply_comment_publisher(current_command);
+    command_handler.reply_comment_publisher(current_command);
   else if(main_command == Followers)
-    commandhandler.add_follower_user(current_command);
+    command_handler.add_follower_user(current_command);
   else if(main_command == Buy)
-    commandhandler.buy_film_user(current_command);
+    command_handler.buy_film_user(current_command);
   else if(main_command == Rate)
-    commandhandler.rate_film_user(current_command);
+    command_handler.rate_film_user(current_command);
   else if(main_command == Comment)
-    commandhandler.comment_user(current_command);
+    command_handler.comment_user(current_command);
   else
     throw BadRequest();
 }
 
-void FileSystemInterface::find_put_funcitons(string main_command)
+void FileSystemInterface::find_put_functions(string main_command)
 {
   if(main_command == Films)
-    commandhandler.edit_film_publisher(current_command);
+    command_handler.edit_film_publisher(current_command);
   else
     throw BadRequest();
 }
 
-void FileSystemInterface::find_get_films_funcitons()
+void FileSystemInterface::find_get_films_functions()
 {
   if(current_command[3] == "?")
   {
     if(current_command[4] == FilmId)
-      commandhandler.show_film_details_user(current_command);
+      command_handler.show_film_details_user(current_command);
     else
-      commandhandler.search_films_user(current_command);
+      command_handler.search_films_user(current_command);
   }
   else
     throw BadRequest();
 }
 
-void FileSystemInterface::find_get_funcitons(string main_command)
+void FileSystemInterface::find_get_notificaion_functions()
+{
+  if(current_command[3] == Read)
+    command_handler.show_readed_notifications_user(current_command);
+  else
+    command_handler.show_notifications_user(current_command);
+}
+
+void FileSystemInterface::find_get_functions(string main_command)
 {
   if(main_command == Followers)
-    commandhandler.show_followers_list_publisher(current_command);
+    command_handler.show_followers_list_publisher(current_command);
   else if(main_command == Published)
-    commandhandler.show_published_films_publisher(current_command);
+    command_handler.show_published_films_publisher(current_command);
   else if(main_command == Films)
-    find_get_films_funcitons();
-  
-  else if(main_command == Money)
-    find_post_money_functions();
-  else if(main_command == Replies)
-    commandhandler.reply_comment_publisher(current_command);
-  else if(main_command == Followers)
-    commandhandler.add_follower_user(current_command);
-  else if(main_command == Buy)
-    commandhandler.buy_film_user(current_command);
-  else if(main_command == Rate)
-    commandhandler.rate_film_user(current_command);
-  else if(main_command == Comment)
-    commandhandler.comment_user(current_command);
+    find_get_films_functions();
+  else if(main_command == Purchased)
+    command_handler.show_buyed_films_user(current_command);
+  else if(main_command == Notification)
+    find_get_notificaion_functions();
   else
     throw BadRequest();
 }
+
+void FileSystemInterface::find_delete_functions(string main_command)
+{
+  if(main_command == Films)
+    command_handler.delete_film_publisher(current_command);
+  else if(main_command == Comments)
+    command_handler.delete_comment_publisher(current_command);
+  else
+    throw BadRequest();
+}
+
 
 void FileSystemInterface::process_command()
 {
@@ -143,10 +148,13 @@ void FileSystemInterface::process_command()
     find_put_functions(main_command);
   else if(commence == GET)
     find_get_functions(main_command);
-
+  else if(commence == DELETE)
+    find_delete_functions(main_command);
+  else
+    throw BadRequest();
 }
 
-void FileSystemInterface::add_command(std::vector<std::string> input_command)
+void FileSystemInterface::assign_command(std::vector<std::string> input_command)
 {
   current_command = input_command;
   process_command();
