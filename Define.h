@@ -11,7 +11,7 @@
 #define Published "published"
 #define Replies "replies"
 #define Comments "comments"
-#define Comment "comment"
+#define CommentString "comment"
 #define Follower "follower"
 #define Buy "buy"
 #define Rate "rate"

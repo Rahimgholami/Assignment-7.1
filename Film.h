@@ -7,11 +7,12 @@
 #include <map>
 #include "Exception.h"
 #include "Define.h"
+#include "Comment.h"
 
 class Film
 {
 public:
-    Film(std::string _name, int _year, int _length, int _price, std::string _summary, std::string _director);
+    Film(std::string _name, int _year, int _length, int _price, std::string _summary, std::string _director, int _film_id);
     void set_film_id(int film_id);
     std::string get_film_name();
     void rate_film(int _rate_in);
@@ -34,8 +35,7 @@ private:
     std::string status;
     std::string summary;
     std::string director;
-    std::vector<std::string> comments;
-    std::map<int,std::string> comments_replies;
+    std::vector<Comment> comments;
 };
 
 #endif

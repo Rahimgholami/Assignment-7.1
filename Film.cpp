@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Film::Film(std::string _name, int _year, int _length, int _price, std::string _summary, std::string _director)
+Film::Film(std::string _name, int _year, int _length, int _price, std::string _summary, std::string _director, int _film_id)
 {
     name = _name;
     year = _year;
@@ -11,6 +11,7 @@ Film::Film(std::string _name, int _year, int _length, int _price, std::string _s
     summary = _summary;
     director = _director;
     status = Available;
+    film_id = _film_id;
 }
 
 void Film::set_film_id(int _film_id)
@@ -36,7 +37,7 @@ Film Film::get_film()
 
 void Film::comment_film(string content)
 {
-    comments.push_back(content);
+    comments.push_back(Comment(content));
 }
 
 void Film::reply_comment(int comment_id, string content, string _status)
@@ -44,7 +45,7 @@ void Film::reply_comment(int comment_id, string content, string _status)
     if(_status == "publisher")
         comments_replies[comment_id] = content;
     else
-        throw BadRequest();
+        throw PremissionDenied();
 }
 
 void Film::delete_film()

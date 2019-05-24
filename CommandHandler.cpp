@@ -242,7 +242,7 @@ void CommandHandler::add_film_to_vector(vector<int> key_indexes)
 {
     films.push_back(Film(current_command[key_indexes[0]+1],convert_string_to_int(current_command[key_indexes[1]+1]),
                         convert_string_to_int(current_command[key_indexes[2]+1]),convert_string_to_int(current_command[key_indexes[3]+1]),
-                        current_command[key_indexes[4]+1],current_command[key_indexes[5]+1]));
+                        current_command[key_indexes[4]+1],current_command[key_indexes[5]+1]),films.size()+1);
     publishers[current_publisher_index].add_film(films.size());  
 }
 
@@ -261,12 +261,24 @@ void CommandHandler::add_film_publisher()
 
 
 
+vector<int> CommandHandler::find_comment_user_key_indexes()
+{
+    check_QuestionMark_command();
+    vector<int> indexes{find_element_in_vec(FilmId,1), find_element_in_vec(Content,1)};
+    return indexes;
+}
 
 
 
 
 
 
+void CommandHandler::comment_user()
+{
+    check_command_size(7,7);
+    int indexes = find_comment_user_key_indexes();
+    films[stoi(current_command[indexes[0]+1])-1].
+}
 
 
 
@@ -292,10 +304,6 @@ void CommandHandler::rate_film_user()
 cerr << "I";
 }
 
-void CommandHandler::comment_user()
-{
-cerr << "I";
-}
 
 void CommandHandler::edit_film_publisher()
 {
