@@ -21,7 +21,7 @@ public:
   void show_purchased_films(std::string name,int price,int min_year, int max_year, std::string director);
   void show_notification();
   void show_readed_notification();
-  void add_following(int _following_id);
+  void add_follower(int _follower_id);
 
 private:
   std::string username;
@@ -32,7 +32,7 @@ private:
   int user_id;
   std::vector<std::string> notification;
   std::vector<std::string> readed_notification;
-  std::vector<int> followings_id;
+  std::vector<int> followers_id;
   std::vector<int> buyed_films_id;
 
 };

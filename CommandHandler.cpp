@@ -199,7 +199,7 @@ int CommandHandler::convert_money_to_int()
     int money=0;
     try
     {
-        money = stoi(current_command[4]);
+        money = convert_string_to_int(current_command[4]);
     }
     catch(invalid_argument er)
     {
@@ -259,13 +259,6 @@ void CommandHandler::add_film_publisher()
 }   
 
 
-
-
-
-
-
-
-
 vector<int> CommandHandler::find_comment_user_key_indexes()
 {
     check_QuestionMark_command();
@@ -277,9 +270,8 @@ void CommandHandler::comment_user()
 {
     check_command_size(7,7);
     vector<int> indexes = find_comment_user_key_indexes();
-    films[stoi(current_command[indexes[0]+1])-1].comment_film(current_command[indexes[1]+1]);
+    films[convert_string_to_int(current_command[indexes[0]+1])-1].comment_film(current_command[indexes[1]+1]);
 }
-
 
 
 vector<int> CommandHandler::find_reply_comment_key_indexes()
@@ -292,13 +284,19 @@ void CommandHandler::reply_comment_publisher()
 {
     check_command_size(9,9);
     vector<int> indexes = find_reply_comment_key_indexes();
-    films[stoi(current_command[indexes[0]+1])-1].reply_comment(stoi(current_command[indexes[1]+1]), current_command[indexes[2]+1], role);
+    films[convert_string_to_int(current_command[indexes[0]+1])-1].reply_comment(convert_string_to_int(current_command[indexes[1]+1]), current_command[indexes[2]+1], role);
 }
+
 
 void CommandHandler::add_follower_user()
 {
-cerr << "I";
+    check_QuestionMark_command();
+    if(role == User_word)
+        users[current_user_index].add_follower(convert_string_to_int(current_command[(find_element_in_vec(Follower, 1))+1]));
+    else if(role == Publisher_word)
+        publishers[current_publisher_index].add_follower(convert_string_to_int(current_command[(find_element_in_vec(Follower, 1))+1])); 
 }
+
 
 void CommandHandler::buy_film_user()
 {

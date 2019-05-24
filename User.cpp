@@ -53,9 +53,9 @@ void User::show_readed_notification()
         cout << readed_notification[i] << endl;
 }
 
-void User::add_following(int _following_id)
+void User::add_follower(int _follower_id)
 {
-    followings_id.push_back(_following_id);
+    followers_id.push_back(_follower_id);
 }
 
 

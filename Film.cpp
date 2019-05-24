@@ -1,5 +1,6 @@
 #include "Film.h"
 
+
 using namespace std;
 
 Film::Film(std::string _name, int _year, int _length, int _price, std::string _summary, std::string _director, int _film_id)
@@ -37,13 +38,19 @@ Film Film::get_film()
 
 void Film::comment_film(string content)
 {
-    comments.push_back(Comment(content));
+    Comment cc(content);
+    comments.push_back(cc);
 }
 
 void Film::reply_comment(int comment_id, string content, string _status)
 {
     if(_status == Publisher_word)
-        comments[comment_id-1].reply_comment_message(content);
+    {
+        if(comments.size() != 0)
+            comments[comment_id-1].reply_comment_message(content);
+        else
+            throw BadRequest();
+    }
     else
         throw PremissionDenied();
 }
