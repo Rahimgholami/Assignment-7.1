@@ -54,6 +54,28 @@ void FileSystemInterface::assign_command(vector<string> input_command)
   command_handler.add_command(input_command);
 }
 
+void FileSystemInterface::process_command()
+{
+  string commence = current_command[0];
+  string main_command = current_command[1];
+  if(commence == POST)
+  {
+    if(main_command == SignUp)
+      commandhandler.signup(current_command);
+    else if(main_command == Login)
+      commandhandler.login(current_command);
+    else if(main_command == Films)
+      commandhandler.
+  }
+}
+
+void FileSystemInterface::add_command(std::vector<std::string> input_command)
+{
+  current_command = input_command;
+  process_command();
+}
+
+
 void FileSystemInterface::run_commands()
 {
   for(int i=0; i<splitted_commands.size(); i++)

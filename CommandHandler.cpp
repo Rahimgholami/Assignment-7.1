@@ -45,7 +45,7 @@ void CommandHandler::check_signup_command()
     else
         throw BadRequest();
 }
-
+/*
 void CommandHandler::process_command()
 {
     string commence = current_command[0];
@@ -55,14 +55,14 @@ void CommandHandler::process_command()
         if(main_command == SignUp)
             check_signup_command();
     }
-}
+}*/
 
-
+/*
 void CommandHandler::add_command(vector<string> input_command)
 {
     current_command = input_command;
     process_command();
-}
+}*/
 
 
 User CommandHandler::get_user(int _user_id)

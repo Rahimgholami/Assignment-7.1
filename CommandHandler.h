@@ -20,12 +20,12 @@ public:
     void check_signup_command_size();
     int find_element_in_vec(std::string search_element, int priority);
     void check_signup_command();
-    void add_command(std::vector<std::string> input_command);
-    void process_command();
+    //void add_command(std::vector<std::string> input_command);
+    //void process_command();
     User get_user(int _user_id);
     Publisher get_publisher(int _publisher_id);
 private:
-    std::vector<std::string> current_command;
+  //  std::vector<std::string> current_command;
     std::vector<User> users;
     std::vector<Publisher> publishers;
     std::vector<Film> films;

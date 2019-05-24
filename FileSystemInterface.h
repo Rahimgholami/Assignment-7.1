@@ -27,8 +27,11 @@ public:
     void check_commence(std::string command_commerce);
     void assign_command(std::vector<std::string> input_command);
     void run_commands();
+    void add_command(std::vector<std::string> input_command);
+
 
 private:
+    std::vector<std::string> current_command;
     std::vector<std::string> commands;
     std::vector<std::vector<std::string>> splitted_commands;
     CommandHandler command_handler;
