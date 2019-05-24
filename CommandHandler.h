@@ -24,6 +24,28 @@ public:
     //void process_command();
     User get_user(int _user_id);
     Publisher get_publisher(int _publisher_id);
+
+  void increase_money_user(std::vector<std::string> current_command);
+  void increase_money_publisher(std::vector<std::string> current_command);
+  void signup(std::vector<std::string> current_command);
+  void login(std::vector<std::string> current_command);
+  void add_film_publisher(std::vector<std::string> current_command);
+  void reply_comment_publisher(std::vector<std::string> current_command);
+  void add_follower_user(std::vector<std::string> current_command);
+  void buy_film_user(std::vector<std::string> current_command);
+  void rate_film_user(std::vector<std::string> current_command);
+  void comment_user(std::vector<std::string> current_command);
+  void edit_film_publisher(std::vector<std::string> current_command);
+  void show_film_details_user(std::vector<std::string> current_command);
+  void search_films_user(std::vector<std::string> current_command);
+  void show_readed_notifications_user(std::vector<std::string> current_command);
+  void show_notifications_user(std::vector<std::string> current_command);
+  void show_followers_list_publisher(std::vector<std::string> current_command);
+  void show_published_films_publisher(std::vector<std::string> current_command);
+  void show_buyed_films_user(std::vector<std::string> current_command);
+  void delete_film_publisher(std::vector<std::string> current_command);
+  void delete_comment_publisher( std::vector<std::string> current_command);
+ 
 private:
   //  std::vector<std::string> current_command;
     std::vector<User> users;

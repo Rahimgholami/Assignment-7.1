@@ -6,6 +6,130 @@ CommandHandler::CommandHandler()
 {
 }
 
+
+
+void CommandHandler::increase_money_user(std::vector<std::string> current_command)
+{
+    cerr << "I";
+}
+
+void CommandHandler::increase_money_publisher(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::signup(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::login(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::add_film_publisher(std::vector<std::string> current_command)
+{
+    cerr << "I";
+}
+
+void CommandHandler::reply_comment_publisher(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::add_follower_user(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::buy_film_user(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::rate_film_user(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::comment_user(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::edit_film_publisher(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::show_film_details_user(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::search_films_user(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::show_readed_notifications_user(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::show_notifications_user(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::show_followers_list_publisher(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::show_published_films_publisher(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::show_buyed_films_user(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::delete_film_publisher(std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+void CommandHandler::delete_comment_publisher( std::vector<std::string> current_command)
+{
+cerr << "I";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 bool CommandHandler::is_email_valid(const std::string& email)
 {
    const std::regex pattern
