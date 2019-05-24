@@ -12,6 +12,7 @@
 #include "Define.h"
 #include "Publisher.h"
 #include "User.h"
+#include "Film.h"
 
 class CommandHandler
 {

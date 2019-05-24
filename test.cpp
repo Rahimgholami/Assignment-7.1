@@ -183,9 +183,14 @@ public:
   }
   void printA()
   {
-    cout << id << endl;
+    cout << vec.size() << endl;
+  }
+  void vec_add(int _vec)
+  {
+    vec.push_back(_vec);
   }
 private:
+  vector<int> vec;
   int id;
 };
 
@@ -211,10 +216,15 @@ private:
 int main()
 {
   B b(5);
+  b.vec_add(5);
   b.add(2);
   b.minus(-6);
   b.printB();
   b.printA();
-
+  b.vec_add(4);
+  b.printA();
+  A aa(6);
+  aa.vec_add(66);
+  aa.printA();
   return 0;
 }

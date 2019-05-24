@@ -2,11 +2,11 @@
 #ifndef __USER_H__
 #define __USER_H__
 
-#include "Film.h"
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include "Define.h"
+#include "Exception.h"
 
 class User {
 

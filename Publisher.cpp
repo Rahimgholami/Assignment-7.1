@@ -10,10 +10,8 @@ Publisher::Publisher(string _email, string _username, string _password, int _age
 }
 void Publisher::add_film(int _film_id)
 {
-    cerr << "Here" << endl;
+    cerr << "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH" << endl;
    // published_films_id.push_back(_film_id);
-   cerr << published_films.size() << endl;
-   //published_films.push_back(_film_id);
     cerr << "D" << endl;
 }
 
