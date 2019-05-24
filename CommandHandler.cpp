@@ -291,6 +291,7 @@ void CommandHandler::reply_comment_publisher()
 void CommandHandler::add_follower_user()
 {
     check_QuestionMark_command();
+    check_command_size(5,5);
     if(role == User_word)
         users[current_user_index].add_follower(convert_string_to_int(current_command[(find_element_in_vec(Follower, 1))+1]));
     else if(role == Publisher_word)
@@ -298,9 +299,15 @@ void CommandHandler::add_follower_user()
 }
 
 
+
 void CommandHandler::buy_film_user()
 {
-cerr << "I";
+    check_QuestionMark_command();
+    check_command_size(5,5);    
+    if(role == User_word)
+        users[current_user_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(Follower, 1))+1]));
+    else if(role == Publisher_word)
+        publishers[current_publisher_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(Follower, 1))+1])); 
 }
 
 void CommandHandler::rate_film_user()
