@@ -54,24 +54,13 @@ void FileSystemInterface::assign_command(vector<string> input_command)
   command_handler.add_command(input_command);
 }
 
-void FileSystemInterface::find_post_funcitons(string main_command)
+void FileSystemInterface::find_post_money_funtions()
 {
-  if(main_command == SignUp)
-    commandhandler.signup(current_command);
-  else if(main_command == Login)
-    commandhandler.login(current_command);
-  else if(main_command == Films)
-    commandhandler.add_film_publisher(current_command);
-  else if(main_command == Follower)
-    commandhandler.add_follower_user(current_command);
-  else if(main_command == Money)
+  third_command_member = current_command[3];
+  if(third_command_member == "?")
     commandhandler.increase_money_user(current_command);
-  else if(main_command == Buy)
-    commandhandler.buy_film_user(current_command);
-  else if(main_command == Rate)
-    commandhandler.rate_film_user(current_command);
-  else if(main_command == Comment)
-    commandhandler.comment_user(current_command);
+  else
+    commandhandler.increase_money_publisher(current_command);
 }
 
 void FileSystemInterface::find_post_funcitons(string main_command)
@@ -82,16 +71,28 @@ void FileSystemInterface::find_post_funcitons(string main_command)
     commandhandler.login(current_command);
   else if(main_command == Films)
     commandhandler.add_film_publisher(current_command);
-  else if(main_command == Follower)
-    commandhandler.add_follower_user(current_command);
   else if(main_command == Money)
-    commandhandler.increase_money_user(current_command);
+    find_post_money_functions();
+  else if(main_command == Replies)
+    commandhandler.reply_comment_publisher(current_command);
+  else if(main_command == Followers)
+    commandhandler.add_follower_user(current_command);
   else if(main_command == Buy)
     commandhandler.buy_film_user(current_command);
   else if(main_command == Rate)
     commandhandler.rate_film_user(current_command);
   else if(main_command == Comment)
     commandhandler.comment_user(current_command);
+  else
+    throw BadRequest();
+}
+
+void FileSystemInterface::find_put_funcitons(string main_command)
+{
+  if(main_command == Films)
+    commandhandler.edit_film_publisher(current_command);
+  else
+    throw BadRequest();
 }
 
 
