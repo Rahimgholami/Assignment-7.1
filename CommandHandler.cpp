@@ -8,102 +8,102 @@ CommandHandler::CommandHandler()
 
 
 
-void CommandHandler::increase_money_user(std::vector<std::string> current_command)
+void CommandHandler::increase_money_user()
 {
     cerr << "I";
 }
 
-void CommandHandler::increase_money_publisher(std::vector<std::string> current_command)
+void CommandHandler::increase_money_publisher()
 {
 cerr << "I";
 }
 
-void CommandHandler::signup(std::vector<std::string> current_command)
+void CommandHandler::signup()
 {
 cerr << "I";
 }
 
-void CommandHandler::login(std::vector<std::string> current_command)
+void CommandHandler::login()
 {
 cerr << "I";
 }
 
-void CommandHandler::add_film_publisher(std::vector<std::string> current_command)
+void CommandHandler::add_film_publisher()
 {
     cerr << "I";
 }
 
-void CommandHandler::reply_comment_publisher(std::vector<std::string> current_command)
+void CommandHandler::reply_comment_publisher()
 {
 cerr << "I";
 }
 
-void CommandHandler::add_follower_user(std::vector<std::string> current_command)
+void CommandHandler::add_follower_user()
 {
 cerr << "I";
 }
 
-void CommandHandler::buy_film_user(std::vector<std::string> current_command)
+void CommandHandler::buy_film_user()
 {
 cerr << "I";
 }
 
-void CommandHandler::rate_film_user(std::vector<std::string> current_command)
+void CommandHandler::rate_film_user()
 {
 cerr << "I";
 }
 
-void CommandHandler::comment_user(std::vector<std::string> current_command)
+void CommandHandler::comment_user()
 {
 cerr << "I";
 }
 
-void CommandHandler::edit_film_publisher(std::vector<std::string> current_command)
+void CommandHandler::edit_film_publisher()
 {
 cerr << "I";
 }
 
-void CommandHandler::show_film_details_user(std::vector<std::string> current_command)
+void CommandHandler::show_film_details_user()
 {
 cerr << "I";
 }
 
-void CommandHandler::search_films_user(std::vector<std::string> current_command)
+void CommandHandler::search_films_user()
 {
 cerr << "I";
 }
 
-void CommandHandler::show_readed_notifications_user(std::vector<std::string> current_command)
+void CommandHandler::show_readed_notifications_user()
 {
 cerr << "I";
 }
 
-void CommandHandler::show_notifications_user(std::vector<std::string> current_command)
+void CommandHandler::show_notifications_user()
 {
 cerr << "I";
 }
 
-void CommandHandler::show_followers_list_publisher(std::vector<std::string> current_command)
+void CommandHandler::show_followers_list_publisher()
 {
 cerr << "I";
 }
 
-void CommandHandler::show_published_films_publisher(std::vector<std::string> current_command)
+void CommandHandler::show_published_films_publisher()
 {
 cerr << "I";
 }
 
-void CommandHandler::show_buyed_films_user(std::vector<std::string> current_command)
+void CommandHandler::show_buyed_films_user()
 {
 cerr << "I";
 }
 
-void CommandHandler::delete_film_publisher(std::vector<std::string> current_command)
+void CommandHandler::delete_film_publisher()
 {
 cerr << "I";
 }
 
-void CommandHandler::delete_comment_publisher( std::vector<std::string> current_command)
+void CommandHandler::delete_comment_publisher( )
 {
 cerr << "I";
 }
@@ -181,12 +181,11 @@ void CommandHandler::process_command()
     }
 }*/
 
-/*
+
 void CommandHandler::add_command(vector<string> input_command)
 {
     current_command = input_command;
-    process_command();
-}*/
+}
 
 
 User CommandHandler::get_user(int _user_id)

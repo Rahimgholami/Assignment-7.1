@@ -53,31 +53,31 @@ void FileSystemInterface::find_post_money_funtions()
 {
   string third_command_member = current_command[3];
   if(third_command_member == "?")
-    command_handler.increase_money_user(current_command);
+    command_handler.increase_money_user();
   else
-    command_handler.increase_money_publisher(current_command);
+    command_handler.increase_money_publisher();
 }
 
 void FileSystemInterface::find_post_functions(string main_command)
 {
   if(main_command == SignUp)
-    command_handler.signup(current_command);
+    command_handler.signup();
   else if(main_command == Login)
-    command_handler.login(current_command);
+    command_handler.login();
   else if(main_command == Films)
-    command_handler.add_film_publisher(current_command);
+    command_handler.add_film_publisher();
   else if(main_command == Money)
     find_post_money_funtions();
   else if(main_command == Replies)
-    command_handler.reply_comment_publisher(current_command);
+    command_handler.reply_comment_publisher();
   else if(main_command == Followers)
-    command_handler.add_follower_user(current_command);
+    command_handler.add_follower_user();
   else if(main_command == Buy)
-    command_handler.buy_film_user(current_command);
+    command_handler.buy_film_user();
   else if(main_command == Rate)
-    command_handler.rate_film_user(current_command);
+    command_handler.rate_film_user();
   else if(main_command == Comment)
-    command_handler.comment_user(current_command);
+    command_handler.comment_user();
   else
     throw BadRequest();
 }
@@ -85,7 +85,7 @@ void FileSystemInterface::find_post_functions(string main_command)
 void FileSystemInterface::find_put_functions(string main_command)
 {
   if(main_command == Films)
-    command_handler.edit_film_publisher(current_command);
+    command_handler.edit_film_publisher();
   else
     throw BadRequest();
 }
@@ -95,9 +95,9 @@ void FileSystemInterface::find_get_films_functions()
   if(current_command[3] == "?")
   {
     if(current_command[4] == FilmId)
-      command_handler.show_film_details_user(current_command);
+      command_handler.show_film_details_user();
     else
-      command_handler.search_films_user(current_command);
+      command_handler.search_films_user();
   }
   else
     throw BadRequest();
@@ -106,21 +106,21 @@ void FileSystemInterface::find_get_films_functions()
 void FileSystemInterface::find_get_notificaion_functions()
 {
   if(current_command[3] == Read)
-    command_handler.show_readed_notifications_user(current_command);
+    command_handler.show_readed_notifications_user();
   else
-    command_handler.show_notifications_user(current_command);
+    command_handler.show_notifications_user();
 }
 
 void FileSystemInterface::find_get_functions(string main_command)
 {
   if(main_command == Followers)
-    command_handler.show_followers_list_publisher(current_command);
+    command_handler.show_followers_list_publisher();
   else if(main_command == Published)
-    command_handler.show_published_films_publisher(current_command);
+    command_handler.show_published_films_publisher();
   else if(main_command == Films)
     find_get_films_functions();
   else if(main_command == Purchased)
-    command_handler.show_buyed_films_user(current_command);
+    command_handler.show_buyed_films_user();
   else if(main_command == Notification)
     find_get_notificaion_functions();
   else
@@ -130,9 +130,9 @@ void FileSystemInterface::find_get_functions(string main_command)
 void FileSystemInterface::find_delete_functions(string main_command)
 {
   if(main_command == Films)
-    command_handler.delete_film_publisher(current_command);
+    command_handler.delete_film_publisher();
   else if(main_command == Comments)
-    command_handler.delete_comment_publisher(current_command);
+    command_handler.delete_comment_publisher();
   else
     throw BadRequest();
 }
@@ -140,6 +140,7 @@ void FileSystemInterface::find_delete_functions(string main_command)
 
 void FileSystemInterface::process_command()
 {
+  command_handler.add_command(current_command);
   string commence = current_command[0];
   string main_command = current_command[1];
   if(commence == POST)
