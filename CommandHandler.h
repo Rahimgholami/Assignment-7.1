@@ -48,12 +48,17 @@ public:
   std::vector<int> find_add_film_publisher_key_indexes();
   void add_film_publisher();
 
+  std::vector<int> find_comment_user_key_indexes();
+  void comment_user();
 
+  std::vector<int> find_reply_comment_key_indexes();
   void reply_comment_publisher();
+
+
+
   void add_follower_user();
   void buy_film_user();
   void rate_film_user();
-  void comment_user();
   void edit_film_publisher();
   void show_film_details_user();
   void search_films_user();

@@ -52,7 +52,7 @@ void FileSystemInterface::check_commence(string command_commerce)
 void FileSystemInterface::find_post_money_funtions()
 {
   string third_command_member = current_command[3];
-  if(third_command_member == "?")
+  if(third_command_member == QuestionMark)
     command_handler.increase_money_user();
   else
     command_handler.increase_money_publisher();
@@ -76,7 +76,7 @@ void FileSystemInterface::find_post_functions(string main_command)
     command_handler.buy_film_user();
   else if(main_command == Rate)
     command_handler.rate_film_user();
-  else if(main_command == Comment)
+  else if(main_command == CommentString)
     command_handler.comment_user();
   else
     throw BadRequest();
@@ -92,7 +92,7 @@ void FileSystemInterface::find_put_functions(string main_command)
 
 void FileSystemInterface::find_get_films_functions()
 {
-  if(current_command[3] == "?")
+  if(current_command[3] == QuestionMark)
   {
     if(current_command[4] == FilmId)
       command_handler.show_film_details_user();

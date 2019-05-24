@@ -32,7 +32,7 @@ void Film::rate_film(int _rate_in)
 
 Film Film::get_film()
 {
-    return Film(name, year, length, price, summary, director);
+    return Film(name, year, length, price, summary, director,film_id);
 }
 
 void Film::comment_film(string content)
@@ -42,8 +42,8 @@ void Film::comment_film(string content)
 
 void Film::reply_comment(int comment_id, string content, string _status)
 {
-    if(_status == "publisher")
-        comments_replies[comment_id] = content;
+    if(_status == Publisher_word)
+        comments[comment_id-1].reply_comment_message(content);
     else
         throw PremissionDenied();
 }
@@ -81,7 +81,7 @@ void Film::show_film_details()
     cout << CommentsShow << endl;
     for(int i=0; i<comments.size(); i++)
     {
-        cout << (i+1) << comments[i] << endl;
+       // cout << (i+1) << comments[i] << endl;
         cout << "Replies will be added!" << endl; 
     }
     cout << RecommendationFilm << endl;
@@ -90,5 +90,5 @@ void Film::show_film_details()
 
 void Film::delete_comment(int _comment_id)
 {
-    comments[_comment_id-1] = EmptyString;
+  //  comments[_comment_id-1] = EmptyString;
 }

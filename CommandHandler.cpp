@@ -240,10 +240,15 @@ vector<int> CommandHandler::find_add_film_publisher_key_indexes()
 
 void CommandHandler::add_film_to_vector(vector<int> key_indexes)
 {
-    films.push_back(Film(current_command[key_indexes[0]+1],convert_string_to_int(current_command[key_indexes[1]+1]),
+    if(role == Publisher_word)
+    {
+    films.push_back(Film(current_command[key_indexes[0]+1], convert_string_to_int(current_command[key_indexes[1]+1]),
                         convert_string_to_int(current_command[key_indexes[2]+1]),convert_string_to_int(current_command[key_indexes[3]+1]),
-                        current_command[key_indexes[4]+1],current_command[key_indexes[5]+1]),films.size()+1);
+                        current_command[key_indexes[4]+1],current_command[key_indexes[5]+1],films.size()+1));
     publishers[current_publisher_index].add_film(films.size());  
+    }
+    else
+        throw PremissionDenied();
 }
 
 void CommandHandler::add_film_publisher()
@@ -268,25 +273,26 @@ vector<int> CommandHandler::find_comment_user_key_indexes()
     return indexes;
 }
 
-
-
-
-
-
 void CommandHandler::comment_user()
 {
     check_command_size(7,7);
-    int indexes = find_comment_user_key_indexes();
-    films[stoi(current_command[indexes[0]+1])-1].
+    vector<int> indexes = find_comment_user_key_indexes();
+    films[stoi(current_command[indexes[0]+1])-1].comment_film(current_command[indexes[1]+1]);
 }
 
 
 
-
-
+vector<int> CommandHandler::find_reply_comment_key_indexes()
+{
+    check_QuestionMark_command();
+    vector<int> indexes{find_element_in_vec(FilmId,1), find_element_in_vec(CommentId,1), find_element_in_vec(Content,1)};
+    return indexes;
+}
 void CommandHandler::reply_comment_publisher()
 {
-cerr << "I";
+    check_command_size(9,9);
+    vector<int> indexes = find_reply_comment_key_indexes();
+    films[stoi(current_command[indexes[0]+1])-1].reply_comment(stoi(current_command[indexes[1]+1]), current_command[indexes[2]+1], role);
 }
 
 void CommandHandler::add_follower_user()
