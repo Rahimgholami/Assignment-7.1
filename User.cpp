@@ -12,6 +12,7 @@ User::User(string _email, string _username, string _password, int _age, int _use
     age = _age;
     user_id = _user_id;
     cout << OK << endl;
+    money = 0;
 }
 
 string User::get_username()

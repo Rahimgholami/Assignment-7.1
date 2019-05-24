@@ -25,6 +25,7 @@ public:
   std::vector<int> find_signup_key_indexes();
   static void is_email_valid(const std::string& email);
   void check_signup_command();
+  void add_user_publisher_to_vector(std::vector<int> key_indexes, int age);
   void signup();
   
   void login();
@@ -33,17 +34,19 @@ public:
   bool publisher_search();  
     
 
+  void check_increase_money();
+  int convert_money_to_int();
+  void increase_money_user();
 
-
-    //void process_command();
+    /*void process_command();
     User get_user(int _user_id);
     Publisher get_publisher(int _publisher_id);
-    
+    */
 
   
 
 
-  void increase_money_user();
+ 
   void increase_money_publisher();
   void add_film_publisher();
   void reply_comment_publisher();
@@ -70,6 +73,8 @@ private:
     std::string role;
     int current_user_id;
     int current_publisher_id;
+    int current_user_index;
+    int current_publisher_index;
 };
 
 

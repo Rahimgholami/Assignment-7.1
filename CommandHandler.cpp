@@ -9,15 +9,6 @@ CommandHandler::CommandHandler()
 
 
 
-void CommandHandler::increase_money_user()
-{
-    cerr << "I";
-}
-
-void CommandHandler::increase_money_publisher()
-{
-cerr << "I";
-}
 
 void CommandHandler::add_film_publisher()
 {
@@ -139,7 +130,7 @@ void CommandHandler::is_email_valid(const std::string& email)
 void CommandHandler::check_signup_command()
 {
     check_command_size(11,13);
-    if(current_command[2] == "?")
+    if(current_command[2] == QuestionMark)
     {
         cerr << "OK" << endl;
     }
@@ -162,10 +153,26 @@ vector<int> CommandHandler::find_signup_key_indexes()
     return indexes;
 }
 
+void CommandHandler::add_user_publisher_to_vector(vector<int> key_indexes, int age)
+{
+    if(role == Publisher_word)
+    {
+        publishers.push_back(Publisher(current_command[key_indexes[0]+1],current_command[key_indexes[1]+1],current_command[key_indexes[2]+1],age,users.size()+publishers.size()+1));
+        current_publisher_index = publishers.size()-1;
+        current_publisher_id = users.size()+publishers.size();
+    }
+    else if(role == User_word)
+    {
+        users.push_back(User(current_command[key_indexes[0]+1],current_command[key_indexes[1]+1],current_command[key_indexes[2]+1],age,users.size()+publishers.size()+1));
+        current_user_index = users.size()-1;
+        current_user_id = users.size()+publishers.size();
+    }
+    else
+        throw PremissionDenied();
+}
 void CommandHandler::signup()
 {
     vector<int> key_indexes = find_signup_key_indexes();
-    int id = users.size() + publishers.size() + 1;
     int age;
     try
     {
@@ -175,12 +182,7 @@ void CommandHandler::signup()
     {
         cerr << "Bad Request" << endl;
     }
-    if(role == Publisher_word)
-        publishers.push_back(Publisher(current_command[key_indexes[0]+1],current_command[key_indexes[1]+1],current_command[key_indexes[2]+1],age,id));
-    else if(role == User_word)
-        users.push_back(User(current_command[key_indexes[0]+1],current_command[key_indexes[1]+1],current_command[key_indexes[2]+1],age,id));
-    else
-        throw PremissionDenied();
+    add_user_publisher_to_vector(key_indexes,age);
 }
 
 
@@ -202,7 +204,7 @@ void CommandHandler::add_command(vector<string> input_command)
     current_command = input_command;
 }
 
-
+/*
 
 User CommandHandler::get_user(int _user_id)
 {
@@ -222,12 +224,12 @@ Publisher CommandHandler::get_publisher(int _publisher_id)
             return publishers[_publisher_id];
     }
     throw BadRequest();
-}
+}*/
 
 void CommandHandler::check_login_command()
 {
     check_command_size(7,7);
-    if(current_command[2] == "?")
+    if(current_command[2] == QuestionMark)
     {
         cerr << "OK" << endl;
     }
@@ -246,7 +248,7 @@ bool CommandHandler::user_search()
             {
                 cout << OK << endl;
                 role = User_word;
-                current_user_id = find_element_in_vec(UserName,1)+1;
+                current_user_id = i;
                 check = 1;
             }
         }
@@ -265,7 +267,7 @@ bool CommandHandler::publisher_search()
             {
                 cout << OK << endl;
                 role = Publisher_word;
-                current_publisher_id = find_element_in_vec(UserName,1)+1;
+                current_publisher_id = i;
                 check = 1;
             }
         }
@@ -281,3 +283,44 @@ void CommandHandler::login()
     if((check_user_search == 0) && (check_publisher_search))
         throw BadRequest();
 }
+
+
+void CommandHandler::check_increase_money()
+{
+    if((current_command[2] != QuestionMark) || (current_command[3] != Amount))
+        throw BadRequest();
+}
+
+int CommandHandler::convert_money_to_int()
+{
+    int money=0;
+    try
+    {
+        money = stoi(current_command[4]);
+    }
+    catch(invalid_argument er)
+    {
+        cerr << "Bad Request" << endl;
+    }
+    return money;
+}
+void CommandHandler::increase_money_user()
+{
+    check_increase_money();
+    check_command_size(5,5);
+    if(role == User_word)
+        users[current_user_index].increase_money(convert_money_to_int());
+    else if(role == Publisher_word)
+        publishers[current_publisher_index].increase_money(convert_money_to_int());
+    else
+        throw PremissionDenied();
+}
+
+
+
+void CommandHandler::increase_money_publisher()
+{
+    check_command_size(2,2);
+    publishers[current_publisher_index].get_money();
+}
+

@@ -59,3 +59,4 @@
 #define EqualSpace " = "
 #define NotSets "not_sets"
 #define OK "OK"
+#define QuestionMark "?"

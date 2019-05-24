@@ -134,7 +134,7 @@ int main()
 }*/
 
 
-
+/*
 #include <iostream>
 #include <vector>
 #include <string>
@@ -162,4 +162,59 @@ int main()
     {
       cout << "error!" << endl;
     }
+}*/
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class A
+{
+public:
+  A(int _id)
+  {
+    id = _id;
+  }
+  void add(int _id)
+  {
+    id += _id;
+  }
+  void printA()
+  {
+    cout << id << endl;
+  }
+private:
+  int id;
+};
+
+class B:public A
+{
+public:
+  B(int _id):A(_id)
+  {
+    cal = 0;
+  }
+  void minus(int _min)
+  {
+    cal -= _min;
+  }
+  void printB()
+  {
+    cout << cal << endl;
+  }
+private:
+  int cal;
+};
+
+int main()
+{
+  B b(5);
+  b.add(2);
+  b.minus(-6);
+  b.printB();
+  b.printA();
+
+  return 0;
 }
