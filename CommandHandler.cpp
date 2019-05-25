@@ -358,14 +358,24 @@ void CommandHandler::edit_film_publisher()
 }
 
 
-
-
-
-
 void CommandHandler::show_film_details_user()
 {
-cerr << "I";
+    check_command_size(5,5);
+    check_QuestionMark_command();
+    if(current_command[3] == FilmId)
+    {
+        if(convert_string_to_int(current_command[4]) <= films.size())
+        {
+            films[convert_string_to_int(current_command[4])-1].show_film_details();
+        }
+        else
+            throw NotFound();
+    }
+    else
+        throw BadRequest();
 }
+
+
 
 void CommandHandler::search_films_user()
 {

@@ -20,10 +20,47 @@ void Film::set_film_id(int _film_id)
     film_id = _film_id;
 }
 
+
 string Film::get_film_name()
 {
     return name;
 }
+
+string Film::get_film_director()
+{
+    return director;
+}
+
+string Film::get_film_summary()
+{
+    return summary;
+}
+
+int Film::get_film_length()
+{
+    return length;
+}
+
+int Film::get_film_year()
+{
+    return year;
+}
+
+int Film::get_film_rate()
+{
+    return rate;
+}
+
+int Film::get_film_price()
+{
+    return price;
+}
+
+int Film::get_film_id()
+{
+    return film_id;
+}
+
 
 void Film::rate_film(int _rate_in)
 {
@@ -74,6 +111,12 @@ void Film::edit_film(string _name, int _year, int _length, string _summary, stri
     director = (_director != EmptyString) ? _director:director;
 }
 
+void Film::show_comment_replies(int _comment_id)
+{
+    vector<string> replies = comments[_comment_id].return_reply_comments();
+    for(int i=0; i<replies.size(); i++)
+        cout << _comment_id << Dot << replies[i] << endl;
+}
 
 void Film::show_film_details()
 {
@@ -88,8 +131,8 @@ void Film::show_film_details()
     cout << CommentsShow << endl;
     for(int i=0; i<comments.size(); i++)
     {
-       // cout << (i+1) << comments[i] << endl;
-        cout << "Replies will be added!" << endl; 
+        cout << (i+1) << Dot << comments[i].get_comment() << endl;
+        show_comment_replies(i); 
     }
     cout << RecommendationFilm << endl;
     cout << "Best Films will be added!" << endl;
