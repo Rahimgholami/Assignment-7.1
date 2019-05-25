@@ -14,6 +14,7 @@ class Film
 public:
     Film(std::string _name, int _year, int _length, int _price, std::string _summary, std::string _director, int _film_id);
     void add_film_inbox_money();
+    int get_film_money();
     void set_film_id(int film_id);
     std::string get_film_name();
     std::string get_film_director();

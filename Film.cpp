@@ -26,6 +26,13 @@ void Film::add_film_inbox_money()
         film_inbox_money += price*rate*StrongFilm;
 }
 
+int Film::get_film_money()
+{
+    int inbox_money = film_inbox_money;
+    film_inbox_money = 0;
+    return inbox_money;
+}
+
 void Film::set_film_id(int _film_id)
 {
     film_id = _film_id;
