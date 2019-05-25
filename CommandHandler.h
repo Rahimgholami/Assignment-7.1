@@ -68,7 +68,9 @@ public:
   std::vector<Film> best_films();
   void show_film_details_user();
 
+  void show_all_films_detail();
   std::vector<int> find_search_key_indexes();
+  void edit_search_films_features();
   void search_films_user();
 
 

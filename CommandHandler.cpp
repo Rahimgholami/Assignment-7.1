@@ -396,6 +396,26 @@ vector<int> CommandHandler::find_search_key_indexes()
     return indexes;
 }
 
+void CommandHandler::show_all_films_detail()
+{
+    for(int i=0; i<films.size(); i++)
+        films[i].show_search_film_details(i);
+}
+
+void CommandHandler::edit_search_films_features()
+{
+    vector<int> indexes = find_search_key_indexes();
+    string name = (indexes[0] != 0) ? current_command[indexes[0]+1] : EmptyString;
+    int min_rate = (indexes[1] != 0) ? convert_string_to_int(current_command[indexes[1]+1]) : EmptyInt;
+    int min_year = (indexes[2] != 0) ? convert_string_to_int(current_command[indexes[2]+1]) : EmptyInt;
+    int price = (indexes[3] != 0) ? convert_string_to_int(current_command[indexes[3]+1]) : EmptyInt;
+    int max_year = (indexes[4] != 0) ? convert_string_to_int(current_command[indexes[4]+1]) : EmptyInt;
+    string director = (indexes[5] != 0) ? current_command[indexes[5]+1] : EmptyString;
+    /*
+    else
+        throw PremissionDenied();*/
+}
+
 void CommandHandler::search_films_user()
 {
 
