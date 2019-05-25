@@ -296,6 +296,8 @@ void CommandHandler::add_follower_user()
         users[current_user_index].add_follower(convert_string_to_int(current_command[(find_element_in_vec(Follower, 1))+1]));
     else if(role == Publisher_word)
         publishers[current_publisher_index].add_follower(convert_string_to_int(current_command[(find_element_in_vec(Follower, 1))+1])); 
+    else
+        throw PremissionDenied();
 }
 
 
@@ -305,14 +307,28 @@ void CommandHandler::buy_film_user()
     check_QuestionMark_command();
     check_command_size(5,5);    
     if(role == User_word)
-        users[current_user_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(Follower, 1))+1]));
+        users[current_user_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(FilmId, 1))+1]));
     else if(role == Publisher_word)
-        publishers[current_publisher_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(Follower, 1))+1])); 
+        publishers[current_publisher_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(FilmId, 1))+1])); 
+    else
+        throw PremissionDenied();
 }
 
 void CommandHandler::rate_film_user()
 {
-cerr << "I";
+    check_QuestionMark_command();
+    check_command_size(7,7);    
+    if(role == User_word)
+        users[current_user_index].rate_films(films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, 1))+1])],
+                                            convert_string_to_int(current_command[(find_element_in_vec(FilmId, 1))+1]),
+                                             convert_string_to_int(current_command[(find_element_in_vec(Score, 1))+1]));
+
+    else if(role == Publisher_word)
+        publishers[current_publisher_index].rate_films(films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, 1))+1])-1],
+                                            convert_string_to_int(current_command[(find_element_in_vec(FilmId, 1))+1]),
+                                             convert_string_to_int(current_command[(find_element_in_vec(Score, 1))+1]));
+    else
+        throw PremissionDenied();
 }
 
 

@@ -40,6 +40,7 @@
 #define Amount "amount"
 #define MinYear "min_year"
 #define Limit "limit"
+#define Score "score"
 
 #define Deleted "deleted"
 #define Available "available"
