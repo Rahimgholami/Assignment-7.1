@@ -81,6 +81,8 @@ public:
   void show_published_films_publisher();
   void show_buyed_films_user();
   void delete_film_publisher();
+
+  
   void delete_comment_publisher( );
  
 private:

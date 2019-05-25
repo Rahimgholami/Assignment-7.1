@@ -37,6 +37,7 @@ public:
 
 
     void delete_comment(int _comment_id);
+    
     void delete_film();
     std::string film_status();
     void edit_film(std::string _name, int _year, int _length, std::string _summary, std::string _director);

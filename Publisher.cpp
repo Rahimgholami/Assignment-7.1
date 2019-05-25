@@ -55,10 +55,6 @@ void Publisher::reply_comments(int _film_id, string _comment_id, string _content
     cerr << "It will be completed!" << endl;
 }
 
-void Publisher::delete_comments(int _film_id, int _comment_id)
-{
-    cerr << "It will be completed!" << endl;
-}
 
 void Publisher::add_follower(int _follower_id, string _user_name, string _email)
 {
@@ -66,5 +62,14 @@ void Publisher::add_follower(int _follower_id, string _user_name, string _email)
     followers_username.push_back(_user_name);
     followers_email.push_back(_email);
 }
-    
+
+void Publisher::is_film_published(int _film_id)
+{
+    for(int i=0; i<published_films_id.size(); i++)
+    {
+        if(published_films_id[i] == _film_id)
+            return High;
+    }
+    throw PremissionDenied();
+}
     

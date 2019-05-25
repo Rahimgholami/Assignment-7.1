@@ -493,5 +493,11 @@ cerr << "I";
 
 void CommandHandler::delete_comment_publisher( )
 {
-cerr << "I";
+    check_command_size(7,7);
+    check_QuestionMark_command();
+    int _film_id = convert_string_to_int(current_command[find_element_in_vec(FilmId,High)+1]));
+    int _comment_id = convert_string_to_int(current_command[find_element_in_vec(CommentId,High)+1]));
+    publishers[current_publisher_index].is_film_published(_film_id);
+    publishers[current_publisher_index].delete_comments(films[_film_id-1], _comment_id);
+ 
 }
