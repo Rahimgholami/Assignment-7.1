@@ -29,4 +29,5 @@ GET films
 GET films ? film_id 1
 GET films ? film_id 2
 POST buy ? film_id 2
+POST rate ? film_id 3 score 10
 

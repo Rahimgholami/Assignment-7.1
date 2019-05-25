@@ -345,12 +345,11 @@ void CommandHandler::rate_film_user()
     check_QuestionMark_command();
     check_command_size(7,7);    
     if(role == User_word)
-        users[current_user_index].rate_films(films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])],
+        users[current_user_index].rate_films(films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])-1],
                                             convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]),
                                              convert_string_to_int(current_command[(find_element_in_vec(Score, High))+1]));
-
     else if(role == Publisher_word)
-        publishers[current_publisher_index].rate_films(films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])-1],
+       publishers[current_publisher_index].rate_films(films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])-1],
                                             convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]),
                                              convert_string_to_int(current_command[(find_element_in_vec(Score, High))+1]));
     else
