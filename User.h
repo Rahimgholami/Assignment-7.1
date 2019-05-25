@@ -19,8 +19,9 @@ public:
   std::string get_password();
   int get_user_id();
   std::string get_email();
+  int get_money();    
   void increase_money(int money_amount);
-  void buy_film(int film_id);
+  void buy_film(int film_id, int _film_price);
   void rate_films(Film _film, int _film_id, int score);
   void show_purchased_films(std::string name,int price,int min_year, int max_year, std::string director);
   void show_notification();

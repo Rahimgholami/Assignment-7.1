@@ -226,7 +226,10 @@ void CommandHandler::increase_money_user()
 void CommandHandler::increase_money_publisher()
 {
     check_command_size(2,2);
-    publishers[current_publisher_index].get_money(films);
+    if(role == Publisher_word)
+        publishers[current_publisher_index].get_money(films);
+    else
+        throw PremissionDenied();
 }
 
 vector<int> CommandHandler::find_add_film_publisher_key_indexes()
@@ -319,21 +322,28 @@ void CommandHandler::add_following_user()
         throw PremissionDenied();
 }
 
+void CommandHandler::check_user_money_sufficency(int _film_price)
+{
+    if(_film_price > users[current_user_index].get_money())
+        throw PremissionDenied();
+}
+
 void CommandHandler::buy_film_user()
 {
     int _film_id = convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]);
+    check_user_money_sufficency(films[_film_id-1].get_film_price());
     check_QuestionMark_command();
     check_command_size(5,5);    
     if((_film_id > films.size()) || films[_film_id].get_film_status() == Deleted) 
         throw NotFound(); 
     if(role == User_word)
     {
-        users[current_user_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]));
+        users[current_user_index].buy_film(_film_id, films[_film_id-1].get_film_price());
         films[_film_id-1].add_film_inbox_money();
     }
     else if(role == Publisher_word)
     {
-        publishers[current_publisher_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])); 
+        publishers[current_publisher_index].buy_film(_film_id, films[_film_id-1].get_film_price());
         films[_film_id-1].add_film_inbox_money();
     }
     else
@@ -484,6 +494,7 @@ void CommandHandler::show_buyed_films_user()
 {
 
 }
+
 
 void CommandHandler::delete_film_publisher()
 {

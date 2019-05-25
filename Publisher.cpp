@@ -48,7 +48,9 @@ void Publisher::show_followers()
 
 void Publisher::get_money(vector<Film> _films)
 {
-    cerr << "It will be completed!" << endl;
+    for(int i=0; i<published_films_id.size(); i++)
+        increase_money(_films[published_films_id[i]].get_film_money());
+    cout << OK << endl;
 }
 
 void Publisher::show_published_films(string _name, int _min_rate, int _price, int _max_year, string _director)

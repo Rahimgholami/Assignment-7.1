@@ -55,7 +55,7 @@ public:
   std::vector<int> find_reply_comment_key_indexes();
   void reply_comment_publisher();
 
-
+  void check_user_money_sufficency(int _film_price);
   void add_follwer_details(int _following_id, int _follower_index);
   void add_following_user();
 

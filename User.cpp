@@ -30,11 +30,17 @@ void User::increase_money(int money_amount)
 {
     money += money_amount;
 };
-    
-void User::buy_film(int film_id)
+
+int User::get_money()    
+{
+    return money;
+}
+
+void User::buy_film(int film_id, int _film_price)
 {
 
     buyed_films_id.push_back(film_id);
+    money -= _film_price;
     cout << OK << endl;
 }
 
