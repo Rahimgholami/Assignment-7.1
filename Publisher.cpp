@@ -35,8 +35,14 @@ void Publisher::edit_films(Film _film, int _film_id, string _film_name, int _fil
 
 void Publisher::show_followers()
 {
-    for(int i=0; i<followers_id.size(); i++)
-        cout << followers_id[i] << endl;
+    cout << ListOfFollowers << endl;
+    cout << Hashtak << Dot << Space << USERID << Vertical 
+        << UserUsername << Vertical << UserEmail << endl;
+        for(int i=0; i<followers_id.size(); i++)
+        {
+            cout << i << Dot << Space << followers_id[i] << Vertical
+                << followers_username[i] << Vertical << followers_email[i] << endl;
+        }
 }
 
 
@@ -65,11 +71,13 @@ void Publisher::add_follower(int _follower_id, string _user_name, string _email)
 
 void Publisher::is_film_published(int _film_id)
 {
+    int check = 0;
     for(int i=0; i<published_films_id.size(); i++)
     {
         if(published_films_id[i] == _film_id)
-            return High;
+            check = 1;
     }
-    throw PremissionDenied();
+    if(check == 0)
+        throw PremissionDenied();
 }
     

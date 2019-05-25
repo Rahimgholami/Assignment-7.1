@@ -47,12 +47,18 @@
 #define Low 0
 #define High 1
 #define Vertical " | "
+#define Hashtak "#"
+#define Space " "
+#define USERID "User Id"
+#define UserUsername "User Username"
+#define UserEmail "User Email"
 
 #define Deleted "deleted"
 #define Available "available"
 #define EmptyString "empty"
 #define EmptyInt -1
 #define NumberOfShownFilms 4
+#define ListOfFollowers "List of Followers"
 
 #define DetailsOfFilm "Details of Film"
 #define YearShow "Year"

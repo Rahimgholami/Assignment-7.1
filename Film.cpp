@@ -160,5 +160,16 @@ void Film::show_film_details()
 
 void Film::delete_comment(int _comment_id)
 {
-  //  comments[_comment_id-1] = EmptyString;
+    if(status == Available)
+    {
+        if(_comment_id <= comments.size())
+        {
+        comments[_comment_id-1].set_comment_status(Deleted);
+        cout << OK << endl;
+        }
+        else
+            throw NotFound();
+    }
+    else
+        throw NotFound();
 }
