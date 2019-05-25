@@ -387,11 +387,18 @@ void CommandHandler::show_film_details_user()
         throw BadRequest();
 }
 
-
+vector<int> CommandHandler::find_search_key_indexes()
+{
+    check_command_size(3,15);
+    check_QuestionMark_command();
+    vector<int> indexes{find_element_in_vec(Name,Low), find_element_in_vec(MinRate,Low),  find_element_in_vec(MinYear,Low),
+                        find_element_in_vec(Price,Low), find_element_in_vec(MaxYear,Low), find_element_in_vec(Director,Low)};
+    return indexes;
+}
 
 void CommandHandler::search_films_user()
 {
-cerr << "I";
+
 }
 
 void CommandHandler::show_readed_notifications_user()

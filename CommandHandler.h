@@ -68,8 +68,10 @@ public:
   std::vector<Film> best_films();
   void show_film_details_user();
 
-
+  std::vector<int> find_search_key_indexes();
   void search_films_user();
+
+
   void show_readed_notifications_user();
   void show_notifications_user();
   void show_followers_list_publisher();

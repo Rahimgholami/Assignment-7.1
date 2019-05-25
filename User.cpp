@@ -84,7 +84,7 @@ void User::show_best_films(vector<Film> _best_films)
     vector<Film> _this_user_best_films;
     for(int i=0; i<_best_films.size(); i++)
     {
-        if (  find( buyed_films_id.begin(), buyed_films_id.end(), _best_films[i].get_film_id() ) != buyed_films_id.end() ){}
+        if (find( buyed_films_id.begin(), buyed_films_id.end(), _best_films[i].get_film_id() ) != buyed_films_id.end()){}
         else
             _this_user_best_films.push_back(_best_films[i]);
     }
