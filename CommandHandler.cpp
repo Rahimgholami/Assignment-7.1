@@ -39,10 +39,7 @@ void CommandHandler::is_email_valid(const std::string& email)
 
 void CommandHandler::check_QuestionMark_command()
 {
-    if(current_command[2] == QuestionMark)
-    {
-        cerr << "OK" << endl;
-    }
+    if(current_command[2] == QuestionMark){}
     else
         throw BadRequest();
 }
@@ -63,8 +60,23 @@ vector<int> CommandHandler::find_signup_key_indexes()
     return indexes;
 }
 
+void CommandHandler::check_uniqueness(vector<int> key_indexes, int age)
+{
+    for(int i=0; i<users.size(); i++)
+    {
+        if(users[i].get_username() == current_command[key_indexes[1]+1])
+            throw BadRequest();
+    }
+    for(int i=0; i<publishers.size(); i++)
+    {
+        if(publishers[i].get_username() == current_command[key_indexes[1]+1])
+            throw BadRequest();
+    }
+}
+
 void CommandHandler::add_user_publisher_to_vector(vector<int> key_indexes, int age)
 {
+    check_uniqueness(key_indexes, age);
     if(role == Publisher_word)
     {
         publishers.push_back(Publisher(current_command[key_indexes[0]+1],current_command[key_indexes[1]+1],current_command[key_indexes[2]+1],age,users.size()+publishers.size()+1));
@@ -91,7 +103,7 @@ int CommandHandler::convert_string_to_int(string input_string)
     }
     catch(invalid_argument er)
     {
-        cerr << "Bad Request" << endl;
+        //cerr << "Bad Request" << endl;
         throw BadRequest();
     }
 }
@@ -129,17 +141,6 @@ Publisher CommandHandler::get_publisher(int _publisher_id)
     }
     throw BadRequest();
 }*/
-
-void CommandHandler::check_login_command()
-{
-    check_command_size(7,7);
-    if(current_command[2] == QuestionMark)
-    {
-        cerr << "OK" << endl;
-    }
-    else
-        throw BadRequest();
-}
 
 bool CommandHandler::user_search()
 {
@@ -181,7 +182,7 @@ bool CommandHandler::publisher_search()
 
 void CommandHandler::login()
 {
-    check_login_command();
+    check_QuestionMark_command();
     int check_user_search = user_search();
     int check_publisher_search = publisher_search();
     if((check_user_search == 0) && (check_publisher_search))
@@ -287,15 +288,39 @@ void CommandHandler::reply_comment_publisher()
     films[convert_string_to_int(current_command[indexes[0]+1])-1].reply_comment(convert_string_to_int(current_command[indexes[1]+1]), current_command[indexes[2]+1], role);
 }
 
+void CommandHandler::add_follwer_details(int _following_id, int _follower_index)
+{
+    int check = 0;
+    for(int i=0; i<publishers.size(); i++)
+    {
+        if(publishers[i].get_user_id() == _following_id)
+        {
+            publishers[i].add_follower(users[_follower_index].get_user_id(), users[_follower_index].get_username(), users[_follower_index].get_email());
+            check = 1;
+        }
+    }
+    if(check == 0)
+        throw BadRequest();
+}
 
-void CommandHandler::add_follower_user()
+void CommandHandler::add_following_user()
 {
     check_QuestionMark_command();
     check_command_size(5,5);
     if(role == User_word)
-        users[current_user_index].add_follower(convert_string_to_int(current_command[(find_element_in_vec(Follower,High))+1]));
+    {
+        users[current_user_index].add_following(convert_string_to_int(current_command[(find_element_in_vec(UserId,High))+1]));
+        add_follwer_details(convert_string_to_int(current_command[(find_element_in_vec(UserId,High))+1]), current_user_index);
+    }
     else if(role == Publisher_word)
-        publishers[current_publisher_index].add_follower(convert_string_to_int(current_command[(find_element_in_vec(Follower,High))+1])); 
+    {
+                cerr << "here2" << endl;
+                int id = convert_string_to_int(current_command[(find_element_in_vec(UserId,High))+1]);
+                cerr << "EE" << endl;
+        publishers[current_user_index].add_following(id);
+        cerr << "JHHHHHHHHHHHHHH" << endl;
+        add_follwer_details(convert_string_to_int(current_command[(find_element_in_vec(UserId,High))+1]), current_user_index);
+    }
     else
         throw PremissionDenied();
 }
@@ -306,6 +331,9 @@ void CommandHandler::buy_film_user()
 {
     check_QuestionMark_command();
     check_command_size(5,5);    
+    if((convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]) > films.size()) || 
+            films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])].get_film_status() == Deleted) 
+        throw NotFound(); 
     if(role == User_word)
         users[current_user_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]));
     else if(role == Publisher_word)
@@ -411,14 +439,27 @@ void CommandHandler::edit_search_films_features()
     int price = (indexes[3] != 0) ? convert_string_to_int(current_command[indexes[3]+1]) : EmptyInt;
     int max_year = (indexes[4] != 0) ? convert_string_to_int(current_command[indexes[4]+1]) : EmptyInt;
     string director = (indexes[5] != 0) ? current_command[indexes[5]+1] : EmptyString;
-    /*
-    else
-        throw PremissionDenied();*/
+   // search_films_user(name,min_year,max_year,min_rate,price,director);
+    
 }
-
-void CommandHandler::search_films_user()
+/*
+vector<int> CommandHandler::find_features_films(vector<int> input_ids, int feature)
 {
 
+}
+*/
+//void CommandHandler::search_films_user(string _name, int _min_year, int _max_year, int _min_rate, int _price, string _director)
+void CommandHandler::search_films_user()
+{/*
+    vector<int> fims_id;
+    if(_name != EmptyString)
+    {
+        for(int i=0; i<films.size(); i++)
+        {
+            if(_name == films[i].get_film_name())
+                films_id.push_back(films[i].get_film_id());
+        }
+    }*/
 }
 
 void CommandHandler::show_readed_notifications_user()
@@ -433,7 +474,9 @@ cerr << "I";
 
 void CommandHandler::show_followers_list_publisher()
 {
-cerr << "I";
+    check_command_size(2,2);
+    if(role == Publisher_word)
+        publishers[current_publisher_index].show_followers();
 }
 
 void CommandHandler::show_published_films_publisher()

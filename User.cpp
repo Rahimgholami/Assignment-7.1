@@ -34,6 +34,7 @@ void User::increase_money(int money_amount)
 void User::buy_film(int film_id)
 {
     buyed_films_id.push_back(film_id);
+    cout << OK << endl;
 }
 
 void User::show_purchased_films(std::string name,int price,int min_year, int max_year, std::string director)
@@ -53,9 +54,10 @@ void User::show_readed_notification()
         cout << readed_notification[i] << endl;
 }
 
-void User::add_follower(int _follower_id)
+void User::add_following(int _following_id)
 {
-    followers_id.push_back(_follower_id);
+    cout << _following_id << endl;
+    followers_id.push_back(_following_id);
 }
 
 
@@ -95,4 +97,9 @@ void User::show_best_films(vector<Film> _best_films)
         cout << (i+1) << Dot << _this_user_best_films[i].get_film_id() << Vertical 
             << _this_user_best_films[i].get_film_name() << Vertical << _this_user_best_films[i].get_film_length() 
             << Vertical << _this_user_best_films[i].get_film_director() << endl;
+}
+
+string User::get_email()
+{
+    return email;
 }

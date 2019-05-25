@@ -33,11 +33,12 @@ void Publisher::edit_films(Film _film, int _film_id, string _film_name, int _fil
         throw PremissionDenied();
 }
 
-void Publisher::list_followers()
+void Publisher::show_followers()
 {
     for(int i=0; i<followers_id.size(); i++)
         cout << followers_id[i] << endl;
 }
+
 
 void Publisher::get_money()
 {
@@ -59,6 +60,11 @@ void Publisher::delete_comments(int _film_id, int _comment_id)
     cerr << "It will be completed!" << endl;
 }
 
-
+void Publisher::add_follower(int _follower_id, string _user_name, string _email)
+{
+    followers_id.push_back(_follower_id);
+    followers_username.push_back(_user_name);
+    followers_email.push_back(_email);
+}
     
     

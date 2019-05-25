@@ -71,7 +71,7 @@ void FileSystemInterface::find_post_functions(string main_command)
   else if(main_command == Replies)
     command_handler.reply_comment_publisher();
   else if(main_command == Followers)
-    command_handler.add_follower_user();
+    command_handler.add_following_user();
   else if(main_command == Buy)
     command_handler.buy_film_user();
   else if(main_command == Rate)
@@ -194,6 +194,5 @@ FileSystemInterface::FileSystemInterface(string _commands)
       splitted_commands.pop_back();
     }
   }
-
   run_commands();
 }

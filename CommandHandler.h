@@ -28,6 +28,7 @@ public:
   std::vector<int> find_signup_key_indexes();
   static void is_email_valid(const std::string& email);
   
+  void check_uniqueness(std::vector<int> key_indexes, int age);
   void add_user_publisher_to_vector(std::vector<int> key_indexes, int age);
   void signup();
   
@@ -55,8 +56,8 @@ public:
   void reply_comment_publisher();
 
 
-
-  void add_follower_user();
+  void add_follwer_details(int _following_id, int _follower_index);
+  void add_following_user();
 
   void buy_film_user();
   
@@ -71,8 +72,8 @@ public:
   void show_all_films_detail();
   std::vector<int> find_search_key_indexes();
   void edit_search_films_features();
+ // void search_films_user(std::string _name, int _min_year, int _max_year, int _min_rate, int _price, std::string _director);
   void search_films_user();
-
 
   void show_readed_notifications_user();
   void show_notifications_user();

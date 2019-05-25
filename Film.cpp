@@ -61,6 +61,10 @@ int Film::get_film_id()
     return film_id;
 }
 
+string Film::get_film_status()
+{
+    return status;
+}
 
 void Film::rate_film(int _rate_in)
 {
