@@ -488,11 +488,19 @@ cerr << "I";
 
 void CommandHandler::delete_film_publisher()
 {
-cerr << "I";
+    if(role != Publisher_word)
+        throw PremissionDenied();
+    check_command_size(5,5);
+    check_QuestionMark_command();
+    int _film_id = convert_string_to_int(current_command[find_element_in_vec(FilmId,High)+1]);
+    publishers[current_publisher_index].is_film_published(_film_id);
+    films[_film_id-1].delete_film();
 }
 
 void CommandHandler::delete_comment_publisher( )
 {
+    if(role != Publisher_word)
+        throw PremissionDenied();
     check_command_size(7,7);
     check_QuestionMark_command();
     int _film_id = convert_string_to_int(current_command[find_element_in_vec(FilmId,High)+1]);
