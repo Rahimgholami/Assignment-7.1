@@ -57,9 +57,14 @@ public:
 
 
   void add_follower_user();
+
   void buy_film_user();
+  
   void rate_film_user();
+  
+  std::vector<int> find_edit_film_key_indexes();
   void edit_film_publisher();
+  
   void show_film_details_user();
   void search_films_user();
   void show_readed_notifications_user();

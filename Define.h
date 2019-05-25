@@ -42,6 +42,9 @@
 #define Limit "limit"
 #define Score "score"
 
+#define Low 0
+#define High 1
+
 #define Deleted "deleted"
 #define Available "available"
 #define EmptyString "empty"

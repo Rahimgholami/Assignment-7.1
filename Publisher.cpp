@@ -20,9 +20,9 @@ void Publisher::delete_film(int _film_id)
     cerr << "It will be completed!" << endl;
 }
 
-void Publisher::edit_film(int _film_id, string _film_name, int _film_year, int _film_length, string _film_summary, string _film_director)
+void Publisher::edit_films(Film _film, int _film_id, string _film_name, int _film_year, int _film_length, string _film_summary, string _film_director)
 {
-    cerr << "It will be completed!" << endl;
+    
 }
 
 void Publisher::list_followers()

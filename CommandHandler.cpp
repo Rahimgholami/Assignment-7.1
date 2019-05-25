@@ -14,7 +14,7 @@ int CommandHandler::find_element_in_vec(string search_element, int priority)
 	    return distance(current_command.begin(), itr);
 	else 
     {
-        if(priority == 1)
+        if(priority == High)
 		    throw BadRequest();
         else
             return 0;
@@ -51,11 +51,11 @@ vector<int> CommandHandler::find_signup_key_indexes()
 {
     check_command_size(11,13);
     check_QuestionMark_command();
-    vector<int> indexes{find_element_in_vec(Email,1), find_element_in_vec(UserName,1), find_element_in_vec(PassWord,1), find_element_in_vec(Age,1)};
-    is_email_valid(current_command[find_element_in_vec(Email,1)+1]);
-    if(find_element_in_vec(Publisher_word,0) != 0)
+    vector<int> indexes{find_element_in_vec(Email,High), find_element_in_vec(UserName,High), find_element_in_vec(PassWord,High), find_element_in_vec(Age,High)};
+    is_email_valid(current_command[find_element_in_vec(Email,High)+1]);
+    if(find_element_in_vec(Publisher_word,Low) != 0)
     {
-        if(current_command[find_element_in_vec(Publisher_word,0)+1] == "true")
+        if(current_command[find_element_in_vec(Publisher_word,Low)+1] == "true")
             role = Publisher_word;
         else
             role = User_word;
@@ -146,9 +146,9 @@ bool CommandHandler::user_search()
     int check = 0;
     for(int i=0; i<users.size(); i++)
     {
-        if(current_command[find_element_in_vec(UserName,1)+1] == users[i].get_username())
+        if(current_command[find_element_in_vec(UserName,High)+1] == users[i].get_username())
         {
-            if(current_command[find_element_in_vec(PassWord,1)+1] == users[i].get_password())
+            if(current_command[find_element_in_vec(PassWord,High)+1] == users[i].get_password())
             {
                 cout << OK << endl;
                 role = User_word;
@@ -233,8 +233,8 @@ void CommandHandler::increase_money_publisher()
 vector<int> CommandHandler::find_add_film_publisher_key_indexes()
 {
     check_QuestionMark_command();
-    vector<int> indexes{find_element_in_vec(Name,1), find_element_in_vec(Year,1), find_element_in_vec(Length,1),
-                         find_element_in_vec(Price,1), find_element_in_vec(Summary,1), find_element_in_vec(Director,1)};
+    vector<int> indexes{find_element_in_vec(Name,High), find_element_in_vec(Year,High), find_element_in_vec(Length,High),
+                         find_element_in_vec(Price,High), find_element_in_vec(Summary,High), find_element_in_vec(Director,High)};
     return indexes;
 }
 
@@ -262,7 +262,7 @@ void CommandHandler::add_film_publisher()
 vector<int> CommandHandler::find_comment_user_key_indexes()
 {
     check_QuestionMark_command();
-    vector<int> indexes{find_element_in_vec(FilmId,1), find_element_in_vec(Content,1)};
+    vector<int> indexes{find_element_in_vec(FilmId,High), find_element_in_vec(Content,High)};
     return indexes;
 }
 
@@ -277,7 +277,7 @@ void CommandHandler::comment_user()
 vector<int> CommandHandler::find_reply_comment_key_indexes()
 {
     check_QuestionMark_command();
-    vector<int> indexes{find_element_in_vec(FilmId,1), find_element_in_vec(CommentId,1), find_element_in_vec(Content,1)};
+    vector<int> indexes{find_element_in_vec(FilmId,High), find_element_in_vec(CommentId,High), find_element_in_vec(Content,High)};
     return indexes;
 }
 void CommandHandler::reply_comment_publisher()
@@ -293,9 +293,9 @@ void CommandHandler::add_follower_user()
     check_QuestionMark_command();
     check_command_size(5,5);
     if(role == User_word)
-        users[current_user_index].add_follower(convert_string_to_int(current_command[(find_element_in_vec(Follower, 1))+1]));
+        users[current_user_index].add_follower(convert_string_to_int(current_command[(find_element_in_vec(Follower,High))+1]));
     else if(role == Publisher_word)
-        publishers[current_publisher_index].add_follower(convert_string_to_int(current_command[(find_element_in_vec(Follower, 1))+1])); 
+        publishers[current_publisher_index].add_follower(convert_string_to_int(current_command[(find_element_in_vec(Follower,High))+1])); 
     else
         throw PremissionDenied();
 }
@@ -307,9 +307,9 @@ void CommandHandler::buy_film_user()
     check_QuestionMark_command();
     check_command_size(5,5);    
     if(role == User_word)
-        users[current_user_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(FilmId, 1))+1]));
+        users[current_user_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]));
     else if(role == Publisher_word)
-        publishers[current_publisher_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(FilmId, 1))+1])); 
+        publishers[current_publisher_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])); 
     else
         throw PremissionDenied();
 }
@@ -319,23 +319,48 @@ void CommandHandler::rate_film_user()
     check_QuestionMark_command();
     check_command_size(7,7);    
     if(role == User_word)
-        users[current_user_index].rate_films(films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, 1))+1])],
-                                            convert_string_to_int(current_command[(find_element_in_vec(FilmId, 1))+1]),
-                                             convert_string_to_int(current_command[(find_element_in_vec(Score, 1))+1]));
+        users[current_user_index].rate_films(films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])],
+                                            convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]),
+                                             convert_string_to_int(current_command[(find_element_in_vec(Score, High))+1]));
 
     else if(role == Publisher_word)
-        publishers[current_publisher_index].rate_films(films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, 1))+1])-1],
-                                            convert_string_to_int(current_command[(find_element_in_vec(FilmId, 1))+1]),
-                                             convert_string_to_int(current_command[(find_element_in_vec(Score, 1))+1]));
+        publishers[current_publisher_index].rate_films(films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])-1],
+                                            convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]),
+                                             convert_string_to_int(current_command[(find_element_in_vec(Score, High))+1]));
     else
         throw PremissionDenied();
 }
 
 
+vector<int> CommandHandler::find_edit_film_key_indexes()
+{
+    check_command_size(5,15);
+    check_QuestionMark_command();
+    vector<int> indexes{find_element_in_vec(FilmId,High), find_element_in_vec(Name,Low), find_element_in_vec(Year,Low),
+                         find_element_in_vec(Length,Low), find_element_in_vec(Summary,Low), find_element_in_vec(Director,Low)};
+    return indexes;
+}
+
+
 void CommandHandler::edit_film_publisher()
 {
-cerr << "I";
+    vector<int> indexes = find_edit_film_key_indexes();
+    int film_id = convert_string_to_int(current_command[indexes[0]+1]);
+    string name = (indexes[1] != 0) ? current_command[indexes[1]+1] : EmptyString;
+    int year = (indexes[2] != 0) ? convert_string_to_int(current_command[indexes[2]+1]) : EmptyInt;
+    int length = (indexes[3] != 0) ? convert_string_to_int(current_command[indexes[3]+1]) : EmptyInt;
+    string summary = (indexes[4] != 0) ? current_command[indexes[4]+1] : EmptyString;
+    string director = (indexes[5] != 0) ? current_command[indexes[5]+1] : EmptyString;
+    if(role == Publisher_word)
+        publishers[current_publisher_index].edit_films(films[film_id-1],film_id,name,year,length,summary,director);
+    else
+        throw PremissionDenied();
 }
+
+
+
+
+
 
 void CommandHandler::show_film_details_user()
 {
