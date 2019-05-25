@@ -357,6 +357,17 @@ void CommandHandler::edit_film_publisher()
         throw PremissionDenied();
 }
 
+vector<Film> CommandHandler::best_films()
+{
+    vector<Film> sorted_films;
+    vector<int> sorted_films_id;
+    for(int i=0; i<films.size(); i++)
+        sorted_films_id.push_back(films[i].get_film_rate());
+    sort(sorted_films_id.begin(), sorted_films_id.end());
+    for(int i=0; i<sorted_films_id.size(); i++)
+        sorted_films.push_back(films[sorted_films_id[i]-1]);
+    return sorted_films;
+}
 
 void CommandHandler::show_film_details_user()
 {
@@ -367,6 +378,7 @@ void CommandHandler::show_film_details_user()
         if(convert_string_to_int(current_command[4]) <= films.size())
         {
             films[convert_string_to_int(current_command[4])-1].show_film_details();
+            users[current_user_index].show_best_films(best_films());
         }
         else
             throw NotFound();

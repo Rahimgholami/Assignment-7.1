@@ -64,8 +64,11 @@ public:
   
   std::vector<int> find_edit_film_key_indexes();
   void edit_film_publisher();
-  
+
+  std::vector<Film> best_films();
   void show_film_details_user();
+
+
   void search_films_user();
   void show_readed_notifications_user();
   void show_notifications_user();

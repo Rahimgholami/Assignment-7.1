@@ -45,11 +45,13 @@
 #define Dot "."
 #define Low 0
 #define High 1
+#define Vertical " | "
 
 #define Deleted "deleted"
 #define Available "available"
 #define EmptyString "empty"
 #define EmptyInt -1
+#define NumberOfShownFilms 4
 
 #define DetailsOfFilm "Details of Film"
 #define YearShow "Year"

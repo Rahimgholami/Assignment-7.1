@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <iterator>
+#include <algorithm>
 #include "Define.h"
 #include "Exception.h"
 #include "Film.h"
@@ -23,6 +25,7 @@ public:
   void show_notification();
   void show_readed_notification();
   void add_follower(int _follower_id);
+  void show_best_films(std::vector<Film> _best_films);
 
 private:
   std::string username;

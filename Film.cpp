@@ -118,7 +118,7 @@ void Film::show_comment_replies(int _comment_id)
         cout << _comment_id << Dot << replies[i] << endl;
 }
 
-void Film::show_film_details()
+void Film::show_film_characteristic()
 {
     cout << DetailsOfFilm << name << endl;
     cout << IdShow << EqualSpace << film_id << endl;
@@ -129,13 +129,24 @@ void Film::show_film_details()
     cout << RateShow << EqualSpace << rate << endl;
     cout << PriceShow << EqualSpace << price << endl;
     cout << CommentsShow << endl;
+    cout << endl;
+}
+
+void Film::show_comments_reply()
+{
     for(int i=0; i<comments.size(); i++)
     {
         cout << (i+1) << Dot << comments[i].get_comment() << endl;
         show_comment_replies(i); 
     }
+}
+
+void Film::show_film_details()
+{
+    show_film_characteristic();
+    show_comments_reply();
+    cout << endl;
     cout << RecommendationFilm << endl;
-    cout << "Best Films will be added!" << endl;
 } 
 
 void Film::delete_comment(int _comment_id)
