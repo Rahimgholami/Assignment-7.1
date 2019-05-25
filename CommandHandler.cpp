@@ -226,12 +226,8 @@ void CommandHandler::increase_money_user()
 void CommandHandler::increase_money_publisher()
 {
     check_command_size(2,2);
-    publishers[current_publisher_index].get_money();
+    publishers[current_publisher_index].get_money(films);
 }
-
-
-
-
 
 vector<int> CommandHandler::find_add_film_publisher_key_indexes()
 {
@@ -276,13 +272,13 @@ void CommandHandler::comment_user()
     films[convert_string_to_int(current_command[indexes[0]+1])-1].comment_film(current_command[indexes[1]+1]);
 }
 
-
 vector<int> CommandHandler::find_reply_comment_key_indexes()
 {
     check_QuestionMark_command();
     vector<int> indexes{find_element_in_vec(FilmId,High), find_element_in_vec(CommentId,High), find_element_in_vec(Content,High)};
     return indexes;
 }
+
 void CommandHandler::reply_comment_publisher()
 {
     check_command_size(9,9);
@@ -323,19 +319,23 @@ void CommandHandler::add_following_user()
         throw PremissionDenied();
 }
 
-
-
 void CommandHandler::buy_film_user()
 {
+    int _film_id = convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]);
     check_QuestionMark_command();
     check_command_size(5,5);    
-    if((convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]) > films.size()) || 
-            films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])].get_film_status() == Deleted) 
+    if((_film_id > films.size()) || films[_film_id].get_film_status() == Deleted) 
         throw NotFound(); 
     if(role == User_word)
+    {
         users[current_user_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]));
+        films[_film_id-1].add_film_inbox_money();
+    }
     else if(role == Publisher_word)
+    {
         publishers[current_publisher_index].buy_film(convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])); 
+        films[_film_id-1].add_film_inbox_money();
+    }
     else
         throw PremissionDenied();
 }
@@ -356,7 +356,6 @@ void CommandHandler::rate_film_user()
         throw PremissionDenied();
 }
 
-
 vector<int> CommandHandler::find_edit_film_key_indexes()
 {
     check_command_size(5,15);
@@ -365,7 +364,6 @@ vector<int> CommandHandler::find_edit_film_key_indexes()
                          find_element_in_vec(Length,Low), find_element_in_vec(Summary,Low), find_element_in_vec(Director,Low)};
     return indexes;
 }
-
 
 void CommandHandler::edit_film_publisher()
 {
@@ -478,12 +476,13 @@ void CommandHandler::show_followers_list_publisher()
 
 void CommandHandler::show_published_films_publisher()
 {
-cerr << "I";
+    check_command_size(3,15);
+    check_QuestionMark_command();
 }
 
 void CommandHandler::show_buyed_films_user()
 {
-cerr << "I";
+
 }
 
 void CommandHandler::delete_film_publisher()

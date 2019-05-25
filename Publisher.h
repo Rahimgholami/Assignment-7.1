@@ -11,7 +11,7 @@ public:
     void delete_film(int _film_id);
     void edit_films(Film _film, int _film_id, std::string _film_name, int _film_year, int _film_length, std::string _film_summary, std::string _film_director);
     void show_followers();
-    void get_money();
+    void get_money(std::vector<Film> _films);
     void show_published_films(std::string _name, int _min_rate, int _price, int _max_year, std::string _director);
     void reply_comments(int _film_id, std::string _comment_id, std::string _content);
     void add_follower(int _follower_id, std::string _user_name, std::string _email);

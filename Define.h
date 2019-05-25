@@ -52,6 +52,11 @@
 #define USERID "User Id"
 #define UserUsername "User Username"
 #define UserEmail "User Email"
+#define WeakFilm 0.8
+#define MediumFilm 0.9
+#define StrongFilm 0.95
+#define LowInterval 5
+#define HighInterval 8
 
 #define Deleted "deleted"
 #define Available "available"

@@ -46,7 +46,7 @@ void Publisher::show_followers()
 }
 
 
-void Publisher::get_money()
+void Publisher::get_money(vector<Film> _films)
 {
     cerr << "It will be completed!" << endl;
 }

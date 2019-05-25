@@ -13,6 +13,17 @@ Film::Film(std::string _name, int _year, int _length, int _price, std::string _s
     director = _director;
     status = Available;
     film_id = _film_id;
+    film_inbox_money = Low;
+}
+
+void Film::add_film_inbox_money()
+{
+    if(rate < LowInterval)
+        film_inbox_money += price*rate*WeakFilm;
+    else if((rate >= LowInterval) && (rate < HighInterval))
+        film_inbox_money += price*rate*MediumFilm;
+    else if((rate > HighInterval))
+        film_inbox_money += price*rate*StrongFilm;
 }
 
 void Film::set_film_id(int _film_id)
