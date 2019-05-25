@@ -22,7 +22,17 @@ void Publisher::delete_film(int _film_id)
 
 void Publisher::edit_films(Film _film, int _film_id, string _film_name, int _film_year, int _film_length, string _film_summary, string _film_director)
 {
-    
+    int check = 0;
+    for(int i=0; i<published_films_id.size(); i++)
+    {
+        if(_film_id == published_films_id[i])
+        {
+            _film.edit_film(_film_name,_film_year,_film_length,_film_summary,_film_director);
+            check = 1;
+        }
+    }
+    if(check == 0)
+        throw PremissionDenied();
 }
 
 void Publisher::list_followers()
