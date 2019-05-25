@@ -42,6 +42,7 @@
 #define Limit "limit"
 #define Score "score"
 
+#define True "true"
 #define Dot "."
 #define Low 0
 #define High 1

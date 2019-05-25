@@ -52,11 +52,13 @@ vector<int> CommandHandler::find_signup_key_indexes()
     is_email_valid(current_command[find_element_in_vec(Email,High)+1]);
     if(find_element_in_vec(Publisher_word,Low) != 0)
     {
-        if(current_command[find_element_in_vec(Publisher_word,Low)+1] == "true")
+        if(current_command[find_element_in_vec(Publisher_word,Low)+1] == True)
             role = Publisher_word;
         else
             role = User_word;
     }
+    else
+        role = User_word;
     return indexes;
 }
 
@@ -204,7 +206,7 @@ int CommandHandler::convert_money_to_int()
     }
     catch(invalid_argument er)
     {
-        cerr << "Bad Request" << endl;
+        throw BadRequest();
     }
     return money;
 }
@@ -314,11 +316,7 @@ void CommandHandler::add_following_user()
     }
     else if(role == Publisher_word)
     {
-                cerr << "here2" << endl;
-                int id = convert_string_to_int(current_command[(find_element_in_vec(UserId,High))+1]);
-                cerr << "EE" << endl;
-        publishers[current_user_index].add_following(id);
-        cerr << "JHHHHHHHHHHHHHH" << endl;
+        publishers[current_publisher_index].add_following(convert_string_to_int(current_command[(find_element_in_vec(UserId,High))+1]));
         add_follwer_details(convert_string_to_int(current_command[(find_element_in_vec(UserId,High))+1]), current_user_index);
     }
     else

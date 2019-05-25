@@ -33,6 +33,7 @@ void User::increase_money(int money_amount)
     
 void User::buy_film(int film_id)
 {
+
     buyed_films_id.push_back(film_id);
     cout << OK << endl;
 }
@@ -56,7 +57,6 @@ void User::show_readed_notification()
 
 void User::add_following(int _following_id)
 {
-    cout << _following_id << endl;
     followers_id.push_back(_following_id);
 }
 
