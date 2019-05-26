@@ -91,6 +91,11 @@ public:
   std::vector<int> find_common_elements(std::vector<int> vec1, std::vector<int> vec2);
   std::vector<int> filtered_vector(std::vector<int> vec1 , std::vector<int> vec2, std::vector<int> vec3, std::vector<int> vec4, std::vector<int> vec5, std::vector<int> vec6);
   void show_search(std::vector<int> ids);
+  std::vector<int> process_find_elements();
+  void show_search_user(std::vector<int> ids);
+
+
+
 
 
   void show_readed_notifications_user();
