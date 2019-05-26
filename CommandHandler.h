@@ -8,6 +8,7 @@
 #include <iterator>
 #include <algorithm>
 #include <cctype>
+#include <iterator>
 #include "Exception.h"
 #include "Define.h"
 #include "Publisher.h"
@@ -77,11 +78,18 @@ public:
   void edit_search_films_features();
  // void search_films_user(std::string _name, int _min_year, int _max_year, int _min_rate, int _price, std::string _director);
   void search_films_user();
-  std::vector<int> search_film_year_feature(int min_year, int max_year);
-  std::vector<int> search_film_name_feature(std::vector<int> _sorted_film_ids, std::string name);
   void check_buy_exceptions(int _film_id);
   void send_notification_to_followers(std::string _type);
   void send_notification_to_followers(int id);
+  std::vector<int> filter_search(std::string _name, int min_rate, int min_year, int max_year, std::string _director);
+  std::vector<int> find_films_name(std::vector<int> input_ids, std::string _name);
+  std::vector<int> find_films_min_rate(std::vector<int> input_ids, int _min_rate);
+  std::vector<int> find_films_min_year(std::vector<int> input_ids, int _min_year);
+  std::vector<int> find_films_max_year(std::vector<int> input_ids, int _max_year);
+  std::vector<int> find_films_director(std::vector<int> input_ids, std::string _director);
+  std::vector<int> find_films_price(std::vector<int> input_ids, int _price);
+  std::vector<int> find_common_elements(std::vector<int> vec1, std::vector<int> vec2);
+  std::vector<int> filtered_vector(std::vector<int> vec1 , std::vector<int> vec2, std::vector<int> vec3, std::vector<int> vec4, std::vector<int> vec5, std::vector<int> vec6);
 
 
   void show_readed_notifications_user();

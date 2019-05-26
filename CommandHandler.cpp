@@ -529,41 +529,145 @@ void CommandHandler::show_followers_list_publisher()
         publishers[current_publisher_index].show_followers();
 }
 
-
-
-
-
-
-vector<int> CommandHandler::search_film_year_feature(int min_year, int max_year)
+void CommandHandler::show_readed_notifications_user()
 {
-    vector<int> sorted_films_id;
+    if(role == Publisher_word)
+        publishers[current_publisher_index].show_readed_notification();
+    else if(role == User_word)
+        users[current_user_index].show_notification();
+}
+
+void CommandHandler::show_notifications_user()
+{
+    if(role == Publisher_word)
+        publishers[current_publisher_index].show_readed_notification();
+    else if(role == User_word)
+        users[current_user_index].show_notification();
+}
+
+
+
+
+
+
+vector<int> CommandHandler::find_films_name(vector<int> input_ids, string _name)
+{
+    vector<int> ids;
+    int check = 0;
     for(int i=0; i<films.size(); i++)
     {
-        if((min_year != EmptyInt) && (max_year != EmptyInt) && ((films[i].get_film_year()) > min_year) && ((films[i].get_film_year()) < max_year))
-            sorted_films_id.push_back(i+1);
-        else if((min_year != EmptyInt) && ((films[i].get_film_year()) > min_year))
-            sorted_films_id.push_back(i+1);
-        else if((max_year != EmptyInt) && ((films[i].get_film_year()) < max_year))
-            sorted_films_id.push_back(i+1);
+        if(films[i].get_film_name() == _name)
+            ids.push_back(i);
+        check = 1;
     }
-    return sorted_films_id;
+    return (check == 1) ? ids: input_ids;
 }
 
-vector<int> CommandHandler::search_film_name_feature(vector<int> _sorted_film_ids, string name)
+vector<int> CommandHandler::find_films_min_rate(vector<int> input_ids, int _min_rate)
 {
-    vector<int> sorted_film_ids;
-    if((name != EmptyString) && (_sorted_film_ids.size() !=0))
+    vector<int> ids;
+    int check = 0;
+    for(int i=0; i<input_ids.size(); i++)
     {
-        for(int i=0; i<_sorted_film_ids.size(); i++)
-        {
-            if(films[_sorted_film_ids[i]].get_film_name() == name)
-                sorted_film_ids.push_back(i+1);
-        }
+        if(films[input_ids[i]].get_film_rate() >= _min_rate)
+            ids.push_back(i);
+        check = 1;
     }
+    return (check == 1) ? ids: input_ids;
 }
 
+vector<int> CommandHandler::find_films_min_year(vector<int> input_ids, int _min_year)
+{
+    vector<int> ids;
+    int check = 0;
+    for(int i=0; i<input_ids.size(); i++)
+    {
+        if(films[input_ids[i]].get_film_year() >= _min_year)
+            ids.push_back(i);
+        check = 1;
+    }
+    return (check == 1) ? ids: input_ids;
+}
 
+vector<int> CommandHandler::find_films_max_year(vector<int> input_ids, int _max_year)
+{
+    vector<int> ids;
+    int check = 0;
+    for(int i=0; i<input_ids.size(); i++)
+    {
+        if(films[input_ids[i]].get_film_year() <= _max_year)
+            ids.push_back(i);
+        check = 1;
+    }
+    return (check == 1) ? ids: input_ids;
+}
 
+vector<int> CommandHandler::find_films_director(vector<int> input_ids, string _director)
+{
+    vector<int> ids;
+    int check = 0;
+    for(int i=0; i<input_ids.size(); i++)
+    {
+        if(films[input_ids[i]].get_film_director() == _director)
+            ids.push_back(i);
+        check = 1;
+    }
+    return (check == 1) ? ids: input_ids;
+}
+
+vector<int> CommandHandler::find_films_price(vector<int> input_ids, int _price)
+{
+    vector<int> ids;
+    int check = 0;
+    for(int i=0; i<input_ids.size(); i++)
+    {
+        if(films[input_ids[i]].get_film_price() == _price)
+            ids.push_back(i);
+        check = 1;
+    }
+    return (check == 1) ? ids: input_ids;
+}
+
+vector<int> CommandHandler::find_common_elements(vector<int> vec1, vector<int> vec2)
+{
+    vector<int> common_elements;
+    for (vector<int>::iterator i = vec1.begin(); i != vec1.end(); ++i)
+{
+    if (find(vec2.begin(), vec2.end(), *i) != vec2.end())
+    {
+        common_elements.push_back(*i);
+    }
+}
+}
+
+vector<int> CommandHandler::filtered_vector(vector<int> vec1 , vector<int> vec2, vector<int> vec3, vector<int> vec4, vector<int> vec5, vector<int> vec6)
+{
+    vector<int> common_element = find_common_elements(vec1, vec2);
+    vector<int> common_element2 = find_common_elements(vec3, vec4);
+    vector<int> common_element3 = find_common_elements(vec5, vec6);
+    vector<int> common_element4 = find_common_elements(common_element, common_element2);
+    return find_common_elements(common_element4, common_element3);
+}
+
+vector<int> CommandHandler::filter_search(string _name, int min_rate, int min_year, int max_year, string _director, int _price)
+{
+    vector<int> films_id, filtered_films_name, filtered_films_minrate, filtered_films_minyear, filtered_films_maxyear, filtered_films_director, filtered_films_price;
+    for(int i=0; i<films.size(); i++)
+        films_id.push_back(i);
+    if(_name != EmptyString)
+        filtered_films_name = find_films_name(films_id, _name);
+    if(min_rate != EmptyInt)
+        filtered_films_minrate = find_films_min_rate(films_id, min_rate);
+    if(min_year != EmptyInt)
+        filtered_films_minyear = find_films_min_year(films_id, min_year);
+    if(max_year != EmptyInt)
+        filtered_films_maxyear= find_films_max_year(films_id, max_year);
+    if(_director != EmptyString)
+        filtered_films_director = find_films_director(films_id, _director);
+    if(_price != EmptyInt)
+        filtered_films_price = find_films_price(films_id, _price);
+    return filtered_vector(filtered_films_name, filtered_films_minrate, filtered_films_minyear, filtered_films_maxyear, filtered_films_director, filtered_films_price);
+}
 
 void CommandHandler::edit_search_films_features()
 {
@@ -574,15 +678,11 @@ void CommandHandler::edit_search_films_features()
     int price = (indexes[3] != 0) ? convert_string_to_int(current_command[indexes[3]+1]) : EmptyInt;
     int max_year = (indexes[4] != 0) ? convert_string_to_int(current_command[indexes[4]+1]) : EmptyInt;
     string director = (indexes[5] != 0) ? current_command[indexes[5]+1] : EmptyString;
-   // search_films_user(name,min_year,max_year,min_rate,price,director);
+    vector<int> filtered_films_id = filter_search(name, min_rate, min_year, max_year, director, price);
+
     
 }
-/*
-vector<int> CommandHandler::find_features_films(vector<int> input_ids, int feature)
-{
 
-}
-*/
 //void CommandHandler::search_films_user(string _name, int _min_year, int _max_year, int _min_rate, int _price, string _director)
 void CommandHandler::search_films_user()
 {/*
@@ -597,15 +697,6 @@ void CommandHandler::search_films_user()
     }*/
 }
 
-void CommandHandler::show_readed_notifications_user()
-{
-cerr << "I";
-}
-
-void CommandHandler::show_notifications_user()
-{
-cerr << "I";
-}
 
 
 
