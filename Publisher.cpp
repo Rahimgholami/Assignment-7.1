@@ -83,3 +83,14 @@ void Publisher::is_film_published(int _film_id)
         throw PremissionDenied();
 }
     
+
+int Publisher::get_followers_size()
+{
+    return followers_id.size();
+}
+
+int Publisher::get_follower_id(int _index)
+{
+    return followers_id[_index];
+}
+

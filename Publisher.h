@@ -16,6 +16,8 @@ public:
     void reply_comments(Film _film, std::string _comment_id, std::string _content);
     void add_follower(int _follower_id, std::string _user_name, std::string _email);
     void is_film_published(int _film_id);
+    int get_followers_size();
+    int get_follower_id(int _index);
 private:
     int publisher_id;
     std::vector<int> followers_id;
