@@ -158,7 +158,7 @@ void Film::show_search_film_details(int _index)
 
 void Film::show_film_detail_search(int i)
 {
-    cout << i << Space << film_id << Vertical << name
+    cout << i << Dot << Space << film_id << Vertical << name
         << Vertical << length << Vertical << price << rate
         << Vertical << year << Vertical << director << endl;
 }

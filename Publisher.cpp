@@ -53,11 +53,6 @@ void Publisher::get_money(vector<Film> _films)
     cout << OK << endl;
 }
 
-void Publisher::show_published_films(string _name, int _min_rate, int _price, int _max_year, string _director)
-{
-    cerr << "It will be completed!" << endl;
-}
-
 void Publisher::reply_comments(Film _film, string _comment_id, string _content)
 {
     cerr << "It will be completed!" << endl;
@@ -105,4 +100,10 @@ void Publisher::search_in_films(int _film_id)
     if(check == 0)
         throw PremissionDenied();
 }
+
+vector<int> Publisher::get_published_films_id()
+{
+    return published_films_id;
+}
+
 

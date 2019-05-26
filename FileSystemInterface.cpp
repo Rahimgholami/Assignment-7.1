@@ -92,13 +92,15 @@ void FileSystemInterface::find_put_functions(string main_command)
 
 void FileSystemInterface::find_get_films_functions()
 {
-  if(current_command[3] == QuestionMark)
+  if((current_command[3] == QuestionMark) && (current_command.size()>2))
   {
     if(current_command[4] == FilmId)
       command_handler.show_film_details_user();
     else
       command_handler.search_films_user();
   }
+  else if((current_command[3] != QuestionMark) && (current_command.size() == 2))
+    command_handler.search_films_user();
   else
     throw BadRequest();
 }

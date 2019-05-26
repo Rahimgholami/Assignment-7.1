@@ -243,11 +243,12 @@ vector<int> CommandHandler::find_add_film_publisher_key_indexes()
 void CommandHandler::add_film_to_vector(vector<int> key_indexes)
 {
     if(role == Publisher_word)
-    {
+    {   
     films.push_back(Film(current_command[key_indexes[0]+1], convert_string_to_int(current_command[key_indexes[1]+1]),
                         convert_string_to_int(current_command[key_indexes[2]+1]),convert_string_to_int(current_command[key_indexes[3]+1]),
                         current_command[key_indexes[4]+1],current_command[key_indexes[5]+1],films.size()+1,publishers[current_publisher_index].get_user_id()));
     publishers[current_publisher_index].add_film(films.size());  
+    cout << OK << endl;
     }
     else
         throw PremissionDenied();
@@ -269,7 +270,7 @@ void CommandHandler::send_notification_to_followers(string _type)
 
 void CommandHandler::add_film_publisher()
 {
-    check_command_size(15,15);
+    check_command_size(14,15);
     vector<int> indexes = find_add_film_publisher_key_indexes();
     add_film_to_vector(indexes);
     send_notification_to_followers(RegisterNotification);
@@ -485,8 +486,6 @@ void CommandHandler::show_film_details_user()
 
 vector<int> CommandHandler::find_search_key_indexes()
 {
-    check_command_size(3,15);
-    check_QuestionMark_command();
     vector<int> indexes{find_element_in_vec(Name,Low), find_element_in_vec(MinRate,Low),  find_element_in_vec(MinYear,Low),
                         find_element_in_vec(Price,Low), find_element_in_vec(MaxYear,Low), find_element_in_vec(Director,Low)};
     return indexes;
@@ -632,15 +631,26 @@ vector<int> CommandHandler::find_common_elements(vector<int> vec1, vector<int> v
             common_elements.push_back(*i);
         }
     }
+    return common_elements;
 }
 
 vector<int> CommandHandler::filtered_vector(vector<int> vec1 , vector<int> vec2, vector<int> vec3, vector<int> vec4, vector<int> vec5, vector<int> vec6)
 {
-    vector<int> common_element = find_common_elements(vec1, vec2);
-    vector<int> common_element2 = find_common_elements(vec3, vec4);
-    vector<int> common_element3 = find_common_elements(vec5, vec6);
-    vector<int> common_element4 = find_common_elements(common_element, common_element2);
-    return find_common_elements(common_element4, common_element3);
+    if((vec1.size()!=0) && (vec2.size()!=0) && (vec3.size()!=0) && (vec4.size()!=0) && (vec5.size()!=0) && (vec6.size()!=0))
+    {
+        vector<int> common_element = find_common_elements(vec1, vec2);
+        vector<int> common_element2 = find_common_elements(vec3, vec4);
+        vector<int> common_element3 = find_common_elements(vec5, vec6);
+        vector<int> common_element4 = find_common_elements(common_element, common_element2);
+        return find_common_elements(common_element4, common_element3);
+    }
+    else
+    {
+        vector<int> ids;
+        for(int i=0; i<films.size(); i++)
+            ids.push_back(i);
+        return ids;
+    }
 }
 
 vector<int> CommandHandler::filter_search(string _name, int min_rate, int min_year, int max_year, string _director, int _price)
@@ -673,18 +683,21 @@ void CommandHandler::show_search(vector<int> ids)
             films[ids[i]-1].show_film_detail_search(i+1);
         }
     }   
-    else
-    {
-        for(int i=0; i<films.size(); i++)
-        {
-            publishers[current_publisher_index].is_film_published(i);
-            films[i].show_film_detail_search(i+1);
-        }
-    }
+    // else
+    // {
+    //     for(int i=0; i<films.size(); i++)
+    //     {
+    //         publishers[current_publisher_index].is_film_published(i);
+    //         films[i].show_film_detail_search(i+1);
+    //     }
+    // }
 }
+
 
 void CommandHandler::edit_search_films_features()
 {
+    check_command_size(3,15);
+    check_QuestionMark_command();
     vector<int> indexes = find_search_key_indexes();
     string name = (indexes[0] != 0) ? current_command[indexes[0]+1] : EmptyString;
     int min_rate = (indexes[1] != 0) ? convert_string_to_int(current_command[indexes[1]+1]) : EmptyInt;
@@ -700,6 +713,8 @@ void CommandHandler::edit_search_films_features()
 
 vector<int> CommandHandler::process_find_elements()
 {
+    check_command_size(2,15);
+    check_QuestionMark_command();
     vector<int> indexes = find_search_key_indexes();
     string name = (indexes[0] != 0) ? current_command[indexes[0]+1] : EmptyString;
     int min_rate = (indexes[1] != 0) ? convert_string_to_int(current_command[indexes[1]+1]) : EmptyInt;
@@ -712,7 +727,14 @@ vector<int> CommandHandler::process_find_elements()
 
 void CommandHandler::show_published_films_publisher()
 {
-    show_search(process_find_elements());
+    if(process_find_elements().size() == films.size())
+    {
+            cout << Hashtak << Dot << Space <<  FilmIdShow << Vertical << FilmNameShow << Vertical << FilmLenghtShow << Vertical
+        << FilmPriceShow << Vertical << FilmRateShow << Vertical << FilmProductionYear << Vertical << FilmDirector << endl; 
+        show_search(publishers[current_publisher_index].get_published_films_id());
+    }
+    else
+        show_search(process_find_elements());
 }
 
 void CommandHandler::show_search_user(vector<int> ids)
@@ -736,6 +758,8 @@ void CommandHandler::search_films_user()
 
 vector<int> CommandHandler::process_buy_elements()
 {
+    check_command_size(3,15);
+    check_QuestionMark_command();
     vector<int> indexes = find_search_key_indexes();
     vector<int> films_id;
     string name = (indexes[0] != 0) ? current_command[indexes[0]+1] : EmptyString;
