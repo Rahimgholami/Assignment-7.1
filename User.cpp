@@ -29,8 +29,7 @@ string User::get_password()
 void User::increase_money(int money_amount)
 {
     money += money_amount;
-    cout << OK << endl;
-};
+}
 
 int User::get_money()    
 {
@@ -52,14 +51,17 @@ void User::show_purchased_films(std::string name,int price,int min_year, int max
 }
 void User::show_notification()
 {
+    int index = 1;
+    cout << Hashtak << Dot << Space << NotificationMessage << endl; 
     for(int i=0; i<notification.size(); i++)
-        notification[i].show_notification(UnReaded);
+        notification[i].show_notification(UnReaded, index);
 }
 
 void User::show_readed_notification()
 {
+    int index = 1;
       for(int i=0; i<notification.size(); i++)
-        notification[i].show_notification(Readed);
+        notification[i].show_notification(Readed, index);
 }
 
 void User::add_following(int _following_id)

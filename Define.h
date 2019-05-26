@@ -35,6 +35,7 @@
 #define BuyYourFilm "buy your film"
 #define RateYourFilm "rate your film"
 #define CommentOnYourFilm "comment on your film"
+#define NotificationMessage "Notification Message"
 
 #define Age "age"
 #define Email "email"

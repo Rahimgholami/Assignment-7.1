@@ -17,6 +17,7 @@ int Comment::get_user_id()
 void Comment::reply_comment_message(std::string _reply_comment)
 {
     reply_comments.push_back(_reply_comment);
+    cout << OK << endl;
 }
 
 string Comment::get_comment()

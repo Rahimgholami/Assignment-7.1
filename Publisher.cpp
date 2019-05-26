@@ -40,7 +40,7 @@ void Publisher::show_followers()
         << UserUsername << Vertical << UserEmail << endl;
         for(int i=0; i<followers_id.size(); i++)
         {
-            cout << i << Dot << Space << followers_id[i] << Vertical
+            cout << (i+1) << Dot << Space << followers_id[i] << Vertical
                 << followers_username[i] << Vertical << followers_email[i] << endl;
         }
 }

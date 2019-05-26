@@ -75,27 +75,32 @@ void Notifications::comment_film_notification(std::string _username, int _user_i
     notification_type = CommentNotification;  
 }
 
-void Notifications::show_notification(std::string _notificaiton_status)
-{
-    if(_notificaiton_status == notification_status)
-        print_notificaion();
-}
 
 void Notifications::print_notificaion()
 {
     if(notification_type == ReplyNotification)
-        cout << PublisherShow << Space << publisher_name << Space << WithId << Space << publisher_id << Space << ReplyToYourComment << endl;
+        cout << PublisherShow << Space << publisher_name << Space << WithId << Space << publisher_id << Space << ReplyToYourComment << Dot << endl;
     else if(notification_type == RegisterNotification)
-        cout << PublisherShow << Space << publisher_name << Space << WithId << Space << publisher_id << Space << RegisterNewFile << endl;
+        cout << PublisherShow << Space << publisher_name << Space << WithId << Space << publisher_id << Space << RegisterNewFile << Dot << endl;
     else if(notification_type == FollowNotification)
-        cout << UserShow << Space << user_name << Space << WithId << Space << user_id << Space << FollowYou << endl;
+        cout << UserShow << Space << user_name << Space << WithId << Space << user_id << Space << FollowYou << Dot <<endl;
     else if(notification_type == BuyNotificatoin)
         cout << UserShow << Space << user_name << Space << WithId << Space << user_id << Space 
-            << BuyYourFilm << Space << film_name << Space << WithId << Space << film_id << endl;
+            << BuyYourFilm << Space << film_name << Space << WithId << Space << film_id << Dot << endl;
     else if(notification_type == RateNotification)
         cout << UserShow << Space << user_name << Space << WithId << Space << user_id << Space 
-            << RateYourFilm << Space << film_name << Space << WithId << Space << film_id << endl;
+            << RateYourFilm << Space << film_name << Space << WithId << Space << film_id << Dot << endl;
     else if(notification_type == CommentNotification)
         cout << UserShow << Space << user_name << Space << WithId << Space << user_id << Space 
-            << CommentOnYourFilm << Space << film_name << Space << WithId << Space << film_id << endl;  
+            << CommentOnYourFilm << Space << film_name << Space << WithId << Space << film_id  << Dot << endl;  
+}
+
+void Notifications::show_notification(std::string _notificaiton_status, int &index)
+{
+    if(_notificaiton_status == notification_status)
+    {
+        cout << index << Dot << Space;
+        notification_status = Readed;
+        print_notificaion();
+    }
 }

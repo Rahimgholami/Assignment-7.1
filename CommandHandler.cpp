@@ -585,7 +585,7 @@ void CommandHandler::show_readed_notifications_user()
 void CommandHandler::show_notifications_user()
 {
     if(role == Publisher_word)
-        publishers[current_publisher_index].show_readed_notification();
+        publishers[current_publisher_index].show_notification();
     else if(role == User_word)
         users[current_user_index].show_notification();
 }

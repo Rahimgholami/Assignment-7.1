@@ -49,15 +49,6 @@ void FileSystemInterface::check_commence(string command_commerce)
     throw BadRequest();
 }
 
-void FileSystemInterface::find_post_money_funtions()
-{
-  string third_command_member = current_command[2];
-  if(third_command_member == QuestionMark)
-    command_handler.increase_money_user();
-  else
-    command_handler.increase_money_publisher();
-}
-
 void FileSystemInterface::find_post_functions(string main_command)
 {
   if(main_command == SignUp)
@@ -78,6 +69,18 @@ void FileSystemInterface::find_post_functions(string main_command)
     command_handler.rate_film_user();
   else if(main_command == CommentString)
     command_handler.comment_user();
+  else
+    throw BadRequest();
+}
+
+void FileSystemInterface::find_post_money_funtions()
+{
+  if(current_command.size() == 2)
+    command_handler.increase_money_publisher();
+  else if(current_command[2] == QuestionMark)
+  {
+    command_handler.increase_money_user();
+  }
   else
     throw BadRequest();
 }
