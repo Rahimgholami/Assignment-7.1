@@ -26,4 +26,6 @@ GET purchased
 POST money ? amount 999999
 POST followers ? user_id 1
 GET films
+GET films ? film_id 1
+GET films ? film_id 2
 

@@ -463,7 +463,7 @@ vector<Film> CommandHandler::best_films()
         sorted_films_id.push_back(films[i].get_film_rate());
     sort(sorted_films_id.begin(), sorted_films_id.end());
     for(int i=0; i<sorted_films_id.size(); i++)
-        sorted_films.push_back(films[sorted_films_id[i]-1]);
+        sorted_films.push_back(films[sorted_films_id[i]]);
     return sorted_films;
 }
 

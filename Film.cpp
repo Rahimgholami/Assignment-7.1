@@ -178,9 +178,8 @@ void Film::show_film_characteristic()
     cout << YearShow << EqualSpace << year << endl;
     cout << SummaryShow << EqualSpace << summary << endl;
     cout << RateShow << EqualSpace << rate << endl;
-    cout << PriceShow << EqualSpace << price << endl;
+    cout << PriceShow << EqualSpace << price << endl << endl;
     cout << CommentsShow << endl;
-    cout << endl;
 }
 
 void Film::show_comments_reply()
@@ -194,6 +193,8 @@ void Film::show_comments_reply()
 
 void Film::show_film_details()
 {
+    if(status == Deleted)
+        throw NotFound();
     show_film_characteristic();
     show_comments_reply();
     cout << endl;
