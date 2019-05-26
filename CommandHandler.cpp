@@ -669,6 +669,22 @@ vector<int> CommandHandler::filter_search(string _name, int min_rate, int min_ye
     return filtered_vector(filtered_films_name, filtered_films_minrate, filtered_films_minyear, filtered_films_maxyear, filtered_films_director, filtered_films_price);
 }
 
+void CommandHandler::show_search(vector<int> ids)
+{
+    cout << Hashtak << Dot << Space <<  FilmIdShow << Vertical << FilmNameShow << Vertical << FilmLenghtShow << Vertical
+        << FilmPriceShow << Vertical << FilmRateShow << Vertical << FilmProductionYear << Vertical << FilmDirector << endl;  
+    if(ids.size() != 0)
+    {
+        for(int i=0; i<ids.size(); i++)
+            films[ids[i]-1].show_film_detail_search(i+1);
+    }  
+    else
+    {
+        for(int i=0; i<films.size(); i++)
+            films[i].show_film_detail_search(i+1);
+    }
+}
+
 void CommandHandler::edit_search_films_features()
 {
     vector<int> indexes = find_search_key_indexes();
@@ -679,8 +695,7 @@ void CommandHandler::edit_search_films_features()
     int max_year = (indexes[4] != 0) ? convert_string_to_int(current_command[indexes[4]+1]) : EmptyInt;
     string director = (indexes[5] != 0) ? current_command[indexes[5]+1] : EmptyString;
     vector<int> filtered_films_id = filter_search(name, min_rate, min_year, max_year, director, price);
-
-    
+    show_search(filtered_films_id);
 }
 
 //void CommandHandler::search_films_user(string _name, int _min_year, int _max_year, int _min_rate, int _price, string _director)

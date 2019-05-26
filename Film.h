@@ -52,6 +52,7 @@ public:
     void show_comments_reply();
     void show_search_film_details(int _index);
     void show_film_details();
+    void show_film_detail_search(int i);
     
 private:
     int rated_num;
