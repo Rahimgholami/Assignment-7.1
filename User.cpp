@@ -114,3 +114,16 @@ void User::add_notification(int _publisher_id, string _publisher_name, int _user
 {
     notification.push_back(Notifications(_publisher_id, _publisher_name, _user_id, _username, _film_id, _film_name, _type));
 }
+
+vector<int> User::check_buyed_films(vector<int> _film_ids)
+{
+    vector<int> common_ids;
+    for (vector<int>::iterator i = _film_ids.begin(); i != _film_ids.end(); ++i)
+    {
+        if (find(buyed_films_id.begin(), buyed_films_id.end(), *i) != buyed_films_id.end())
+        {
+            common_ids.push_back(*i);
+        }
+    }
+    return common_ids;
+}

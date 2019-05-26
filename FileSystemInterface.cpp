@@ -99,8 +99,10 @@ void FileSystemInterface::find_get_films_functions()
     else
       command_handler.search_films_user();
   }
-  else if((current_command[3] != QuestionMark) && (current_command.size() == 2))
+  else if(current_command.size() == 2)
+  {
     command_handler.search_films_user();
+  }
   else
     throw BadRequest();
 }

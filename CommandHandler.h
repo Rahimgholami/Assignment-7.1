@@ -94,6 +94,8 @@ public:
   std::vector<int> process_find_elements();
   void show_search_user(std::vector<int> ids);
   std::vector<int> process_buy_elements();
+  std::vector<int> check_user_films(std::vector<int> _film_ids);
+
 
 
 

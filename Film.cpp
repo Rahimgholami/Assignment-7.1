@@ -128,6 +128,7 @@ void Film::reply_comment(int comment_id, string content, string _status)
 void Film::delete_film()
 {
     status = Deleted; 
+    cout << OK << endl;
 }
 
 string Film::film_status()
@@ -142,6 +143,7 @@ void Film::edit_film(string _name, int _year, int _length, string _summary, stri
     length = (_length != EmptyInt) ? _length:length;
     summary = (_summary != EmptyString) ? _summary:summary;
     director = (_director != EmptyString) ? _director:director;
+    cout << OK << endl;
 }
 
 void Film::show_comment_replies(int _comment_id)

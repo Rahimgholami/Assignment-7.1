@@ -185,9 +185,10 @@ int CommandHandler::convert_publisher_id_to_index(int _publisher_id)
 void CommandHandler::login()
 {
     check_QuestionMark_command();
+    check_command_size(7,7);
     int check_user_search = user_search();
     int check_publisher_search = publisher_search();
-    if((check_user_search == 0) && (check_publisher_search))
+    if((check_user_search == 0) && (check_publisher_search == 0))
         throw BadRequest();
 }
 
@@ -739,10 +740,12 @@ void CommandHandler::show_published_films_publisher()
 
 void CommandHandler::show_search_user(vector<int> ids)
 { 
+    cout << Hashtak << Dot << Space <<  FilmIdShow << Vertical << FilmNameShow << Vertical << FilmLenghtShow << Vertical
+        << FilmPriceShow << Vertical << FilmRateShow << Vertical << FilmProductionYear << Vertical << FilmDirector << endl;
     if(ids.size() != 0)
     {
         for(int i=0; i<ids.size(); i++)
-            films[ids[i]-1].show_film_detail_search(i+1);
+            films[ids[i]].show_film_detail_search(i+1);
     }   
     else
     {
@@ -753,12 +756,13 @@ void CommandHandler::show_search_user(vector<int> ids)
 
 void CommandHandler::search_films_user()
 {
-    show_search_user(process_find_elements());
+    vector<int> ids = process_find_elements();
+    show_search_user(ids);
 }
 
 vector<int> CommandHandler::process_buy_elements()
 {
-    check_command_size(3,15);
+    check_command_size(2,15);
     check_QuestionMark_command();
     vector<int> indexes = find_search_key_indexes();
     vector<int> films_id;
@@ -770,11 +774,24 @@ vector<int> CommandHandler::process_buy_elements()
     return filter_search(name, EmptyInt, min_year, max_year, director, price);
 }
 
+vector<int> CommandHandler::check_user_films(vector<int> _film_ids)
+{
+    if(role == User_word)
+        return users[current_user_index].check_buyed_films(_film_ids);
+    else if(role == Publisher_word)
+        return publishers[current_publisher_index].check_buyed_films(_film_ids);
+    else
+        throw PremissionDenied();
+}
+
 void CommandHandler::show_buyed_films_user()
 {
     vector<int> ids = process_buy_elements();
+    ids = check_user_films(ids);
+    cout << Hashtak << Dot << Space <<  FilmIdShow << Vertical << FilmNameShow << Vertical << FilmLenghtShow << Vertical
+        << FilmPriceShow << Vertical << FilmRateShow << Vertical << FilmProductionYear << Vertical << FilmDirector << endl; 
     for(int i=0; i<ids.size(); i++)
-            films[ids[i]-1].show_film_detail_search(i+1);
+            films[ids[i]].show_film_detail_search(i+1);
 }
 
 
