@@ -18,6 +18,7 @@ public:
     void is_film_published(int _film_id);
     int get_followers_size();
     int get_follower_id(int _index);
+    void search_in_films(int _film_id);
 private:
     int publisher_id;
     std::vector<int> followers_id;

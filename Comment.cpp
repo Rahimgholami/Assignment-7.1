@@ -2,10 +2,16 @@
 
 using namespace std;
 
-Comment::Comment(std::string _comment)
+Comment::Comment(std::string _comment, int _user_id)
 {  
     comment = _comment;
     comment_status = Available;
+    user_commented_id = _user_id;
+}
+
+int Comment::get_user_id()
+{
+    return user_commented_id;
 }
 
 void Comment::reply_comment_message(std::string _reply_comment)

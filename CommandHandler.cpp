@@ -253,17 +253,17 @@ void CommandHandler::add_film_to_vector(vector<int> key_indexes)
         throw PremissionDenied();
 }
 
-void CommandHandler::sent_notification()
+void CommandHandler::send_notification_to_followers(string _type)
 {
     for(int i=0; i<publishers[current_publisher_index].get_followers_size(); i++)
     {
         int id = publishers[current_publisher_index].get_follower_id(i);
         if(id == users[convert_user_id_to_index(id)].get_user_id())
             users[convert_user_id_to_index(id)].add_notification(current_publisher_id, publishers[current_publisher_index].get_username(), 
-                                                                EmptyInt, EmptyString, EmptyInt, EmptyString, RegisterNotification);
+                                                                EmptyInt, EmptyString, EmptyInt, EmptyString, _type);
         else if(id == publishers[convert_publisher_id_to_index(id)].get_user_id())
             publishers[convert_publisher_id_to_index(id)].add_notification(current_publisher_id, publishers[current_publisher_index].get_username(), 
-                                                                EmptyInt, EmptyString, EmptyInt, EmptyString, RegisterNotification);        
+                                                                EmptyInt, EmptyString, EmptyInt, EmptyString, _type);        
     }
 }
 
@@ -272,7 +272,7 @@ void CommandHandler::add_film_publisher()
     check_command_size(15,15);
     vector<int> indexes = find_add_film_publisher_key_indexes();
     add_film_to_vector(indexes);
-    sent_notification();
+    send_notification_to_followers(RegisterNotification);
 }   
 
 
@@ -288,13 +288,18 @@ void CommandHandler::comment_user()
     check_command_size(7,7);
     vector<int> indexes = find_comment_user_key_indexes();
     int _film_id = convert_string_to_int(current_command[indexes[0]+1])-1;
-    films[_film_id].comment_film(current_command[indexes[1]+1]);
     if(role == User_word)
+    {
         publishers[films[_film_id-1].get_publisher_id()].add_notification(EmptyInt, EmptyString, current_user_id, 
                                         users[current_user_index].get_username(), _film_id, films[_film_id-1].get_film_name(), CommentNotification);
+        films[_film_id].comment_film(current_command[indexes[1]+1], current_user_id);
+    }
     else if(role == Publisher_word)
+    {
         publishers[films[_film_id-1].get_publisher_id()].add_notification(EmptyInt, EmptyString, current_publisher_id, 
                                         publishers[current_publisher_index].get_username(), _film_id, films[_film_id-1].get_film_name(), CommentNotification);
+        films[_film_id].comment_film(current_command[indexes[1]+1], current_publisher_id);
+    }
 }
 
 vector<int> CommandHandler::find_reply_comment_key_indexes()
@@ -304,12 +309,26 @@ vector<int> CommandHandler::find_reply_comment_key_indexes()
     return indexes;
 }
 
+
+void CommandHandler::send_notification_to_followers(int id)
+{
+    if(id == users[convert_user_id_to_index(id)].get_user_id())
+            users[convert_user_id_to_index(id)].add_notification(current_publisher_id, publishers[current_publisher_index].get_username(), 
+                                                                EmptyInt, EmptyString, EmptyInt, EmptyString, ReplyNotification);
+    else if(id == publishers[convert_publisher_id_to_index(id)].get_user_id())
+            publishers[convert_publisher_id_to_index(id)].add_notification(current_publisher_id, publishers[current_publisher_index].get_username(), 
+                                                                EmptyInt, EmptyString, EmptyInt, EmptyString, ReplyNotification);        
+}
+
+
 void CommandHandler::reply_comment_publisher()
 {
     check_command_size(9,9);
     vector<int> indexes = find_reply_comment_key_indexes();
+    publishers[current_publisher_index].search_in_films(convert_string_to_int(current_command[indexes[0]+1]));
     int comment_id = convert_string_to_int(current_command[indexes[1]+1]);
     films[convert_string_to_int(current_command[indexes[0]+1])-1].reply_comment(comment_id, current_command[indexes[2]+1], role);
+    send_notification_to_followers(films[convert_string_to_int(current_command[indexes[0]+1])-1].get_comment_user_id(comment_id));
 }
 
 void CommandHandler::add_follwer_details(int _following_id, int _follower_index)

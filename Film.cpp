@@ -101,10 +101,15 @@ Film Film::get_film()
     return Film(name, year, length, price, summary, director,film_id,publisher_id);
 }
 
-void Film::comment_film(string content)
+void Film::comment_film(string content, int _user_id)
 {
-    Comment cc(content);
+    Comment cc(content, _user_id);
     comments.push_back(cc);
+}
+
+int Film::get_comment_user_id(int _comment_id)
+{
+    return comments[_comment_id-1].get_user_id();
 }
 
 void Film::reply_comment(int comment_id, string content, string _status)

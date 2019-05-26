@@ -30,11 +30,13 @@ public:
 
     
     void rate_film(int _rate_in);
-    Film get_film();/*
+    Film get_film();
+    int get_comment_user_id(int _comment_id);
+    /*
     
     void comment_film(std::string content);
     void reply_comment(int comment_id, std::string content, std::string _status);*/
-    void comment_film(std::string content);
+    void comment_film(std::string content, int _user_id);
 
 
     void reply_comment(int comment_id, std::string content, std::string _status);

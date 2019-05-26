@@ -80,7 +80,8 @@ public:
   std::vector<int> search_film_year_feature(int min_year, int max_year);
   std::vector<int> search_film_name_feature(std::vector<int> _sorted_film_ids, std::string name);
   void check_buy_exceptions(int _film_id);
-  void sent_notification();
+  void send_notification_to_followers(std::string _type);
+  void send_notification_to_followers(int id);
 
 
   void show_readed_notifications_user();

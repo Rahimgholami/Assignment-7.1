@@ -94,3 +94,15 @@ int Publisher::get_follower_id(int _index)
     return followers_id[_index];
 }
 
+void Publisher::search_in_films(int _film_id)
+{
+    int check = 0;
+    for(int i=0; i<published_films_id.size(); i++)
+    {
+        if(published_films_id[i] == _film_id)
+            check = 1;
+    }
+    if(check == 0)
+        throw PremissionDenied();
+}
+
