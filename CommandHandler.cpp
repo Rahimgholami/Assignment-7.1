@@ -224,7 +224,7 @@ void CommandHandler::add_film_to_vector(vector<int> key_indexes)
     {
     films.push_back(Film(current_command[key_indexes[0]+1], convert_string_to_int(current_command[key_indexes[1]+1]),
                         convert_string_to_int(current_command[key_indexes[2]+1]),convert_string_to_int(current_command[key_indexes[3]+1]),
-                        current_command[key_indexes[4]+1],current_command[key_indexes[5]+1],films.size()+1));
+                        current_command[key_indexes[4]+1],current_command[key_indexes[5]+1],films.size()+1,publishers[current_publisher_index].get_user_id()));
     publishers[current_publisher_index].add_film(films.size());  
     }
     else

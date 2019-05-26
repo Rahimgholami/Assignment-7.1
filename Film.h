@@ -12,8 +12,10 @@
 class Film
 {
 public:
-    Film(std::string _name, int _year, int _length, int _price, std::string _summary, std::string _director, int _film_id);
+    Film(std::string _name, int _year, int _length, int _price, std::string _summary, std::string _director, int _film_id, int _publisher_id);
     void add_film_inbox_money();
+    int get_publisher_id();
+
     int get_film_money();
     void set_film_id(int film_id);
     std::string get_film_name();
@@ -58,6 +60,7 @@ private:
     int length;
     int price;
     int film_inbox_money;
+    int publisher_id;
     std::string status;
     std::string summary;
     std::string director;

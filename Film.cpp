@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Film::Film(std::string _name, int _year, int _length, int _price, std::string _summary, std::string _director, int _film_id)
+Film::Film(std::string _name, int _year, int _length, int _price, std::string _summary, std::string _director, int _film_id, int _publisher_id)
 {
     name = _name;
     year = _year;
@@ -14,6 +14,7 @@ Film::Film(std::string _name, int _year, int _length, int _price, std::string _s
     status = Available;
     film_id = _film_id;
     film_inbox_money = Low;
+    publisher_id = _publisher_id;
 }
 
 void Film::add_film_inbox_money()
@@ -24,6 +25,11 @@ void Film::add_film_inbox_money()
         film_inbox_money += price*rate*MediumFilm;
     else if((rate > HighInterval))
         film_inbox_money += price*rate*StrongFilm;
+}
+
+int Film::get_publisher_id()
+{
+    return publisher_id;
 }
 
 int Film::get_film_money()
@@ -92,7 +98,7 @@ void Film::rate_film(int _rate_in)
 
 Film Film::get_film()
 {
-    return Film(name, year, length, price, summary, director,film_id);
+    return Film(name, year, length, price, summary, director,film_id,publisher_id);
 }
 
 void Film::comment_film(string content)
