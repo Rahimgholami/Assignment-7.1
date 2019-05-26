@@ -52,13 +52,13 @@ void User::show_purchased_films(std::string name,int price,int min_year, int max
 void User::show_notification()
 {
     for(int i=0; i<notification.size(); i++)
-        cout << notification[i] << endl;
+        notification[i].show_notification(UnReaded);
 }
 
 void User::show_readed_notification()
 {
-      for(int i=0; i<readed_notification.size(); i++)
-        cout << readed_notification[i] << endl;
+      for(int i=0; i<notification.size(); i++)
+        notification[i].show_notification(Readed);
 }
 
 void User::add_following(int _following_id)
@@ -110,4 +110,7 @@ string User::get_email()
     return email;
 }
 
-
+void User::add_notification(int _publisher_id, string _publisher_name, int _user_id, string _username, int _film_id, string _film_name, string _type)
+{
+    notification.push_back(Notifications(_publisher_id, _publisher_name, _user_id, _username, _film_id, _film_name, _type));
+}

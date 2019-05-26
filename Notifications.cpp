@@ -3,7 +3,22 @@
 using namespace std;
 
 
- Notifications::Notifications(){};
+ Notifications::Notifications(int _publisher_id, string _publisher_name, int _user_id, string _username, int _film_id, string _film_name, string _type)
+ {
+    if(_type == ReplyNotification)
+        reply_comment_notification(_publisher_id, _publisher_name);
+    else if(_type == RegisterNotification)
+        register_film_notification(_publisher_id, _publisher_name);
+    else if(_type == FollowNotification)
+        follower_notification(_username, _user_id);
+    else if(_type == BuyNotificatoin)
+        buy_film_notification(_username, _user_id, _film_name, _film_id);
+    else if(_type == RateNotification)
+        rate_film_notification( _username, _user_id, _film_name, _film_id);
+    else if(_type == CommentNotification)
+        comment_film_notification(_username, _user_id, _film_name, _film_id);
+ }
+
 
 void Notifications::reply_comment_notification(int _publisher_id, std::string _publisher_name)
 {

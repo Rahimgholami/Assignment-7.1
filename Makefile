@@ -1,7 +1,7 @@
 
 
 CPP11 = g++ -std=c++11
-OBJ = main.o FileSystemInterface.o CommandHandler.o User.o Film.o Publisher.o Comment.o
+OBJ = main.o FileSystemInterface.o CommandHandler.o User.o Film.o Publisher.o Comment.o Notifications.o
 
 result.out: $(OBJ)
 	$(CPP11) $(OBJ)  -o result.out
@@ -18,12 +18,14 @@ Publisher.o:	Publisher.cpp Publisher.h User.cpp User.h Define.h Exception.h Film
 Film.o:	Film.cpp Film.h Define.h Exception.h Comment.cpp Comment.h
 	$(CPP11) Film.cpp -c
 
-User.o:	User.cpp User.h Define.h Exception.h Film.cpp Film.h
+User.o:	User.cpp User.h Define.h Exception.h Film.cpp Film.h Notifications.cpp Notifications.h
 		$(CPP11) User.cpp -c
 
 Comment.o: Comment.cpp Comment.h Exception.h Define.h
 		$(CPP11) Comment.cpp -c
 
+Notifications.o: Notifications.cpp Notifications.h Exception.h Define.h
+		$(CPP11) Notifications.cpp -c
 main.o:		main.cpp FileSystemInterface.h CommandHandler.h Publisher.h User.h Film.h Exception.h Define.h
 	$(CPP11) main.cpp -c
 

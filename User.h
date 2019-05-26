@@ -10,6 +10,7 @@
 #include "Define.h"
 #include "Exception.h"
 #include "Film.h"
+#include "Notifications.h"
 
 class User {
 
@@ -28,6 +29,7 @@ public:
   void show_readed_notification();
   void add_following(int _following_id);
   void show_best_films(std::vector<Film> _best_films);
+  void add_notification(int _publisher_id, std::string _publisher_name, int _user_id, std::string _username, int _film_id, std::string _film_name, std::string _type);
 
 private:
   std::string username;
@@ -36,8 +38,7 @@ private:
   int age;
   int money;
   int user_id;
-  std::vector<std::string> notification;
-  std::vector<std::string> readed_notification;
+  std::vector<Notifications> notification;
   std::vector<int> followers_id;
   std::vector<int> buyed_films_id;
 

@@ -74,6 +74,9 @@ public:
   void edit_search_films_features();
  // void search_films_user(std::string _name, int _min_year, int _max_year, int _min_rate, int _price, std::string _director);
   void search_films_user();
+  std::vector<int> search_film_year_feature(int min_year, int max_year);
+  std::vector<int> search_film_name_feature(std::vector<int> _sorted_film_ids, std::string name);
+
 
   void show_readed_notifications_user();
   void show_notifications_user();

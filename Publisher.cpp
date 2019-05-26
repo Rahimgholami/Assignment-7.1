@@ -58,7 +58,7 @@ void Publisher::show_published_films(string _name, int _min_rate, int _price, in
     cerr << "It will be completed!" << endl;
 }
 
-void Publisher::reply_comments(int _film_id, string _comment_id, string _content)
+void Publisher::reply_comments(Film _film, string _comment_id, string _content)
 {
     cerr << "It will be completed!" << endl;
 }

@@ -9,7 +9,7 @@
 class Notifications
 {
 public:
-    Notifications();
+    Notifications(int _publisher_id, std::string _publisher_name, int _user_id, std::string _username, int _film_id, std::string _film_name, std::string _type);
     void reply_comment_notification(int _publisher_id, std::string _publisher_name);
     void register_film_notification(int _publisher_id, std::string _publisher_name);
     void follower_notification(std::string _username, int _user_id);

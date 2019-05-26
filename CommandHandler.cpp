@@ -264,7 +264,8 @@ void CommandHandler::reply_comment_publisher()
 {
     check_command_size(9,9);
     vector<int> indexes = find_reply_comment_key_indexes();
-    films[convert_string_to_int(current_command[indexes[0]+1])-1].reply_comment(convert_string_to_int(current_command[indexes[1]+1]), current_command[indexes[2]+1], role);
+    int comment_id = convert_string_to_int(current_command[indexes[1]+1]);
+    films[convert_string_to_int(current_command[indexes[0]+1])-1].reply_comment(comment_id, current_command[indexes[2]+1], role);
 }
 
 void CommandHandler::add_follwer_details(int _following_id, int _follower_index)
@@ -317,6 +318,7 @@ void CommandHandler::buy_film_user()
     if(role == User_word)
     {
         users[current_user_index].buy_film(_film_id, films[_film_id-1].get_film_price());
+        users[current_user_index].add_notification(EmptyInt, EmptyString, users[current_user_index].get_user_id(), users[current_user_index].get_username(), _film_id, films[_film_id-1].get_film_name(), BuyNotificatoin);
         films[_film_id-1].add_film_inbox_money();
     }
     else if(role == Publisher_word)
@@ -453,9 +455,9 @@ vector<int> CommandHandler::search_film_year_feature(int min_year, int max_year)
     vector<int> sorted_films_id;
     for(int i=0; i<films.size(); i++)
     {
-        if((min_year != EmptyInt)) && (max_year != EmptyInt) && ((films[i].get_film_year()) > min_year) && ((films[i].get_film_year()) < max_year))
+        if((min_year != EmptyInt) && (max_year != EmptyInt) && ((films[i].get_film_year()) > min_year) && ((films[i].get_film_year()) < max_year))
             sorted_films_id.push_back(i+1);
-        else if((min_year != EmptyInt)) && ((films[i].get_film_year()) > min_year))
+        else if((min_year != EmptyInt) && ((films[i].get_film_year()) > min_year))
             sorted_films_id.push_back(i+1);
         else if((max_year != EmptyInt) && ((films[i].get_film_year()) < max_year))
             sorted_films_id.push_back(i+1);
