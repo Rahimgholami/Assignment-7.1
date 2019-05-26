@@ -133,7 +133,8 @@ bool CommandHandler::user_search()
             {
                 cout << OK << endl;
                 role = User_word;
-                current_user_id = i;
+                current_user_index = i;
+                current_user_id = users[i].get_user_id();
                 check = 1;
             }
         }
@@ -152,12 +153,33 @@ bool CommandHandler::publisher_search()
             {
                 cout << OK << endl;
                 role = Publisher_word;
-                current_publisher_id = i;
+                current_publisher_index = i;
+                current_publisher_id = publishers[i].get_user_id();
                 check = 1;
             }
         }
     }
     return check;
+}
+
+int CommandHandler::convert_user_id_to_index(int _user_id)
+{
+    for(int i=0; i<users.size(); i++)
+    {
+        if(users[i].get_user_id() == _user_id)
+            return i;
+    }
+    throw NotFound();
+}
+
+int CommandHandler::convert_publisher_id_to_index(int _publisher_id)
+{
+    for(int i=0; i<publishers.size(); i++)
+    {
+        if(publishers[i].get_user_id() == _publisher_id)
+            return i;
+    }
+    throw NotFound();
 }
 
 void CommandHandler::login()
@@ -283,19 +305,25 @@ void CommandHandler::add_follwer_details(int _following_id, int _follower_index)
         throw BadRequest();
 }
 
+
 void CommandHandler::add_following_user()
 {
+    int _following_id = convert_string_to_int(current_command[(find_element_in_vec(UserId,High))+1]);
+    string _username = users[current_user_index].get_username();
+    string _username_p = publishers[current_publisher_index].get_username();
     check_QuestionMark_command();
     check_command_size(5,5);
     if(role == User_word)
     {
-        users[current_user_index].add_following(convert_string_to_int(current_command[(find_element_in_vec(UserId,High))+1]));
-        add_follwer_details(convert_string_to_int(current_command[(find_element_in_vec(UserId,High))+1]), current_user_index);
+        users[current_user_index].add_following(_following_id);
+        add_follwer_details(_following_id, current_user_index);
+        publishers[convert_publisher_id_to_index(_following_id)].add_notification(EmptyInt, EmptyString, current_user_id, _username, EmptyInt, EmptyString, FollowNotification);
     }
     else if(role == Publisher_word)
     {
         publishers[current_publisher_index].add_following(convert_string_to_int(current_command[(find_element_in_vec(UserId,High))+1]));
         add_follwer_details(convert_string_to_int(current_command[(find_element_in_vec(UserId,High))+1]), current_user_index);
+        publishers[convert_publisher_id_to_index(_following_id)].add_notification(EmptyInt, EmptyString, current_publisher_id, _username_p, EmptyInt, EmptyString, FollowNotification);
     }
     else
         throw PremissionDenied();
@@ -307,23 +335,31 @@ void CommandHandler::check_user_money_sufficency(int _film_price)
         throw PremissionDenied();
 }
 
-void CommandHandler::buy_film_user()
+void CommandHandler::check_buy_exceptions(int _film_id)
 {
-    int _film_id = convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]);
     check_user_money_sufficency(films[_film_id-1].get_film_price());
     check_QuestionMark_command();
     check_command_size(5,5);    
     if((_film_id > films.size()) || films[_film_id].get_film_status() == Deleted) 
         throw NotFound(); 
+}
+
+void CommandHandler::buy_film_user()
+{
+    int _film_id = convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]);
+    check_buy_exceptions(_film_id);
     if(role == User_word)
     {
         users[current_user_index].buy_film(_film_id, films[_film_id-1].get_film_price());
-        users[current_user_index].add_notification(EmptyInt, EmptyString, users[current_user_index].get_user_id(), users[current_user_index].get_username(), _film_id, films[_film_id-1].get_film_name(), BuyNotificatoin);
+        publishers[films[_film_id-1].get_publisher_id()].add_notification(EmptyInt, EmptyString, current_user_id, 
+                                    users[current_user_index].get_username(), _film_id, films[_film_id-1].get_film_name(), BuyNotificatoin);
         films[_film_id-1].add_film_inbox_money();
     }
     else if(role == Publisher_word)
     {
         publishers[current_publisher_index].buy_film(_film_id, films[_film_id-1].get_film_price());
+        publishers[films[_film_id-1].get_publisher_id()].add_notification(EmptyInt, EmptyString, current_publisher_id ,
+                                    publishers[current_user_index].get_username(), _film_id, films[_film_id-1].get_film_name(), BuyNotificatoin);
         films[_film_id-1].add_film_inbox_money();
     }
     else
@@ -333,15 +369,22 @@ void CommandHandler::buy_film_user()
 void CommandHandler::rate_film_user()
 {
     check_QuestionMark_command();
-    check_command_size(7,7);    
+    check_command_size(7,7);  
+    Film _film = films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])-1];  
+    int _film_id = convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]);
+    int _score = convert_string_to_int(current_command[(find_element_in_vec(Score, High))+1]);
     if(role == User_word)
-        users[current_user_index].rate_films(films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])-1],
-                                            convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]),
-                                             convert_string_to_int(current_command[(find_element_in_vec(Score, High))+1]));
+    {
+        users[current_user_index].rate_films(_film, _film_id, _score);
+        publishers[convert_publisher_id_to_index(films[_film_id-1].get_publisher_id())].add_notification(EmptyInt, EmptyString, current_user_id, 
+                                            users[current_user_index].get_username(), _film_id, films[_film_id-1].get_film_name(), RateNotification);
+    }
     else if(role == Publisher_word)
-       publishers[current_publisher_index].rate_films(films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])-1],
-                                            convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]),
-                                             convert_string_to_int(current_command[(find_element_in_vec(Score, High))+1]));
+    {
+       publishers[current_publisher_index].rate_films(_film, _film_id, _score);
+        publishers[convert_publisher_id_to_index(films[_film_id-1].get_publisher_id())].add_notification(EmptyInt, EmptyString, current_publisher_id, 
+                                            publishers[current_publisher_index].get_username(), _film_id, films[_film_id-1].get_film_name(), RateNotification);
+    }       
     else
         throw PremissionDenied();
 }

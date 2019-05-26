@@ -36,6 +36,9 @@ public:
   void check_login_command();
   bool user_search();
   bool publisher_search();  
+  int convert_user_id_to_index(int _user_id);
+  int convert_publisher_id_to_index(int _publisher_id);
+
     
 
   void check_increase_money();
@@ -76,6 +79,7 @@ public:
   void search_films_user();
   std::vector<int> search_film_year_feature(int min_year, int max_year);
   std::vector<int> search_film_name_feature(std::vector<int> _sorted_film_ids, std::string name);
+  void check_buy_exceptions(int _film_id);
 
 
   void show_readed_notifications_user();
