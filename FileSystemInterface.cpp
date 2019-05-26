@@ -51,7 +51,7 @@ void FileSystemInterface::check_commence(string command_commerce)
 
 void FileSystemInterface::find_post_money_funtions()
 {
-  string third_command_member = current_command[3];
+  string third_command_member = current_command[2];
   if(third_command_member == QuestionMark)
     command_handler.increase_money_user();
   else
@@ -92,9 +92,9 @@ void FileSystemInterface::find_put_functions(string main_command)
 
 void FileSystemInterface::find_get_films_functions()
 {
-  if((current_command[3] == QuestionMark) && (current_command.size()>2))
+  if((current_command[2] == QuestionMark) && (current_command.size()>2))
   {
-    if(current_command[4] == FilmId)
+    if(current_command[3] == FilmId)
       command_handler.show_film_details_user();
     else
       command_handler.search_films_user();

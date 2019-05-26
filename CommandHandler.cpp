@@ -676,22 +676,23 @@ vector<int> CommandHandler::filter_search(string _name, int min_rate, int min_ye
 
 void CommandHandler::show_search(vector<int> ids)
 { 
+    int k=1;
     if(ids.size() != 0)
     {
         for(int i=0; i<ids.size(); i++)
         {
             publishers[current_publisher_index].is_film_published(ids[i]);
-            films[ids[i]-1].show_film_detail_search(i+1);
+            films[ids[i]-1].show_film_detail_search(k);
         }
     }   
-    // else
-    // {
-    //     for(int i=0; i<films.size(); i++)
-    //     {
-    //         publishers[current_publisher_index].is_film_published(i);
-    //         films[i].show_film_detail_search(i+1);
-    //     }
-    // }
+    else
+    {
+        for(int i=0; i<films.size(); i++)
+        {
+            publishers[current_publisher_index].is_film_published(i);
+            films[i].show_film_detail_search(k);
+        }
+    }
 }
 
 
@@ -740,23 +741,24 @@ void CommandHandler::show_published_films_publisher()
 
 void CommandHandler::show_search_user(vector<int> ids)
 { 
-    cout << Hashtak << Dot << Space <<  FilmIdShow << Vertical << FilmNameShow << Vertical << FilmLenghtShow << Vertical
-        << FilmPriceShow << Vertical << FilmRateShow << Vertical << FilmProductionYear << Vertical << FilmDirector << endl;
+    int k=1;
     if(ids.size() != 0)
     {
         for(int i=0; i<ids.size(); i++)
-            films[ids[i]].show_film_detail_search(i+1);
+            films[ids[i]].show_film_detail_search(k);
     }   
     else
     {
         for(int i=0; i<films.size(); i++)
-            films[i].show_film_detail_search(i+1);
+            films[i].show_film_detail_search(k);
     }
 }
 
 void CommandHandler::search_films_user()
 {
     vector<int> ids = process_find_elements();
+    cout << Hashtak << Dot << Space <<  FilmIdShow << Vertical << FilmNameShow << Vertical << FilmLenghtShow << Vertical
+        << FilmPriceShow << Vertical << FilmRateShow << Vertical << FilmProductionYear << Vertical << FilmDirector << endl;
     show_search_user(ids);
 }
 
@@ -790,8 +792,9 @@ void CommandHandler::show_buyed_films_user()
     ids = check_user_films(ids);
     cout << Hashtak << Dot << Space <<  FilmIdShow << Vertical << FilmNameShow << Vertical << FilmLenghtShow << Vertical
         << FilmPriceShow << Vertical << FilmRateShow << Vertical << FilmProductionYear << Vertical << FilmDirector << endl; 
+    int k = 0;
     for(int i=0; i<ids.size(); i++)
-            films[ids[i]].show_film_detail_search(i+1);
+            films[ids[i]].show_film_detail_search(k);
 }
 
 

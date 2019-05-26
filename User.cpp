@@ -29,6 +29,7 @@ string User::get_password()
 void User::increase_money(int money_amount)
 {
     money += money_amount;
+    cout << OK << endl;
 };
 
 int User::get_money()    
@@ -64,6 +65,7 @@ void User::show_readed_notification()
 void User::add_following(int _following_id)
 {
     followers_id.push_back(_following_id);
+    cout << OK << endl;
 }
 
 

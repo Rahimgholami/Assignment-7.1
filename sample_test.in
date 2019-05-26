@@ -23,4 +23,7 @@ GET followers
 
 POST login ? username customer password 123
 GET purchased
+POST money ? amount 999999
+POST followers ? user_id 1
+GET films
 
