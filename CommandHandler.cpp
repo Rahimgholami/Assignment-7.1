@@ -734,9 +734,23 @@ void CommandHandler::search_films_user()
     show_search_user(process_find_elements());
 }
 
+vector<int> CommandHandler::process_buy_elements()
+{
+    vector<int> indexes = find_search_key_indexes();
+    vector<int> films_id;
+    string name = (indexes[0] != 0) ? current_command[indexes[0]+1] : EmptyString;
+    int min_year = (indexes[2] != 0) ? convert_string_to_int(current_command[indexes[2]+1]) : EmptyInt;
+    int price = (indexes[3] != 0) ? convert_string_to_int(current_command[indexes[3]+1]) : EmptyInt;
+    int max_year = (indexes[4] != 0) ? convert_string_to_int(current_command[indexes[4]+1]) : EmptyInt;
+    string director = (indexes[5] != 0) ? current_command[indexes[5]+1] : EmptyString;
+    return filter_search(name, EmptyInt, min_year, max_year, director, price);
+}
+
 void CommandHandler::show_buyed_films_user()
 {
-
+    vector<int> ids = process_buy_elements();
+    for(int i=0; i<ids.size(); i++)
+            films[ids[i]-1].show_film_detail_search(i+1);
 }
 
 
