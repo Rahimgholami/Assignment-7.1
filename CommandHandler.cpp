@@ -455,15 +455,61 @@ void CommandHandler::edit_film_publisher()
         throw PremissionDenied();
 }
 
+vector<int> CommandHandler::sort_films_rate(vector<int> sorted_films_id, vector<int> sorted_films_rate)
+{
+    int i, j, min, temp;
+   for (i = 0; i < sorted_films_id.size()-1; i++) 
+   {
+       min = i;
+      for (j = i + 1; j < sorted_films_id.size(); j++)
+         if(sorted_films_rate[j] < sorted_films_rate[min])
+            min = j;
+      temp = sorted_films_rate[i];
+      sorted_films_rate[i] = sorted_films_rate[min];
+      sorted_films_rate[min] = temp;
+      temp = sorted_films_id[i];
+      sorted_films_id[i] = sorted_films_id[min];
+      sorted_films_id[min] = temp;
+   }
+   return sorted_films_id;
+}
+
+
+
+   /* for(int i=0; i<sorted_films_id; i++)
+    {
+
+    }
+    vector<int> id_copy = sorted_films_id;
+    vector<int> index;
+    sort(sorted_films_rate.begin(), sorted_films_rate.end());
+    for (auto itr = id_copy.cbegin(); itr!= id_copy.cend(); ++itr)
+    {
+        auto c_iter = find(id_copy.cbegin(), id_copy.cend(), *itr);
+        if(c_iter != id_copy.end())
+        {
+            index.push_back(distance(id_copy.cbegin(), c_iter));
+        }
+    }
+    return index;*/
+
+
 vector<Film> CommandHandler::best_films()
 {
     vector<Film> sorted_films;
+    vector<int> sorted_films_rate;
     vector<int> sorted_films_id;
     for(int i=0; i<films.size(); i++)
-        sorted_films_id.push_back(films[i].get_film_rate());
-    sort(sorted_films_id.begin(), sorted_films_id.end());
-    for(int i=0; i<sorted_films_id.size(); i++)
-        sorted_films.push_back(films[sorted_films_id[i]]);
+    {   
+        if(films[i].get_film_status() != Deleted)
+        {
+            sorted_films_id.push_back(i);
+            sorted_films_rate.push_back(films[i].get_film_rate());
+        }
+    }
+    sorted_films_id = sort_films_rate(sorted_films_id, sorted_films_rate);
+    for(int i=0; i<sorted_films_rate.size(); i++)
+        sorted_films.push_back(films[sorted_films_rate[i]]);
     return sorted_films;
 }
 
@@ -792,7 +838,7 @@ void CommandHandler::show_buyed_films_user()
     ids = check_user_films(ids);
     cout << Hashtak << Dot << Space <<  FilmIdShow << Vertical << FilmNameShow << Vertical << FilmLenghtShow << Vertical
         << FilmPriceShow << Vertical << FilmRateShow << Vertical << FilmProductionYear << Vertical << FilmDirector << endl; 
-    int k = 0;
+    int k = 1;
     for(int i=0; i<ids.size(); i++)
             films[ids[i]].show_film_detail_search(k);
 }

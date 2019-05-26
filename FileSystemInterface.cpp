@@ -109,7 +109,7 @@ void FileSystemInterface::find_get_films_functions()
 
 void FileSystemInterface::find_get_notificaion_functions()
 {
-  if(current_command[3] == Read)
+  if(current_command[2] == Read)
     command_handler.show_readed_notifications_user();
   else
     command_handler.show_notifications_user();

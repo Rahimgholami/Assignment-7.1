@@ -94,6 +94,7 @@ void Film::rate_film(int _rate_in)
 {
     rate = (rate*rated_num + _rate_in)/(rated_num+1);
     rated_num++;
+    cout << OK << endl;
 }
 
 Film Film::get_film()
@@ -103,8 +104,8 @@ Film Film::get_film()
 
 void Film::comment_film(string content, int _user_id)
 {
-    Comment cc(content, _user_id);
-    comments.push_back(cc);
+    comments.push_back(Comment(content, _user_id));
+    cout << OK << endl;
 }
 
 int Film::get_comment_user_id(int _comment_id)
@@ -127,6 +128,7 @@ void Film::reply_comment(int comment_id, string content, string _status)
 
 void Film::delete_film()
 {
+    //if()
     status = Deleted; 
     cout << OK << endl;
 }
@@ -171,7 +173,7 @@ void Film::show_film_detail_search(int &index)
 
 void Film::show_film_characteristic()
 {
-    cout << DetailsOfFilm << name << endl;
+    cout << DetailsOfFilm << Space << name << endl;
     cout << IdShow << EqualSpace << film_id << endl;
     cout << DirectorShow << EqualSpace << director << endl;
     cout << LengthShow << EqualSpace << length << endl;
@@ -199,6 +201,8 @@ void Film::show_film_details()
     show_comments_reply();
     cout << endl;
     cout << RecommendationFilm << endl;
+    cout << Hashtak << Dot << Space << FilmIdShow << Vertical << FilmNameShow << Vertical 
+        << FilmLenghtShow << Vertical << FilmDirector << endl;
 } 
 
 void Film::delete_comment(int _comment_id)

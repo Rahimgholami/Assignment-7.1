@@ -95,7 +95,8 @@ public:
   void show_search_user(std::vector<int> ids);
   std::vector<int> process_buy_elements();
   std::vector<int> check_user_films(std::vector<int> _film_ids);
-
+  std::vector<int> sort_films_rate(std::vector<int> sorted_films_id, std::vector<int> sorted_film_rate);
+  
 
 
 
