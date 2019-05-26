@@ -85,6 +85,10 @@ public:
   
   void delete_comment_publisher( );
  
+
+
+ std::vector<int> search_film_feature(int min_year, int max_year);
+
 private:
     std::vector<std::string> current_command;
     std::vector<User> users;

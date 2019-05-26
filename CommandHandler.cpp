@@ -122,28 +122,6 @@ void CommandHandler::add_command(vector<string> input_command)
     current_command = input_command;
 }
 
-/*
-
-User CommandHandler::get_user(int _user_id)
-{
-    for(int i=0; i<users.size(); i++)
-    {
-        if(users[i].get_user_id() == _user_id)
-            return users[_user_id];
-    }
-    throw BadRequest();
-}
-
-Publisher CommandHandler::get_publisher(int _publisher_id)
-{
-    for(int i=0; i<publishers.size(); i++)
-    {
-        if(publishers[i].get_user_id() == _publisher_id)
-            return publishers[_publisher_id];
-    }
-    throw BadRequest();
-}*/
-
 bool CommandHandler::user_search()
 {
     int check = 0;
@@ -435,6 +413,72 @@ void CommandHandler::show_all_films_detail()
         films[i].show_search_film_details(i);
 }
 
+void CommandHandler::delete_film_publisher()
+{
+    if(role != Publisher_word)
+        throw PremissionDenied();
+    check_command_size(5,5);
+    check_QuestionMark_command();
+    int _film_id = convert_string_to_int(current_command[find_element_in_vec(FilmId,High)+1]);
+    publishers[current_publisher_index].is_film_published(_film_id);
+    films[_film_id-1].delete_film();
+}
+
+void CommandHandler::delete_comment_publisher( )
+{
+    if(role != Publisher_word)
+        throw PremissionDenied();
+    check_command_size(7,7);
+    check_QuestionMark_command();
+    int _film_id = convert_string_to_int(current_command[find_element_in_vec(FilmId,High)+1]);
+    int _comment_id = convert_string_to_int(current_command[find_element_in_vec(CommentId,High)+1]);
+    publishers[current_publisher_index].is_film_published(_film_id);
+    films[_film_id-1].delete_comment(_comment_id);
+}
+
+void CommandHandler::show_followers_list_publisher()
+{
+    check_command_size(2,2);
+    if(role == Publisher_word)
+        publishers[current_publisher_index].show_followers();
+}
+
+
+
+
+
+
+vector<int> CommandHandler::search_film_year_feature(int min_year, int max_year)
+{
+    vector<int> sorted_films_id;
+    for(int i=0; i<films.size(); i++)
+    {
+        if((min_year != EmptyInt)) && (max_year != EmptyInt) && ((films[i].get_film_year()) > min_year) && ((films[i].get_film_year()) < max_year))
+            sorted_films_id.push_back(i+1);
+        else if((min_year != EmptyInt)) && ((films[i].get_film_year()) > min_year))
+            sorted_films_id.push_back(i+1);
+        else if((max_year != EmptyInt) && ((films[i].get_film_year()) < max_year))
+            sorted_films_id.push_back(i+1);
+    }
+    return sorted_films_id;
+}
+
+vector<int> CommandHandler::search_film_name_feature(vector<int> _sorted_film_ids, string name)
+{
+    vector<int> sorted_film_ids;
+    if((name != EmptyString) && (_sorted_film_ids.size() !=0))
+    {
+        for(int i=0; i<_sorted_film_ids.size(); i++)
+        {
+            if(films[_sorted_film_ids[i]].get_film_name() == name)
+                sorted_film_ids.push_back(i+1);
+        }
+    }
+}
+
+
+
+
 void CommandHandler::edit_search_films_features()
 {
     vector<int> indexes = find_search_key_indexes();
@@ -477,12 +521,7 @@ void CommandHandler::show_notifications_user()
 cerr << "I";
 }
 
-void CommandHandler::show_followers_list_publisher()
-{
-    check_command_size(2,2);
-    if(role == Publisher_word)
-        publishers[current_publisher_index].show_followers();
-}
+
 
 void CommandHandler::show_published_films_publisher()
 {
@@ -496,25 +535,3 @@ void CommandHandler::show_buyed_films_user()
 }
 
 
-void CommandHandler::delete_film_publisher()
-{
-    if(role != Publisher_word)
-        throw PremissionDenied();
-    check_command_size(5,5);
-    check_QuestionMark_command();
-    int _film_id = convert_string_to_int(current_command[find_element_in_vec(FilmId,High)+1]);
-    publishers[current_publisher_index].is_film_published(_film_id);
-    films[_film_id-1].delete_film();
-}
-
-void CommandHandler::delete_comment_publisher( )
-{
-    if(role != Publisher_word)
-        throw PremissionDenied();
-    check_command_size(7,7);
-    check_QuestionMark_command();
-    int _film_id = convert_string_to_int(current_command[find_element_in_vec(FilmId,High)+1]);
-    int _comment_id = convert_string_to_int(current_command[find_element_in_vec(CommentId,High)+1]);
-    publishers[current_publisher_index].is_film_published(_film_id);
-    films[_film_id-1].delete_comment(_comment_id);
-}
