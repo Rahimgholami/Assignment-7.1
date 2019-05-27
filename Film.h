@@ -29,7 +29,7 @@ public:
     std::string get_film_status();
 
     
-    void rate_film(int _rate_in);
+    void rate_film(int _rate_in, int user_id);
     Film get_film();
     int get_comment_user_id(int _comment_id);
     /*
@@ -54,7 +54,8 @@ public:
     void show_film_details();
     void show_film_detail_search(int &index);
     void set_film_name(std::string _name);
-    
+    void calc_avg();
+
 private:
     int rated_num;
     int rate;
@@ -69,6 +70,8 @@ private:
     std::string summary;
     std::string director;
     std::vector<Comment> comments;
+    std::vector<int> rates;
+    std::vector<int> rated_user_id;
 };
 
 #endif

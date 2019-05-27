@@ -406,6 +406,29 @@ void CommandHandler::buy_film_user()
         throw PremissionDenied();
 }
 
+void CommandHandler::rate_films(int _film_id, int score)
+{
+    vector<int> buyed_films_id;
+    if(role == User_word)
+        buyed_films_id = users[current_user_index].get_buyed_films_id();
+    if(role == Publisher_word)
+        buyed_films_id = users[current_publisher_index].get_buyed_films_id();
+    int check = 0;
+    for(int i=0; i<buyed_films_id.size(); i++)
+    {
+        if(_film_id == buyed_films_id[i])
+        {
+            if(role == User_word)
+                films[_film_id-1].rate_film(score, current_user_id);
+            else if(role == Publisher_word)
+                films[_film_id-1].rate_film(score, current_publisher_id);
+            check = 1;
+        }
+    }
+    if(check == 0)
+        throw PremissionDenied();
+}
+
 void CommandHandler::rate_film_user()
 {
     check_QuestionMark_command();
@@ -413,19 +436,10 @@ void CommandHandler::rate_film_user()
     Film _film = films[convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1])-1];  
     int _film_id = convert_string_to_int(current_command[(find_element_in_vec(FilmId, High))+1]);
     int _score = convert_string_to_int(current_command[(find_element_in_vec(Score, High))+1]);
-    if(role == User_word)
-    {
-        users[current_user_index].rate_films(_film, _film_id, _score);
-        publishers[convert_publisher_id_to_index(films[_film_id-1].get_publisher_id())].add_notification(EmptyInt, EmptyString, current_user_id, 
-                                            users[current_user_index].get_username(), _film_id, films[_film_id-1].get_film_name(), RateNotification);
-    }
-    else if(role == Publisher_word)
-    {
-       publishers[current_publisher_index].rate_films(_film, _film_id, _score);
-        publishers[convert_publisher_id_to_index(films[_film_id-1].get_publisher_id())].add_notification(EmptyInt, EmptyString, current_publisher_id, 
-                                            publishers[current_publisher_index].get_username(), _film_id, films[_film_id-1].get_film_name(), RateNotification);
-    }       
-    else
+    rate_films(_film_id, _score);
+    publishers[convert_publisher_id_to_index(films[_film_id-1].get_publisher_id())].add_notification(EmptyInt, EmptyString, current_user_id, 
+                                users[current_user_index].get_username(), _film_id, films[_film_id-1].get_film_name(), RateNotification);    
+    if((role != Publisher_word) || (role != User_word))
         throw PremissionDenied();
 }
 
@@ -542,7 +556,7 @@ void CommandHandler::show_best_films(vector<int> _this_user_best_films)
     int min = (_this_user_best_films.size()< NumberOfShownFilms) ? _this_user_best_films.size() : NumberOfShownFilms;
     for(int i=0; i<min; i++)
         if(convert_string_to_int(current_command[4]) != _this_user_best_films[i])
-            cout << (i+1) << Dot << _this_user_best_films[i] << Vertical
+            cout << (i+1) << Dot << Space << _this_user_best_films[i] << Vertical
             << films[_this_user_best_films[i]-1].get_film_name() << Vertical << films[_this_user_best_films[i]-1].get_film_length()
             << Vertical << films[_this_user_best_films[i]-1].get_film_director() << endl;
 }
@@ -891,7 +905,7 @@ void CommandHandler::show_buyed_films_user()
         << FilmPriceShow << Vertical << FilmRateShow << Vertical << FilmProductionYear << Vertical << FilmDirector << endl; 
     int k = 1;
     for(int i=0; i<ids.size(); i++)
-            films[ids[i]].show_film_detail_search(k);
+            films[ids[i]-1].show_film_detail_search(k);
 }
 
 

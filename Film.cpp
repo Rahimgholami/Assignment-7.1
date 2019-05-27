@@ -15,6 +15,7 @@ Film::Film(std::string _name, int _year, int _length, int _price, std::string _s
     film_id = _film_id;
     film_inbox_money = Low;
     publisher_id = _publisher_id;
+    rate = 0;
 }
 
 void Film::add_film_inbox_money()
@@ -90,11 +91,34 @@ string Film::get_film_status()
     return status;
 }
 
-void Film::rate_film(int _rate_in)
+void Film::calc_avg()
 {
-    rate = (rate*rated_num + _rate_in)/(rated_num+1);
-    rated_num++;
+    for(int i=0; i<rates.size(); i++)
+        rate += rates[i];
+    if(rates.size() != 0)
+        rate = rate / rates.size();
+    else 
+        rate = 0;
     cout << OK << endl;
+}
+
+void Film::rate_film(int _rate_in, int user_id)
+{
+    int check = 0;
+    for(int i=0; i<rated_user_id.size(); i++)
+    {
+        if(rated_user_id[i] == user_id)
+        {
+            rates[i] = _rate_in;
+            check = 1;
+        }
+    }
+    if(check == 0)
+    {
+        rates.push_back(_rate_in);
+        rated_user_id.push_back(user_id);
+    }
+    calc_avg();
 }
 
 Film Film::get_film()

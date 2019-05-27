@@ -42,6 +42,7 @@ public:
   std::vector<int> inverse_vector(std::vector<int> input_vector);
 
     
+  void rate_films(int _film_id, int score);
 
   void check_increase_money();
   int convert_money_to_int();

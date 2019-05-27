@@ -72,22 +72,6 @@ int User::get_user_id()
     return user_id;
 }
 
-void User::rate_films(Film _film, int _film_id, int score)
-{
-    int check = 0;
-    for(int i=0; i<buyed_films_id.size(); i++)
-    {
-        if(_film_id == buyed_films_id[i])
-        {
-            _film.rate_film(score);
-            check = 1;
-        }
-    }
-    if(check == 0)
-        throw PremissionDenied();
-}
-    
-
 
 string User::get_email()
 {
