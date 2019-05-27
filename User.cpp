@@ -30,7 +30,7 @@ void User::increase_money(int money_amount)
     money += money_amount;
 }
 
-int User::get_money()
+int User::get_money_user()
 {
     return money;
 }

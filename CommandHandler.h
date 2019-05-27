@@ -20,6 +20,8 @@ class CommandHandler
 public:
 
   CommandHandler();
+  void logout_user();
+  int show_user_money();
   void add_command(std::vector<std::string> input_command);
   int convert_string_to_int(std::string input_string);
   void check_command_size(int min_size, int max_size);

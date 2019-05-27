@@ -8,6 +8,17 @@ CommandHandler::CommandHandler()
     role = NotSets;
 }
 
+void CommandHandler::logout_user()
+{
+    if(role != NotSets)
+    {
+        role = NotSets;
+        cout << OK << endl;
+    }
+    else
+        throw BadRequest();
+}
+
 int CommandHandler::find_element_in_vec(string search_element, int priority)
 {
     vector<string>::iterator itr = find(current_command.begin(), current_command.end(), search_element);
@@ -111,9 +122,14 @@ int CommandHandler::convert_string_to_int(string input_string)
 
 void CommandHandler::signup()
 {
-    vector<int> key_indexes = find_signup_key_indexes();
-    int age = convert_string_to_int(current_command[key_indexes[3]+1]);
-    add_user_publisher_to_vector(key_indexes,age);
+    if(role != NotSets)
+    {
+        vector<int> key_indexes = find_signup_key_indexes();
+        int age = convert_string_to_int(current_command[key_indexes[3]+1]);
+        add_user_publisher_to_vector(key_indexes,age);
+    }
+    else
+        throw BadRequest();
 }
 
 void CommandHandler::add_command(vector<string> input_command)
@@ -183,11 +199,16 @@ int CommandHandler::convert_publisher_id_to_index(int _publisher_id)
 
 void CommandHandler::login()
 {
-    check_QuestionMark_command();
-    check_command_size(7,7);
-    int check_user_search = user_search();
-    int check_publisher_search = publisher_search();
-    if((check_user_search == 0) && (check_publisher_search == 0))
+    if(role != NotSets)
+    {
+        check_QuestionMark_command();
+        check_command_size(7,7);
+        int check_user_search = user_search();
+        int check_publisher_search = publisher_search();
+        if((check_user_search == 0) && (check_publisher_search == 0))
+            throw BadRequest();
+    }
+    else
         throw BadRequest();
 }
 
@@ -381,7 +402,7 @@ void CommandHandler::add_following_user()
 
 void CommandHandler::check_user_money_sufficency(int _film_price)
 {
-    if(_film_price > users[current_user_index].get_money())
+    if(_film_price > users[current_user_index].get_money_user())
         throw PremissionDenied();
 }
 
@@ -898,4 +919,12 @@ void CommandHandler::show_buyed_films_user()
             films[ids[i]-1].show_film_detail_search(k);
 }
 
-
+int CommandHandler::show_user_money()
+{
+    if(role == User_word)
+        return users[current_user_index].get_money_user();
+    else if(role == Publisher_word)
+        return publishers[current_publisher_index].get_money_user();
+    else
+        throw BadRequest();
+}

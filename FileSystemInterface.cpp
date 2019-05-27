@@ -61,6 +61,7 @@ void FileSystemInterface::find_post_money_funtions()
     throw BadRequest();
 }
 
+
 void FileSystemInterface::find_post_functions(string main_command)
 {
   if(main_command == SignUp)
@@ -69,6 +70,8 @@ void FileSystemInterface::find_post_functions(string main_command)
     command_handler.login();
   else if(main_command == Films)
     command_handler.add_film_publisher();
+  else if(main_command == PutFilms)
+    command_handler.edit_film_publisher();
   else if(main_command == Money)
     find_post_money_funtions();
   else if(main_command == Replies)
@@ -81,17 +84,16 @@ void FileSystemInterface::find_post_functions(string main_command)
     command_handler.rate_film_user();
   else if(main_command == CommentString)
     command_handler.comment_user();
+  else if(main_command == DeleteFilms)
+    command_handler.delete_film_publisher();
+  else if(main_command == DeleteComments)
+    command_handler.delete_comment_publisher();
+  else if(main_command == Logout)
+    command_handler.logout_user();
   else
     throw BadRequest();
 }
 
-void FileSystemInterface::find_put_functions(string main_command)
-{
-  if(main_command == Films)
-    command_handler.edit_film_publisher();
-  else
-    throw BadRequest();
-}
 
 void FileSystemInterface::find_get_films_functions()
 {
@@ -122,6 +124,8 @@ void FileSystemInterface::find_get_functions(string main_command)
 {
   if(main_command == Followers)
     command_handler.show_followers_list_publisher();
+  if(main_command == Money)
+    command_handler.show_user_money();
   else if(main_command == Published)
     command_handler.show_published_films_publisher();
   else if(main_command == Films)
@@ -134,16 +138,6 @@ void FileSystemInterface::find_get_functions(string main_command)
     throw BadRequest();
 }
 
-void FileSystemInterface::find_delete_functions(string main_command)
-{
-  if(main_command == Films)
-    command_handler.delete_film_publisher();
-  else if(main_command == Comments)
-    command_handler.delete_comment_publisher();
-  else
-    throw BadRequest();
-}
-
 void FileSystemInterface::process_command()
 {
   command_handler.add_command(current_command);
@@ -151,12 +145,10 @@ void FileSystemInterface::process_command()
   string main_command = current_command[1];
   if(commence == POST)
     find_post_functions(main_command);
-  else if(commence == PUT)
-    find_put_functions(main_command);
   else if(commence == GET)
     find_get_functions(main_command);
   else if(commence == DELETE)
-    find_delete_functions(main_command);
+    {}
   else
     throw BadRequest();
 }

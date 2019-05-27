@@ -21,7 +21,7 @@ public:
   int get_user_id();
   std::vector<int> get_buyed_films_id();
   std::string get_email();
-  int get_money();    
+  int get_money_user();    
   void increase_money(int money_amount);
   void buy_film(int film_id, int _film_price);
   void rate_films(Film _film, int _film_id, int score);

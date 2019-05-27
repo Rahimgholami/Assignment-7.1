@@ -30,12 +30,11 @@ public:
     void assign_command(std::vector<std::string> input_command);
     void find_post_money_funtions();
     void find_post_functions(std::string main_command);
-    void find_put_functions(std::string main_command);
     void find_get_films_functions();
     void find_get_notificaion_functions();
     void find_get_functions(std::string main_command);
-    void find_delete_functions(std::string main_command);
     void process_command();
+
 private:
     std::vector<std::string> current_command;
     std::vector<std::string> commands;
