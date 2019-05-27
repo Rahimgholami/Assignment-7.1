@@ -535,8 +535,10 @@ vector<int> CommandHandler::sort_films_rate(vector<int> sorted_films_id, vector<
    {
        min = i;
       for (j = i + 1; j < sorted_films_id.size(); j++)
-         if(sorted_films_rate[j] < sorted_films_rate[min])
-            min = j;
+      {
+            if(sorted_films_rate[j] <= sorted_films_rate[min])
+                min = j;
+      }
       temp = sorted_films_rate[i];
       sorted_films_rate[i] = sorted_films_rate[min];
       sorted_films_rate[min] = temp;
@@ -547,47 +549,70 @@ vector<int> CommandHandler::sort_films_rate(vector<int> sorted_films_id, vector<
    return inverse_vector(sorted_films_id);
 }
 
-bool CommandHandler::is_user_buy_both_films(int _first_film_id, int _second_film_id, int user_id, string role)
+bool CommandHandler::is_user_buy_both_films(int _first_film_id, int _second_film_id, int user_index, string role)
 {
     vector<int> user_buyed_films;
     int check = 0;
     if(role == User_word)
-        user_buyed_films = users[convert_user_id_to_index(user_id)].get_buyed_films_id();
-    if(role == Publisher_word)
-        user_buyed_films = publishers[convert_publisher_id_to_index(user_id)].get_buyed_films_id();
-    if(find(user_buyed_films.begin(), user_buyed_films.end(), _first_film_id) != user_buyed_films.end())
+        user_buyed_films = users[user_index].get_buyed_films_id();
+    else if(role == Publisher_word)
+        user_buyed_films = publishers[user_index].get_buyed_films_id();
+    if(find(user_buyed_films.begin(), user_buyed_films.end(), _first_film_id+1) != user_buyed_films.end())
     {
-        if(find(user_buyed_films.begin(), user_buyed_films.end(), _second_film_id) != user_buyed_films.end())
+        if(find(user_buyed_films.begin(), user_buyed_films.end(), _second_film_id+1) != user_buyed_films.end())
             check = 1;
     }
     return check;
 }
 
-
+void CommandHandler::add_matrix_elements(int _first_id, int _second_id, vector<vector<int>> &film_matrix)
+{
+    for(int k=0; k<users.size(); k++)
+    {
+        if(is_user_buy_both_films(_first_id, _second_id, k, User_word))
+        {
+            film_matrix[_first_id][_second_id]++;
+            film_matrix[_second_id][_first_id]++;
+        }
+    }
+    for(int k=0; k<publishers.size(); k++)
+    {
+        if(is_user_buy_both_films(_first_id, _second_id, k, Publisher_word))
+        {
+            film_matrix[_first_id][_second_id]++;
+            film_matrix[_second_id][_first_id]++;
+        }
+    }
+}
 
 vector<int> CommandHandler::best_films_matrix(int n, int k)
 {
     vector<vector<int>> vec2D(n, vector<int>(n, 0));
+    vector<int> best_films;
     for(int i=0; i<n; i++)
     {
         for(int j=0; j<n; j++)
-        {
-            for(int k=0; k<users.size(); k++)
-                if(is_user_buy_both_films(i, j, k, User_word))
-                {
-                    vec2D[i][j]++;
-                    vec2D[j][i]++;
-                }
-            for(int k=0; k<publishers.size(); k++)
-                if(is_user_buy_both_films(i, j, k, Publisher_word))
-                {
-                    vec2D[i][j]++;
-                    vec2D[j][i]++;
-                }
-        }
+            add_matrix_elements(i,j,vec2D);
     }
     return vec2D[k];
 }
+
+vector<int> CommandHandler::sort_best_films(vector<int> best_films)
+{
+    vector<int> sorted_films_rate;
+    vector<int> sorted_films_id;
+    for(int i=0; i<best_films.size(); i++)
+    {   
+        if(films[i].get_film_status() != Deleted)
+        {
+            sorted_films_id.push_back(i+1);
+            sorted_films_rate.push_back(best_films[i]);
+        }
+    }
+    sorted_films_id = sort_films_rate(sorted_films_id, sorted_films_rate);
+    return sorted_films_id;
+}
+
 
 // vector<int> CommandHandler::find_best_films()
 // {
@@ -643,7 +668,7 @@ void CommandHandler::show_film_details_user()
         if(convert_string_to_int(current_command[4]) <= films.size())
         {
             films[convert_string_to_int(current_command[4])-1].show_film_details();
-            process_best_films(best_films_matrix(films.size(), convert_string_to_int(current_command[3])));
+            process_best_films(sort_best_films(best_films_matrix(films.size(), convert_string_to_int(current_command[4])-1)));
         }
         else
             throw NotFound();

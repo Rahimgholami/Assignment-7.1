@@ -96,6 +96,8 @@ public:
   std::vector<int> search_film_feature(int min_year, int max_year);
   bool is_user_buy_both_films(int _first_film_id, int _second_film_id, int user_id, std::string role);
   std::vector<int> best_films_matrix(int n, int k);
+  void add_matrix_elements(int _first_id, int _second_id, std::vector<std::vector<int>> &film_matrix);
+  std::vector<int> sort_best_films(std::vector<int> best_films);
 
 private:
 
