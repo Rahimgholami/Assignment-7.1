@@ -16,7 +16,7 @@ public:
     void buy_film_notification(std::string _username, int _user_id, std::string _film_name, int _film_id);
     void rate_film_notification(std::string _username, int _user_id, std::string _film_name, int _film_id);
     void comment_film_notification(std::string _username, int _user_id, std::string _film_name, int _film_id);
-    void show_notification(std::string _notificaiton_status, int &index);
+    void show_notifications(std::string _notificaiton_status, int &index);
     void print_notificaion();
 private:
     std::string user_name;

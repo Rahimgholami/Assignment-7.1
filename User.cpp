@@ -49,15 +49,15 @@ void User::show_notification()
 {
     int index = 1;
     cout << Hashtak << Dot << Space << NotificationMessage << endl; 
-    for(int i=0; i<notification.size(); i++)
-        notification[i].show_notification(UnReaded, index);
+    for(int i=notification.size()-1; i>-1; i--)
+        notification[i].show_notifications(UnReaded, index);
 }
 
 void User::show_readed_notification()
 {
     int index = 1;
-      for(int i=0; i<notification.size(); i++)
-        notification[i].show_notification(Readed, index);
+    for(int i=notification.size()-1; i>-1; i--)
+        notification[i].show_notifications(Readed, index);
 }
 
 void User::add_following(int _following_id)

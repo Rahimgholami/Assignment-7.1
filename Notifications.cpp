@@ -95,12 +95,13 @@ void Notifications::print_notificaion()
             << CommentOnYourFilm << Space << film_name << Space << WithId << Space << film_id  << Dot << endl;  
 }
 
-void Notifications::show_notification(std::string _notificaiton_status, int &index)
+void Notifications::show_notifications(std::string _notificaiton_status, int &index)
 {
     if(_notificaiton_status == notification_status)
     {
         cout << index << Dot << Space;
         notification_status = Readed;
         print_notificaion();
+        index++;
     }
 }
