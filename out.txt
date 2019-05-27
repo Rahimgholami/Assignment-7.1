@@ -59,7 +59,7 @@ OK
 1. User customer with id 2 comment on your film the_second_film with id 2.
 2. User customer with id 2 comment on your film the_second_film with id 2.
 3. User customer with id 2 rate your film the_second_film with id 2.
-4. User customer with id 2 buy your film film3 with id 3.
+4. User customer with id 2 buy your film the_second_film with id 2.
 5. User customer with id 2 follow you.
 List of Followers
 #. User Id | User Username | User Email
@@ -68,10 +68,8 @@ Not Found
 OK
 OK
 OK
-OK
-OK
-OK
 #. Notification Message
 OK
 #. Notification Message
 1. Publisher pub with id 1 reply to your comment.
+

@@ -216,9 +216,15 @@ void CommandHandler::increase_money_user()
     check_increase_money();
     check_command_size(5,5);
     if(role == User_word)
+    {
         users[current_user_index].increase_money(convert_money_to_int());
+        cout << OK << endl;
+    }
     else if(role == Publisher_word)
+    {
         publishers[current_publisher_index].increase_money(convert_money_to_int());
+        cout << OK << endl;
+    }
     else
         throw PremissionDenied();
 }
@@ -397,14 +403,14 @@ void CommandHandler::buy_film_user()
     {
         users[current_user_index].buy_film(_film_id, films[_film_id-1].get_film_price());
         publishers[convert_publisher_id_to_index(films[_film_id-1].get_publisher_id())].add_notification(EmptyInt, EmptyString, current_user_id, 
-                                users[current_user_index].get_username(), _film_id+1, films[_film_id].get_film_name(), BuyNotificatoin);
+                                users[current_user_index].get_username(), _film_id, films[_film_id-1].get_film_name(), BuyNotificatoin);
         films[_film_id-1].add_film_inbox_money();
     }
     else if(role == Publisher_word)
     {
         publishers[current_publisher_index].buy_film(_film_id, films[_film_id-1].get_film_price());
         publishers[convert_publisher_id_to_index(films[_film_id-1].get_publisher_id())].add_notification(EmptyInt, EmptyString, current_publisher_id, 
-                                publishers[current_publisher_index].get_username(), _film_id+1, films[_film_id].get_film_name(), BuyNotificatoin);
+                                publishers[current_publisher_index].get_username(), _film_id, films[_film_id-1].get_film_name(), BuyNotificatoin);
         films[_film_id-1].add_film_inbox_money();
     }
     else

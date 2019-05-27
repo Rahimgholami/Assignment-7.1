@@ -24,11 +24,4 @@ GET followers
 POST login ? username customer password 123
 GET purchased
 POST money ? amount 999999
-POST followers ? user_id 1
-GET films
-GET films ? film_id 1
-GET films ? film_id 2
-POST buy ? film_id 2
-POST rate ? film_id 3 score 10
-POST rate ? film_id 2 score 10
-POST comments ? film_id 2 content perfeeeect.
+

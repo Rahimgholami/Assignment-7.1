@@ -29,7 +29,6 @@ string User::get_password()
 void User::increase_money(int money_amount)
 {
     money += money_amount;
-    cout << OK << endl;
 }
 
 int User::get_money()    
