@@ -105,7 +105,6 @@ int CommandHandler::convert_string_to_int(string input_string)
     }
     catch(invalid_argument er)
     {
-        //cerr << "Bad Request" << endl;
         throw BadRequest();
     }
 }
@@ -439,6 +438,22 @@ vector<int> CommandHandler::find_edit_film_key_indexes()
     return indexes;
 }
 
+void CommandHandler::edit_films(int _film_id, string _film_name, int _film_year, int _film_length, string _film_summary, string _film_director)
+{
+    vector<int> published_films_id = publishers[current_publisher_index].get_published_films_id();
+    int check = 0;
+    for(int i=0; i<published_films_id.size(); i++)
+    {
+        if(_film_id == published_films_id[i])
+        {
+            films[_film_id-1].edit_film(_film_name,_film_year,_film_length,_film_summary,_film_director);
+            check = 1;
+        }
+    }
+    if(check == 0)
+        throw PremissionDenied();
+}
+
 void CommandHandler::edit_film_publisher()
 {
     vector<int> indexes = find_edit_film_key_indexes();
@@ -450,9 +465,19 @@ void CommandHandler::edit_film_publisher()
     string summary = (indexes[4] != 0) ? current_command[indexes[4]+1] : EmptyString;
     string director = (indexes[5] != 0) ? current_command[indexes[5]+1] : EmptyString;
     if(role == Publisher_word)
-        publishers[current_publisher_index].edit_films(films[film_id-1],film_id,name,year,length,summary,director);
+        edit_films(film_id,name,year,length,summary,director);
     else
         throw PremissionDenied();
+}
+
+vector<int> CommandHandler::inverse_vector(vector<int> input_vector)
+{
+    vector<int> sorted;
+    for(int i=input_vector.size()-1; i > -1; i--)
+    {
+        sorted.push_back(input_vector[i]);
+    }
+    return sorted;
 }
 
 vector<int> CommandHandler::sort_films_rate(vector<int> sorted_films_id, vector<int> sorted_films_rate)
@@ -471,7 +496,7 @@ vector<int> CommandHandler::sort_films_rate(vector<int> sorted_films_id, vector<
       sorted_films_id[i] = sorted_films_id[min];
       sorted_films_id[min] = temp;
    }
-   return sorted_films_id;
+   return inverse_vector(sorted_films_id);
 }
 
 
@@ -494,7 +519,7 @@ vector<int> CommandHandler::sort_films_rate(vector<int> sorted_films_id, vector<
     return index;*/
 
 
-vector<Film> CommandHandler::best_films()
+vector<int> CommandHandler::find_best_films()
 {
     vector<Film> sorted_films;
     vector<int> sorted_films_rate;
@@ -503,14 +528,40 @@ vector<Film> CommandHandler::best_films()
     {   
         if(films[i].get_film_status() != Deleted)
         {
-            sorted_films_id.push_back(i);
+            sorted_films_id.push_back(i+1);
             sorted_films_rate.push_back(films[i].get_film_rate());
         }
     }
     sorted_films_id = sort_films_rate(sorted_films_id, sorted_films_rate);
-    for(int i=0; i<sorted_films_rate.size(); i++)
-        sorted_films.push_back(films[sorted_films_rate[i]]);
-    return sorted_films;
+    return sorted_films_id;
+}
+
+void CommandHandler::show_best_films(vector<int> _this_user_best_films)
+{
+    int n = NumberOfShownFilms;
+    int min = (_this_user_best_films.size()< NumberOfShownFilms) ? _this_user_best_films.size() : NumberOfShownFilms;
+    for(int i=0; i<min; i++)
+        if(convert_string_to_int(current_command[4]) != _this_user_best_films[i])
+            cout << (i+1) << Dot << _this_user_best_films[i] << Vertical
+            << films[_this_user_best_films[i]-1].get_film_name() << Vertical << films[_this_user_best_films[i]-1].get_film_length()
+            << Vertical << films[_this_user_best_films[i]-1].get_film_director() << endl;
+}
+
+void CommandHandler::process_best_films(vector<int> _best_films_id)
+{
+    vector<int> buyed_films_id;
+    vector<int> _this_user_best_films;
+    if(role == User_word)
+        buyed_films_id = users[current_user_index].get_buyed_films_id();
+    else if(role == Publisher_word)
+        buyed_films_id = publishers[current_publisher_index].get_buyed_films_id();
+    for(int i=0; i<_best_films_id.size(); i++)
+    {
+        if (find(buyed_films_id.begin(), buyed_films_id.end(), _best_films_id[i]) != buyed_films_id.end()){}
+        else
+            _this_user_best_films.push_back(_best_films_id[i]);
+    }
+    show_best_films(_this_user_best_films);
 }
 
 void CommandHandler::show_film_details_user()
@@ -522,7 +573,7 @@ void CommandHandler::show_film_details_user()
         if(convert_string_to_int(current_command[4]) <= films.size())
         {
             films[convert_string_to_int(current_command[4])-1].show_film_details();
-            users[current_user_index].show_best_films(best_films());
+            process_best_films(find_best_films());
         }
         else
             throw NotFound();

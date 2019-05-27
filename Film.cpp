@@ -138,8 +138,14 @@ string Film::film_status()
     return status;
 }
 
+void Film::set_film_name(string _name)
+{
+    name = _name;
+}
+
 void Film::edit_film(string _name, int _year, int _length, string _summary, string _director)
 {
+
     name = (_name != EmptyString) ?_name:name;
     year = (_year != EmptyInt) ? _year:year;
     length = (_length != EmptyInt) ? _length:length;
@@ -157,20 +163,18 @@ void Film::show_comment_replies(int _comment_id)
 
 void Film::show_search_film_details(int _index)
 {
-    cout << (_index+1) << Dot << film_id << Vertical << length << Vertical << price << 
-            Vertical << rate << Vertical << year << Vertical << director << endl;
+    cout << (_index+1) << Dot << film_id << Vertical << length << Vertical << price << Vertical << rate << Vertical << year << Vertical << director << endl;
 }
 
 void Film::show_film_detail_search(int &index)
 {
     if(status != Deleted)
     {
-        cout << index << Dot << Space << film_id << Vertical << name << Vertical << length << Vertical << price << 
-                rate << Vertical << year << Vertical << director << endl;
+       cout << index << Dot << Space << film_id << Vertical << name << Vertical << length
+       << Vertical << price <<  Vertical << rate << Vertical << year << Vertical << director << endl;
         index++;
     }
 }
-
 void Film::show_film_characteristic()
 {
     cout << DetailsOfFilm << Space << name << endl;

@@ -29,6 +29,7 @@ string User::get_password()
 void User::increase_money(int money_amount)
 {
     money += money_amount;
+    cout << OK << endl;
 }
 
 int User::get_money()    
@@ -38,17 +39,12 @@ int User::get_money()
 
 void User::buy_film(int film_id, int _film_price)
 {
-
     buyed_films_id.push_back(film_id);
     money -= _film_price;
     cout << OK << endl;
 }
 
-void User::show_purchased_films(std::string name,int price,int min_year, int max_year, std::string director)
-{
-    for(int i=0; i<buyed_films_id.size(); i++)
-        cerr << "It will completed till vector<film> completed" << endl;
-}
+
 void User::show_notification()
 {
     int index = 1;
@@ -91,22 +87,7 @@ void User::rate_films(Film _film, int _film_id, int score)
         throw PremissionDenied();
 }
     
-void User::show_best_films(vector<Film> _best_films)
-{
-    vector<Film> _this_user_best_films;
-    for(int i=0; i<_best_films.size(); i++)
-    {
-        if (find( buyed_films_id.begin(), buyed_films_id.end(), _best_films[i].get_film_id() ) != buyed_films_id.end()){}
-        else
-            _this_user_best_films.push_back(_best_films[i]);
-    }
-    int n = NumberOfShownFilms;
-    int min = (_this_user_best_films.size()< NumberOfShownFilms) ? _this_user_best_films.size() : NumberOfShownFilms;
-    for(int i=0; i<min; i++)
-        cout << (i+1) << Dot << _this_user_best_films[i].get_film_id() << Vertical 
-            << _this_user_best_films[i].get_film_name() << Vertical << _this_user_best_films[i].get_film_length() 
-            << Vertical << _this_user_best_films[i].get_film_director() << endl;
-}
+
 
 string User::get_email()
 {
@@ -129,4 +110,9 @@ vector<int> User::check_buyed_films(vector<int> _film_ids)
         }
     }
     return common_ids;
+}
+
+vector<int> User::get_buyed_films_id()
+{
+    return buyed_films_id;
 }

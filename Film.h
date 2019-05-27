@@ -53,6 +53,7 @@ public:
     void show_search_film_details(int _index);
     void show_film_details();
     void show_film_detail_search(int &index);
+    void set_film_name(std::string _name);
     
 private:
     int rated_num;

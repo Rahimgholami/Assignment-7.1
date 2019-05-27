@@ -39,6 +39,7 @@ public:
   bool publisher_search();  
   int convert_user_id_to_index(int _user_id);
   int convert_publisher_id_to_index(int _publisher_id);
+  std::vector<int> inverse_vector(std::vector<int> input_vector);
 
     
 
@@ -70,8 +71,10 @@ public:
   std::vector<int> find_edit_film_key_indexes();
   void edit_film_publisher();
 
-  std::vector<Film> best_films();
+  std::vector<int> find_best_films();
   void show_film_details_user();
+  void show_best_films(std::vector<int> _best_films_id);
+  void process_best_films(std::vector<int> _best_films_id);
 
   void show_all_films_detail();
   std::vector<int> find_search_key_indexes();
@@ -96,7 +99,8 @@ public:
   std::vector<int> process_buy_elements();
   std::vector<int> check_user_films(std::vector<int> _film_ids);
   std::vector<int> sort_films_rate(std::vector<int> sorted_films_id, std::vector<int> sorted_film_rate);
-  
+  void edit_films(int _film_id, std::string _film_name, int _film_year, int _film_length, std::string _film_summary, std::string _film_director);
+
 
 
 

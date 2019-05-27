@@ -36,7 +36,6 @@
 #define RateYourFilm "rate your film"
 #define CommentOnYourFilm "comment on your film"
 #define NotificationMessage "Notification Message"
-
 #define Age "age"
 #define Email "email"
 #define UserName "username"
@@ -93,7 +92,7 @@
 #define PriceShow "Price"
 #define Name "name"
 
-#define CommentsShow "Commnets"
+#define CommentsShow "Comments"
 #define RecommendationFilm "Recommendation Film"
 #define EqualSpace " = "
 #define NotSets "not_sets"

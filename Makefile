@@ -26,7 +26,7 @@ Comment.o: Comment.cpp Comment.h Exception.h Define.h
 
 Notifications.o: Notifications.cpp Notifications.h Exception.h Define.h
 		$(CPP11) Notifications.cpp -c
-main.o:		main.cpp FileSystemInterface.h CommandHandler.h Publisher.h User.h Film.h Exception.h Define.h
+main.o:		main.cpp FileSystemInterface.h CommandHandler.h Publisher.h User.h Film.h Exception.h Exception-inl.h Define.h
 	$(CPP11) main.cpp -c
 
 clean:

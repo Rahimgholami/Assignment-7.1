@@ -3,7 +3,6 @@
 
 #include <exception>
 
-
 class NotFound : public std::exception
 {
 public:
@@ -23,5 +22,6 @@ public:
 };
 
 #include "Exception-inl.h"
+
 
 #endif

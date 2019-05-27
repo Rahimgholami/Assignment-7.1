@@ -9,7 +9,7 @@ public:
     Publisher(std::string _email, std::string _username, std::string _password, int _age, int _publisher_id);
     void add_film(int _film_id);
     void delete_film(int _film_id);
-    void edit_films(Film _film, int _film_id, std::string _film_name, int _film_year, int _film_length, std::string _film_summary, std::string _film_director);
+   // void edit_films(Film _film, int _film_id, std::string _film_name, int _film_year, int _film_length, std::string _film_summary, std::string _film_director);
     void show_followers();
     void get_money(std::vector<Film> _films);
     void reply_comments(Film _film, std::string _comment_id, std::string _content);
