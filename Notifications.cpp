@@ -19,7 +19,6 @@ using namespace std;
         comment_film_notification(_username, _user_id, _film_name, _film_id);
  }
 
-
 void Notifications::reply_comment_notification(int _publisher_id, std::string _publisher_name)
 {
     publisher_id = _publisher_id;
@@ -27,7 +26,7 @@ void Notifications::reply_comment_notification(int _publisher_id, std::string _p
     notification_status = UnReaded;
     notification_type = ReplyNotification;
 }
-    
+
 void Notifications::register_film_notification(int _publisher_id, std::string _publisher_name)
 {
     publisher_id = _publisher_id;

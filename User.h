@@ -28,7 +28,6 @@ public:
   void show_notification();
   void show_readed_notification();
   void add_following(int _following_id);
- // void show_best_films(std::vector<Film> _best_films);
   void add_notification(int _publisher_id, std::string _publisher_name, int _user_id, std::string _username, int _film_id, std::string _film_name, std::string _type);
   std::vector<int> check_buyed_films(std::vector<int> _film_ids);
 private:
@@ -41,7 +40,6 @@ private:
   std::vector<Notifications> notification;
   std::vector<int> followers_id;
   std::vector<int> buyed_films_id;
-
 };
 
 #endif

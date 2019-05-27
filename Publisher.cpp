@@ -8,16 +8,11 @@ Publisher::Publisher(string _email, string _username, string _password, int _age
 {
     publisher_id = _publisher_id;
 }
+
 void Publisher::add_film(int _film_id)
 {
     published_films_id.push_back(_film_id);
 }
-
-void Publisher::delete_film(int _film_id)
-{
-    cerr << "It will be completed!" << endl;
-}
-
 
 void Publisher::show_followers()
 {
@@ -31,19 +26,12 @@ void Publisher::show_followers()
         }
 }
 
-
 void Publisher::get_money(vector<Film> _films)
 {
     for(int i=0; i<published_films_id.size(); i++)
         increase_money(_films[published_films_id[i]].get_film_money());
     cout << OK << endl;
 }
-
-void Publisher::reply_comments(Film _film, string _comment_id, string _content)
-{
-    cerr << "It will be completed!" << endl;
-}
-
 
 void Publisher::add_follower(int _follower_id, string _user_name, string _email)
 {
@@ -63,7 +51,6 @@ void Publisher::is_film_published(int _film_id)
     if(check == 0)
         throw PremissionDenied();
 }
-    
 
 int Publisher::get_followers_size()
 {

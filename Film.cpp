@@ -152,7 +152,6 @@ void Film::reply_comment(int comment_id, string content, string _status)
 
 void Film::delete_film()
 {
-    //if()
     status = Deleted; 
     cout << OK << endl;
 }
@@ -187,7 +186,8 @@ void Film::show_comment_replies(int _comment_id)
 
 void Film::show_search_film_details(int _index)
 {
-    cout << (_index+1) << Dot << film_id << Vertical << length << Vertical << price << Vertical << rate << Vertical << year << Vertical << director << endl;
+    cout << (_index+1) << Dot << film_id << Vertical << length << Vertical << price
+         << Vertical << rate << Vertical << year << Vertical << director << endl;
 }
 
 void Film::show_film_detail_search(int &index)

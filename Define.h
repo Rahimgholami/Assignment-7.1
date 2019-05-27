@@ -58,7 +58,6 @@
 #define MinYear "min_year"
 #define Limit "limit"
 #define Score "score"
-
 #define True "true"
 #define Dot "."
 #define Low 0
@@ -74,14 +73,12 @@
 #define StrongFilm 0.95
 #define LowInterval 5
 #define HighInterval 8
-
 #define Deleted "deleted"
 #define Available "available"
 #define EmptyString "empty"
 #define EmptyInt -1
 #define NumberOfShownFilms 4
 #define ListOfFollowers "List of Followers"
-
 #define DetailsOfFilm "Details of Film"
 #define YearShow "Year"
 #define IdShow "Id"
@@ -91,7 +88,6 @@
 #define RateShow "Rate"
 #define PriceShow "Price"
 #define Name "name"
-
 #define CommentsShow "Comments"
 #define RecommendationFilm "Recommendation Film"
 #define EqualSpace " = "

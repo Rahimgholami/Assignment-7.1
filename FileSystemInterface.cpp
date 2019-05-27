@@ -144,7 +144,6 @@ void FileSystemInterface::find_delete_functions(string main_command)
     throw BadRequest();
 }
 
-
 void FileSystemInterface::process_command()
 {
   command_handler.add_command(current_command);
@@ -167,7 +166,6 @@ void FileSystemInterface::assign_command(std::vector<std::string> input_command)
   current_command = input_command;
   process_command();
 }
-
 
 void FileSystemInterface::run_commands()
 {

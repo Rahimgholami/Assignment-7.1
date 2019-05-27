@@ -20,18 +20,17 @@ string User::get_username()
     return username;
 }
 
-
 string User::get_password()
 {
     return password;
 };
-    
+
 void User::increase_money(int money_amount)
 {
     money += money_amount;
 }
 
-int User::get_money()    
+int User::get_money()
 {
     return money;
 }
@@ -42,7 +41,6 @@ void User::buy_film(int film_id, int _film_price)
     money -= _film_price;
     cout << OK << endl;
 }
-
 
 void User::show_notification()
 {
@@ -65,12 +63,10 @@ void User::add_following(int _following_id)
     cout << OK << endl;
 }
 
-
 int User::get_user_id()
 {
     return user_id;
 }
-
 
 string User::get_email()
 {

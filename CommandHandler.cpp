@@ -2,6 +2,7 @@
 #include <regex>
 
 using namespace std;
+
 CommandHandler::CommandHandler()
 {
     role = NotSets;
@@ -27,7 +28,6 @@ void CommandHandler::check_command_size(int min_size, int max_size)
     if((command_size > max_size) || (command_size < min_size))
         throw BadRequest();
 }
-
 
 void CommandHandler::is_email_valid(const std::string& email)
 {
@@ -321,7 +321,6 @@ vector<int> CommandHandler::find_reply_comment_key_indexes()
     return indexes;
 }
 
-
 void CommandHandler::send_notification_to_followers(int id)
 {
     if(id == users[convert_user_id_to_index(id)].get_user_id())
@@ -523,26 +522,6 @@ vector<int> CommandHandler::sort_films_rate(vector<int> sorted_films_id, vector<
    }
    return inverse_vector(sorted_films_id);
 }
-
-
-
-   /* for(int i=0; i<sorted_films_id; i++)
-    {
-
-    }
-    vector<int> id_copy = sorted_films_id;
-    vector<int> index;
-    sort(sorted_films_rate.begin(), sorted_films_rate.end());
-    for (auto itr = id_copy.cbegin(); itr!= id_copy.cend(); ++itr)
-    {
-        auto c_iter = find(id_copy.cbegin(), id_copy.cend(), *itr);
-        if(c_iter != id_copy.end())
-        {
-            index.push_back(distance(id_copy.cbegin(), c_iter));
-        }
-    }
-    return index;*/
-
 
 vector<int> CommandHandler::find_best_films()
 {

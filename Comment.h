@@ -16,6 +16,7 @@ public:
     std::string get_comment_status();
     int get_user_id();
     void set_comment_status(std::string _status);
+
 private:
     std::string comment;
     std::vector<std::string> reply_comments;
