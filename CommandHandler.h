@@ -21,7 +21,8 @@ public:
 
   CommandHandler();
   void logout_user();
-  int show_user_money();
+  void show_user_money();
+  int get_whole_money();
   void add_command(std::vector<std::string> input_command);
   int convert_string_to_int(std::string input_string);
   void check_command_size(int min_size, int max_size);
@@ -93,6 +94,8 @@ public:
   void delete_film_publisher();
   void delete_comment_publisher( );
   std::vector<int> search_film_feature(int min_year, int max_year);
+  bool is_user_buy_both_films(int _first_film_id, int _second_film_id, int user_id, std::string role);
+  std::vector<int> best_films_matrix(int n, int k);
 
 private:
 
@@ -101,6 +104,7 @@ private:
   std::vector<Publisher> publishers;
   std::vector<Film> films;
   std::string role;
+  std::string admin_status;
   int current_user_id;
   int current_publisher_id;
   int current_user_index;

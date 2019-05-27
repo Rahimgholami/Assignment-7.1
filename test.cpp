@@ -1,4 +1,78 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <iterator>
 
+using namespace std;
+
+vector<int> two_D_matrix(int n, int k)
+{
+    vector<vector<int>> vec2D(n, vector<int>(n, 0));
+    for(int i=0; i<n; i++)
+    {
+        for(int j=0; j<n; j++)
+        {
+            if(i<j)
+                vec2D[i][j] = 1;
+        }
+    }
+    for(int i=0; i<n; i++)
+    {
+        for(int j=0; j<n; j++)
+            cout << vec2D[i][j] << " ";
+        cout << endl;
+    }
+    return vec2D[k];
+}
+
+int main()
+{
+    vector<int> vec = two_D_matrix(6,4);
+    for(int i=0; i<vec.size(); i++)
+        cout << vec[i] << endl;
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 //Sorting Parallel vectors
 #include <iostream>
 #include <vector>
@@ -82,4 +156,4 @@ int main()
     for(int i=0; i<result.size(); i++)
         cout << result[i] << endl;
     return 0;
-}
+}*/
