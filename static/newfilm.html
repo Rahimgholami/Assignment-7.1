@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html  style="background-color: lightblue; text-align: center; max-width: 300px; border-radius: 3px; margin: auto;">
+
+<header>
+    <h1>!Movie2Movie!</h1>
+</header>
+
+<body>
+    <p></p>
+    <div style="background-color: greenyellow; padding: 1%;">
+    <h2>New Film</h2>
+      <form action="/publish" method="post">
+        <p> <input name="name" type="text" placeholder="Name" /> </p>
+        <p> <input name="year" type="number" placeholder="Year" /> </p>
+        <p> <input name="lenght" type="number" placeholder="Length" /> </p>
+        <p> <input name="price" type="number" placeholder="Price" /> </p>
+        <p> <input name="summary" type="text" placeholder="Summary" /> </p>
+        <p> <input name="director" type="text" placeholder="Director" /> </p>
+        <p> <button type="submit" >publish</button> </p>
+      </form>
+        <p> <a href="/abort"> abort </a> </p>
+        <p> <a href="/logout"> logout </a> </p>      
+    </div>
+  </body>
+</html>
