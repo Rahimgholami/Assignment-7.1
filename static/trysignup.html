@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html  style="background-color: lightcoral; text-align: center; max-width: 300px; border-radius: 3px; margin: auto;">
+
+<header>
+    <h1>!Movie2Movie!</h1>
+</header>
+
+<body>
+    <p></p>
+    <div style="background-color: lightblue; padding: 1%;">
+    <h2>Signup</h2>
+      <form action="/signup" method="post">
+        <p> <input name="username" type="text" placeholder="Username" /> </p>
+        <p> <input name="password" type="password" placeholder="Password" /> </p>
+        <p> <input name="email" type="email" placeholder="Email" /> </p>
+        <p> <input name="age" type="text" placeholder="Age" /> </p>
+        <style="margin-right:10em;">Publisher:
+          <input type="radio" name="publisher_check" value="True"> True
+          <input type="radio" name="publisher_check" value="False"> False<br>
+        <button type="submit" >Signup</button><br>
+        <samll style="color: green;">
+          this username is reserved, please try again.
+      </small>
+      </form>
+    </div>
+    
+  </body>
+
+    <footer>
+        <div>
+            <p>Already have a <b> Movie2Movie Acount? </b> </p>
+            <p> Login <a href="/login"> here! </a> </p>
+        </div>                    
+    </footer>
+</html>
