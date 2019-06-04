@@ -108,3 +108,4 @@
 #define FilmRateShow "Rate"
 #define FilmProductionYear "Production Year"
 #define FilmDirector "Film Director"
+#define BUFSIZE 4145152
